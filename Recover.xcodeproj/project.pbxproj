@@ -7,14 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		943270BC1D5E587A00BE2D1A /* AddExerciseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943270BB1D5E587A00BE2D1A /* AddExerciseTableViewController.swift */; };
+		943270C11D5E5AC900BE2D1A /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943270BF1D5E5AC900BE2D1A /* CloudKitManager.swift */; };
+		943270C21D5E5AC900BE2D1A /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943270C01D5E5AC900BE2D1A /* UserDefaultsManager.swift */; };
+		94475E3B1D5EB6B900D919C4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94475E391D5EB6B900D919C4 /* Main.storyboard */; };
+		94475E3D1D5EB7BB00D919C4 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94475E3C1D5EB7BB00D919C4 /* SettingsTableViewController.swift */; };
 		949AC21F1D5D69DD0029328B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949AC21E1D5D69DD0029328B /* AppDelegate.swift */; };
-		949AC2211D5D69DD0029328B /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949AC2201D5D69DD0029328B /* FirstViewController.swift */; };
-		949AC2231D5D69DD0029328B /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949AC2221D5D69DD0029328B /* SecondViewController.swift */; };
-		949AC2261D5D69DD0029328B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 949AC2241D5D69DD0029328B /* Main.storyboard */; };
 		949AC2281D5D69DD0029328B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 949AC2271D5D69DD0029328B /* Assets.xcassets */; };
 		949AC22B1D5D69DD0029328B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 949AC2291D5D69DD0029328B /* LaunchScreen.storyboard */; };
 		949AC2361D5D69DD0029328B /* RecoverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949AC2351D5D69DD0029328B /* RecoverTests.swift */; };
 		949AC2411D5D69DE0029328B /* RecoverUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949AC2401D5D69DE0029328B /* RecoverUITests.swift */; };
+		94C323DA1D5E116F00227ACE /* BasicTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C323D91D5E116F00227ACE /* BasicTableViewController.swift */; };
+		94C323DE1D5E146600227ACE /* BodyPartCategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C323DD1D5E146600227ACE /* BodyPartCategoryTableViewController.swift */; };
+		94C323E01D5E149F00227ACE /* ExerciseListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C323DF1D5E149F00227ACE /* ExerciseListTableViewController.swift */; };
+		94C323E21D5E151F00227ACE /* ExerciseDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C323E11D5E151F00227ACE /* ExerciseDetailTableViewController.swift */; };
+		94C323E61D5E177500227ACE /* SavedExerciseListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C323E51D5E177500227ACE /* SavedExerciseListTableViewController.swift */; };
+		94C323E81D5E18BD00227ACE /* SavedExerciseDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C323E71D5E18BD00227ACE /* SavedExerciseDetailTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,11 +43,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		943270BB1D5E587A00BE2D1A /* AddExerciseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddExerciseTableViewController.swift; sourceTree = "<group>"; };
+		943270BF1D5E5AC900BE2D1A /* CloudKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
+		943270C01D5E5AC900BE2D1A /* UserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		94475E3A1D5EB6B900D919C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		94475E3C1D5EB7BB00D919C4 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		949AC21B1D5D69DD0029328B /* Recover.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recover.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		949AC21E1D5D69DD0029328B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		949AC2201D5D69DD0029328B /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		949AC2221D5D69DD0029328B /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
-		949AC2251D5D69DD0029328B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		949AC2271D5D69DD0029328B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		949AC22A1D5D69DD0029328B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		949AC22C1D5D69DD0029328B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,6 +59,12 @@
 		949AC23C1D5D69DE0029328B /* RecoverUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecoverUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		949AC2401D5D69DE0029328B /* RecoverUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoverUITests.swift; sourceTree = "<group>"; };
 		949AC2421D5D69DE0029328B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		94C323D91D5E116F00227ACE /* BasicTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicTableViewController.swift; sourceTree = "<group>"; };
+		94C323DD1D5E146600227ACE /* BodyPartCategoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodyPartCategoryTableViewController.swift; sourceTree = "<group>"; };
+		94C323DF1D5E149F00227ACE /* ExerciseListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseListTableViewController.swift; sourceTree = "<group>"; };
+		94C323E11D5E151F00227ACE /* ExerciseDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseDetailTableViewController.swift; sourceTree = "<group>"; };
+		94C323E51D5E177500227ACE /* SavedExerciseListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedExerciseListTableViewController.swift; sourceTree = "<group>"; };
+		94C323E71D5E18BD00227ACE /* SavedExerciseDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedExerciseDetailTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +92,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		943270BA1D5E582B00BE2D1A /* ModalViews */ = {
+			isa = PBXGroup;
+			children = (
+				94475E3C1D5EB7BB00D919C4 /* SettingsTableViewController.swift */,
+				943270BB1D5E587A00BE2D1A /* AddExerciseTableViewController.swift */,
+			);
+			name = ModalViews;
+			sourceTree = "<group>";
+		};
 		949AC2121D5D69DD0029328B = {
 			isa = PBXGroup;
 			children = (
@@ -99,13 +124,7 @@
 		949AC21D1D5D69DD0029328B /* Recover */ = {
 			isa = PBXGroup;
 			children = (
-				949AC21E1D5D69DD0029328B /* AppDelegate.swift */,
-				949AC2201D5D69DD0029328B /* FirstViewController.swift */,
-				949AC2221D5D69DD0029328B /* SecondViewController.swift */,
-				949AC2241D5D69DD0029328B /* Main.storyboard */,
-				949AC2271D5D69DD0029328B /* Assets.xcassets */,
-				949AC2291D5D69DD0029328B /* LaunchScreen.storyboard */,
-				949AC22C1D5D69DD0029328B /* Info.plist */,
+				94C323D51D5E10C600227ACE /* Model */,
 			);
 			path = Recover;
 			sourceTree = "<group>";
@@ -126,6 +145,67 @@
 				949AC2421D5D69DE0029328B /* Info.plist */,
 			);
 			path = RecoverUITests;
+			sourceTree = "<group>";
+		};
+		94C323D51D5E10C600227ACE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				949AC22C1D5D69DD0029328B /* Info.plist */,
+				943270BF1D5E5AC900BE2D1A /* CloudKitManager.swift */,
+				943270C01D5E5AC900BE2D1A /* UserDefaultsManager.swift */,
+				94C323D61D5E10C700227ACE /* Controllers */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		94C323D61D5E10C700227ACE /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				943270BA1D5E582B00BE2D1A /* ModalViews */,
+				949AC21E1D5D69DD0029328B /* AppDelegate.swift */,
+				94C323D81D5E10C900227ACE /* TableViewControllers */,
+				94C323D71D5E10C700227ACE /* Views */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		94C323D71D5E10C700227ACE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				94475E391D5EB6B900D919C4 /* Main.storyboard */,
+				949AC2291D5D69DD0029328B /* LaunchScreen.storyboard */,
+				949AC2271D5D69DD0029328B /* Assets.xcassets */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		94C323D81D5E10C900227ACE /* TableViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				94C323D91D5E116F00227ACE /* BasicTableViewController.swift */,
+				94C323E31D5E155C00227ACE /* Catalog */,
+				94C323E41D5E156100227ACE /* Saved Exercises */,
+			);
+			name = TableViewControllers;
+			sourceTree = "<group>";
+		};
+		94C323E31D5E155C00227ACE /* Catalog */ = {
+			isa = PBXGroup;
+			children = (
+				94C323DD1D5E146600227ACE /* BodyPartCategoryTableViewController.swift */,
+				94C323DF1D5E149F00227ACE /* ExerciseListTableViewController.swift */,
+				94C323E11D5E151F00227ACE /* ExerciseDetailTableViewController.swift */,
+			);
+			name = Catalog;
+			sourceTree = "<group>";
+		};
+		94C323E41D5E156100227ACE /* Saved Exercises */ = {
+			isa = PBXGroup;
+			children = (
+				94C323E51D5E177500227ACE /* SavedExerciseListTableViewController.swift */,
+				94C323E71D5E18BD00227ACE /* SavedExerciseDetailTableViewController.swift */,
+			);
+			name = "Saved Exercises";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,8 +313,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				949AC22B1D5D69DD0029328B /* LaunchScreen.storyboard in Resources */,
+				94475E3B1D5EB6B900D919C4 /* Main.storyboard in Resources */,
 				949AC2281D5D69DD0029328B /* Assets.xcassets in Resources */,
-				949AC2261D5D69DD0029328B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,9 +339,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				949AC2231D5D69DD0029328B /* SecondViewController.swift in Sources */,
+				94C323E81D5E18BD00227ACE /* SavedExerciseDetailTableViewController.swift in Sources */,
 				949AC21F1D5D69DD0029328B /* AppDelegate.swift in Sources */,
-				949AC2211D5D69DD0029328B /* FirstViewController.swift in Sources */,
+				94C323E21D5E151F00227ACE /* ExerciseDetailTableViewController.swift in Sources */,
+				94C323DE1D5E146600227ACE /* BodyPartCategoryTableViewController.swift in Sources */,
+				943270C21D5E5AC900BE2D1A /* UserDefaultsManager.swift in Sources */,
+				943270C11D5E5AC900BE2D1A /* CloudKitManager.swift in Sources */,
+				94C323DA1D5E116F00227ACE /* BasicTableViewController.swift in Sources */,
+				94C323E01D5E149F00227ACE /* ExerciseListTableViewController.swift in Sources */,
+				94475E3D1D5EB7BB00D919C4 /* SettingsTableViewController.swift in Sources */,
+				94C323E61D5E177500227ACE /* SavedExerciseListTableViewController.swift in Sources */,
+				943270BC1D5E587A00BE2D1A /* AddExerciseTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,10 +385,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		949AC2241D5D69DD0029328B /* Main.storyboard */ = {
+		94475E391D5EB6B900D919C4 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				949AC2251D5D69DD0029328B /* Base */,
+				94475E3A1D5EB6B900D919C4 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -488,6 +576,7 @@
 				949AC2471D5D69DE0029328B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		949AC2481D5D69DE0029328B /* Build configuration list for PBXNativeTarget "RecoverTests" */ = {
 			isa = XCConfigurationList;
@@ -496,6 +585,7 @@
 				949AC24A1D5D69DE0029328B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		949AC24B1D5D69DE0029328B /* Build configuration list for PBXNativeTarget "RecoverUITests" */ = {
 			isa = XCConfigurationList;
@@ -504,6 +594,7 @@
 				949AC24D1D5D69DE0029328B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
