@@ -184,11 +184,11 @@
             </objects>
             <point key="canvasLocation" x="812" y="734"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Exercise Catalog-->
         <scene sceneID="IVp-73-q4b">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="T4g-Jt-agf" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="bookmarks" id="P3l-Em-J2e"/>
+                    <tabBarItem key="tabBarItem" title="Exercise Catalog" id="P3l-Em-J2e"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="c2b-vA-Chi">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -203,11 +203,11 @@
             </objects>
             <point key="canvasLocation" x="-6" y="-768"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Saved Exercises-->
         <scene sceneID="xlW-ZQ-f5i">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="fLN-Xi-MV5" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="favorites" id="ir8-X0-gAE"/>
+                    <tabBarItem key="tabBarItem" title="Saved Exercises" id="ir8-X0-gAE"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Lr2-Ac-eqS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -291,7 +291,7 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <state key="normal" title="Add Photo"/>
                                             <connections>
-                                                <action selector="addPhotoButtonPressed:" destination="J1m-mm-Xg2" eventType="touchUpInside" id="CC5-cU-zux"/>
+                                                <action selector="addPhotoButtonPressed:" destination="J1m-mm-Xg2" eventType="touchUpInside" id="E4P-PI-ZBg"/>
                                             </connections>
                                         </button>
                                     </subviews>

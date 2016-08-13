@@ -19,7 +19,7 @@ class ExerciseListTableViewController: BasicTableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("CatalogExerciseCell", forIndexPath: indexPath)
         cell.selectionStyle = .None
-        cell.textLabel?.text = "Body Part"
+        cell.textLabel?.text = "Exercise Name"
         return cell
     }
 
