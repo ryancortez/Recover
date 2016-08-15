@@ -10,6 +10,7 @@ import UIKit
 
 class SavedExerciseDetailTableViewController: BasicTableViewController {
     
+    
     // MARK: - Inital Setup
     override func viewDidLoad() {
         let navBarTitle = "Selected Exercise"

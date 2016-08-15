@@ -12,6 +12,8 @@
 		943270C21D5E5AC900BE2D1A /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943270C01D5E5AC900BE2D1A /* UserDefaultsManager.swift */; };
 		94475E3B1D5EB6B900D919C4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94475E391D5EB6B900D919C4 /* Main.storyboard */; };
 		94475E3D1D5EB7BB00D919C4 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94475E3C1D5EB7BB00D919C4 /* SettingsTableViewController.swift */; };
+		94475E431D5ED02300D919C4 /* EditExerciseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94475E421D5ED02300D919C4 /* EditExerciseTableViewController.swift */; };
+		94475E451D5ED07200D919C4 /* ExerciseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94475E441D5ED07200D919C4 /* ExerciseTableViewController.swift */; };
 		949AC21F1D5D69DD0029328B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949AC21E1D5D69DD0029328B /* AppDelegate.swift */; };
 		949AC2281D5D69DD0029328B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 949AC2271D5D69DD0029328B /* Assets.xcassets */; };
 		949AC22B1D5D69DD0029328B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 949AC2291D5D69DD0029328B /* LaunchScreen.storyboard */; };
@@ -48,6 +50,8 @@
 		943270C01D5E5AC900BE2D1A /* UserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		94475E3A1D5EB6B900D919C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		94475E3C1D5EB7BB00D919C4 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		94475E421D5ED02300D919C4 /* EditExerciseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditExerciseTableViewController.swift; sourceTree = "<group>"; };
+		94475E441D5ED07200D919C4 /* ExerciseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseTableViewController.swift; sourceTree = "<group>"; };
 		949AC21B1D5D69DD0029328B /* Recover.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recover.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		949AC21E1D5D69DD0029328B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		949AC2271D5D69DD0029328B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -96,7 +100,9 @@
 			isa = PBXGroup;
 			children = (
 				94475E3C1D5EB7BB00D919C4 /* SettingsTableViewController.swift */,
+				94475E441D5ED07200D919C4 /* ExerciseTableViewController.swift */,
 				943270BB1D5E587A00BE2D1A /* AddExerciseTableViewController.swift */,
+				94475E421D5ED02300D919C4 /* EditExerciseTableViewController.swift */,
 			);
 			name = ModalViews;
 			sourceTree = "<group>";
@@ -343,7 +349,9 @@
 				949AC21F1D5D69DD0029328B /* AppDelegate.swift in Sources */,
 				94C323E21D5E151F00227ACE /* ExerciseDetailTableViewController.swift in Sources */,
 				94C323DE1D5E146600227ACE /* BodyPartCategoryTableViewController.swift in Sources */,
+				94475E451D5ED07200D919C4 /* ExerciseTableViewController.swift in Sources */,
 				943270C21D5E5AC900BE2D1A /* UserDefaultsManager.swift in Sources */,
+				94475E431D5ED02300D919C4 /* EditExerciseTableViewController.swift in Sources */,
 				943270C11D5E5AC900BE2D1A /* CloudKitManager.swift in Sources */,
 				94C323DA1D5E116F00227ACE /* BasicTableViewController.swift in Sources */,
 				94C323E01D5E149F00227ACE /* ExerciseListTableViewController.swift in Sources */,

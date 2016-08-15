@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -165,11 +165,23 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem systemItem="rewind" id="4ZG-Bj-PCf"/>
+                        <barButtonItem systemItem="rewind" id="4ZG-Bj-PCf">
+                            <connections>
+                                <action selector="previousExerciseButtonPressed:" destination="kfN-kQ-k1Q" id="hea-eN-SZ5"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="nbY-nB-8JF"/>
-                        <barButtonItem title="Resume" id="bzv-Lu-zEo"/>
+                        <barButtonItem title="Resume" id="bzv-Lu-zEo">
+                            <connections>
+                                <action selector="startButtonPressed:" destination="kfN-kQ-k1Q" id="fkx-Mp-65o"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="zKf-LV-gOu"/>
-                        <barButtonItem systemItem="fastForward" id="D2t-D7-eru"/>
+                        <barButtonItem systemItem="fastForward" id="D2t-D7-eru">
+                            <connections>
+                                <action selector="nextExerciseButtonPressed:" destination="kfN-kQ-k1Q" id="G4H-KZ-BRp"/>
+                            </connections>
+                        </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="My Saved Exercises" id="b3M-xm-phY">
                         <barButtonItem key="leftBarButtonItem" title="Settings" id="jlm-8f-4C3">
@@ -179,6 +191,11 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Reorder" id="WuA-3s-ffu"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="nextExerciseButton" destination="D2t-D7-eru" id="2vb-cT-e8T"/>
+                        <outlet property="previousExerciseButton" destination="4ZG-Bj-PCf" id="3Nl-l4-3Cs"/>
+                        <outlet property="startButton" destination="bzv-Lu-zEo" id="bbJ-lW-fKe"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KRk-EQ-Rs4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -324,7 +341,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sdI-19-sp2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3201" y="-2278"/>
+            <point key="canvasLocation" x="3193" y="-2278"/>
         </scene>
         <!--Exercise Catalog-->
         <scene sceneID="9Os-5o-QwE">
@@ -388,7 +405,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Exercise Catalog" id="CPQ-We-Mz6">
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="y19-ho-269"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="y19-ho-269">
+                            <connections>
+                                <segue destination="ZXK-fl-OXU" kind="presentation" id="p8e-h6-qWC"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bB6-s3-zpn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -456,7 +477,15 @@
                                                 </stackView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="hko-P1-PXw" firstAttribute="leading" secondItem="BNi-Aj-0Bb" secondAttribute="trailing" id="10f-Xs-ljU"/>
+                                                <constraint firstItem="BNi-Aj-0Bb" firstAttribute="leading" secondItem="seL-4A-zEj" secondAttribute="leading" id="1NO-ws-GyK"/>
+                                                <constraint firstAttribute="bottom" secondItem="hko-P1-PXw" secondAttribute="bottom" id="8gk-yf-pPr"/>
+                                                <constraint firstAttribute="bottom" secondItem="BNi-Aj-0Bb" secondAttribute="bottom" id="8wP-1N-Jnc"/>
                                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="120" id="Gdz-jh-m0K"/>
+                                                <constraint firstItem="hko-P1-PXw" firstAttribute="leading" secondItem="BNi-Aj-0Bb" secondAttribute="trailing" id="N5i-eo-KES"/>
+                                                <constraint firstItem="BNi-Aj-0Bb" firstAttribute="top" secondItem="seL-4A-zEj" secondAttribute="top" id="PZW-vH-6W4"/>
+                                                <constraint firstItem="hko-P1-PXw" firstAttribute="top" secondItem="seL-4A-zEj" secondAttribute="top" id="Y1y-Lh-FwW"/>
+                                                <constraint firstAttribute="trailing" secondItem="hko-P1-PXw" secondAttribute="trailing" id="uyk-hF-OEU"/>
                                             </constraints>
                                         </stackView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OAJ-EH-Ajd">
@@ -494,12 +523,16 @@
                         <barButtonItem systemItem="fastForward" id="M7Z-cB-WDy"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="My Saved Exercises" id="ptB-sX-T6X">
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="cSA-i3-P4y"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="cSA-i3-P4y">
+                            <connections>
+                                <segue destination="ZXK-fl-OXU" kind="presentation" id="DT0-AQ-5qu"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J1V-ro-fsT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1498" y="734"/>
+            <point key="canvasLocation" x="1558" y="751"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="t8h-P3-RRj">
@@ -754,9 +787,128 @@
             </objects>
             <point key="canvasLocation" x="827" y="-22"/>
         </scene>
+        <!--Add Exercise-->
+        <scene sceneID="NSs-XR-HOI">
+            <objects>
+                <tableViewController id="lmd-zu-Eof" customClass="EditExerciseTableViewController" customModule="Recover" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="v8F-zL-hf5">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TextFieldCell" id="UL1-Cz-RYA">
+                                <rect key="frame" x="0.0" y="113.5" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UL1-Cz-RYA" id="Adc-V0-Hjn">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Add Exercise Title" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="nbl-lz-PjP">
+                                            <rect key="frame" x="8" y="8" width="584" height="27.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="nbl-lz-PjP" firstAttribute="top" secondItem="Adc-V0-Hjn" secondAttribute="topMargin" id="HAK-Wk-0RA"/>
+                                        <constraint firstItem="nbl-lz-PjP" firstAttribute="leading" secondItem="Adc-V0-Hjn" secondAttribute="leadingMargin" id="Iij-54-vk6"/>
+                                        <constraint firstItem="nbl-lz-PjP" firstAttribute="trailing" secondItem="Adc-V0-Hjn" secondAttribute="trailingMargin" id="Q6k-mS-iS3"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="nbl-lz-PjP" secondAttribute="bottom" id="srC-sF-kGn"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TextViewCell" rowHeight="135" id="Yjb-Fh-pxs">
+                                <rect key="frame" x="0.0" y="157.5" width="600" height="135"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Yjb-Fh-pxs" id="6ju-jr-TrN">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="134.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Add Exercise Description" translatesAutoresizingMaskIntoConstraints="NO" id="8GK-dO-zyM">
+                                            <rect key="frame" x="3" y="8" width="589" height="118.5"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="textColor" red="0.73333333329999995" green="0.72941176470000002" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="8GK-dO-zyM" firstAttribute="leading" secondItem="6ju-jr-TrN" secondAttribute="leadingMargin" constant="-5" id="4LN-1V-UNd"/>
+                                        <constraint firstItem="8GK-dO-zyM" firstAttribute="top" secondItem="6ju-jr-TrN" secondAttribute="topMargin" id="O34-a9-vRG"/>
+                                        <constraint firstItem="8GK-dO-zyM" firstAttribute="bottom" secondItem="6ju-jr-TrN" secondAttribute="bottomMargin" id="nED-Cm-YFr"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="8GK-dO-zyM" secondAttribute="trailing" id="zMM-4E-lMl"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddPhotoCell" rowHeight="107" id="LSc-bj-arP">
+                                <rect key="frame" x="0.0" y="292.5" width="600" height="107"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LSc-bj-arP" id="abx-Us-lEW">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="106.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J62-3G-PYe">
+                                            <rect key="frame" x="8" y="8" width="584" height="90.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <state key="normal" title="Add Photo"/>
+                                            <connections>
+                                                <action selector="addPhotoButtonPressed:" destination="lmd-zu-Eof" eventType="touchUpInside" id="hJ3-vy-NXB"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="J62-3G-PYe" secondAttribute="bottom" id="0N1-UW-LrV"/>
+                                        <constraint firstItem="J62-3G-PYe" firstAttribute="top" secondItem="abx-Us-lEW" secondAttribute="topMargin" id="AKp-Kv-A0V"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="J62-3G-PYe" secondAttribute="trailing" id="qNW-aj-Xbb"/>
+                                        <constraint firstItem="J62-3G-PYe" firstAttribute="leading" secondItem="abx-Us-lEW" secondAttribute="leadingMargin" id="vPo-7h-BNf"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="lmd-zu-Eof" id="gqI-0m-z7J"/>
+                            <outlet property="delegate" destination="lmd-zu-Eof" id="Tub-BP-pcC"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Add Exercise" id="9X5-xJ-wdA">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="DnZ-yP-fqC">
+                            <connections>
+                                <action selector="cancelButtonPressed:" destination="lmd-zu-Eof" id="ErM-Y4-qnj"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="MhM-HM-l3L">
+                            <connections>
+                                <action selector="saveButtonPressed:" destination="lmd-zu-Eof" id="yGp-Ge-80a"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TrV-PE-biG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3501" y="562"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="jF9-Ly-Qxn">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZXK-fl-OXU" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="QLf-R5-Ac5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="lmd-zu-Eof" kind="relationship" relationship="rootViewController" id="jPc-HB-3qe"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W5R-I7-hUI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2689" y="562"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="bqQ-0t-K9a"/>
+        <segue reference="Tx4-Yq-4tp"/>
+        <segue reference="DT0-AQ-5qu"/>
         <segue reference="WP8-Vg-0VX"/>
     </inferredMetricsTieBreakers>
 </document>
