@@ -15,6 +15,12 @@ class ExerciseListTableViewController: BasicTableViewController {
         let navBarTitle = "Body Part"
         self.title = navBarTitle
     }
+    
+    // MARK: - Core Data
+    func saveNew(exercise: Exercise) {
+        print("Saving new exercise was fired!")
+    }
+    
     // MARK: - TableView DataSource
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("CatalogExerciseCell", forIndexPath: indexPath)

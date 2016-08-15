@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol AddExerciseTableViewControllerDelegate {
+    func saveNew(exercise: Exercise)
+}
+
 class AddExerciseTableViewController: ExerciseTableViewController {
+    
+    var delegate: AddExerciseTableViewControllerDelegate!
     
     @IBAction func cancelButtonPressed(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)

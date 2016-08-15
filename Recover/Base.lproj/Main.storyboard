@@ -155,7 +155,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="qgf-mW-DPr" kind="show" id="AGS-mf-Sn1"/>
+                                    <segue destination="qgf-mW-DPr" kind="show" identifier="savedListToDetail" id="AGS-mf-Sn1"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -165,36 +165,43 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="nbY-nB-8JF"/>
                         <barButtonItem systemItem="rewind" id="4ZG-Bj-PCf">
                             <connections>
                                 <action selector="previousExerciseButtonPressed:" destination="kfN-kQ-k1Q" id="hea-eN-SZ5"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="nbY-nB-8JF"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="J1H-2K-TjL"/>
                         <barButtonItem title="Resume" id="bzv-Lu-zEo">
                             <connections>
                                 <action selector="startButtonPressed:" destination="kfN-kQ-k1Q" id="fkx-Mp-65o"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="zKf-LV-gOu"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="0YI-XD-xYi"/>
                         <barButtonItem systemItem="fastForward" id="D2t-D7-eru">
                             <connections>
                                 <action selector="nextExerciseButtonPressed:" destination="kfN-kQ-k1Q" id="G4H-KZ-BRp"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="zKf-LV-gOu"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="My Saved Exercises" id="b3M-xm-phY">
-                        <barButtonItem key="leftBarButtonItem" title="Settings" id="jlm-8f-4C3">
+                        <barButtonItem key="leftBarButtonItem" title="Stop" style="done" id="jlm-8f-4C3">
                             <connections>
-                                <segue destination="cfg-E7-7Ey" kind="presentation" id="Tx4-Yq-4tp"/>
+                                <action selector="stopButtonPressed:" destination="kfN-kQ-k1Q" id="11x-2q-wlM"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Reorder" id="WuA-3s-ffu"/>
+                        <barButtonItem key="rightBarButtonItem" title="Reorder" id="WuA-3s-ffu">
+                            <connections>
+                                <action selector="reorderButtonPressed:" destination="kfN-kQ-k1Q" id="oGT-Ex-llD"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="nextExerciseButton" destination="D2t-D7-eru" id="2vb-cT-e8T"/>
                         <outlet property="previousExerciseButton" destination="4ZG-Bj-PCf" id="3Nl-l4-3Cs"/>
                         <outlet property="startButton" destination="bzv-Lu-zEo" id="bbJ-lW-fKe"/>
+                        <outlet property="stopButton" destination="jlm-8f-4C3" id="Kmd-Jt-A3D"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KRk-EQ-Rs4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -516,23 +523,50 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem systemItem="rewind" id="fTx-cS-ZwG"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="3Yb-Cb-Z8M"/>
+                        <barButtonItem systemItem="rewind" id="fTx-cS-ZwG">
+                            <connections>
+                                <action selector="previousButtonPressed:" destination="qgf-mW-DPr" id="hsV-D5-OJM"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="Arl-zW-sw6"/>
-                        <barButtonItem title="Resume" id="cNr-jV-kYx"/>
+                        <barButtonItem title="Pause" id="cNr-jV-kYx">
+                            <connections>
+                                <action selector="startButtonPressed:" destination="qgf-mW-DPr" id="QHp-yz-Ypc"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="u5h-eE-xDW"/>
-                        <barButtonItem systemItem="fastForward" id="M7Z-cB-WDy"/>
+                        <barButtonItem systemItem="fastForward" id="M7Z-cB-WDy">
+                            <connections>
+                                <action selector="nextButtonPressed:" destination="qgf-mW-DPr" id="7nb-wP-yTd"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="0Y2-O5-64c"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="My Saved Exercises" id="ptB-sX-T6X">
+                        <barButtonItem key="leftBarButtonItem" title="Stop" style="done" id="EiK-aU-5yP">
+                            <connections>
+                                <action selector="stopButtonPressed:" destination="qgf-mW-DPr" id="EbM-Fd-gNv"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="cSA-i3-P4y">
                             <connections>
+                                <action selector="editButtonPressed:" destination="qgf-mW-DPr" id="SUg-ou-6el"/>
                                 <segue destination="ZXK-fl-OXU" kind="presentation" id="DT0-AQ-5qu"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="editButton" destination="cSA-i3-P4y" id="HHg-hh-JhS"/>
+                        <outlet property="nextButton" destination="M7Z-cB-WDy" id="K2i-Ld-8gf"/>
+                        <outlet property="previousButton" destination="fTx-cS-ZwG" id="05x-wo-o0g"/>
+                        <outlet property="startButton" destination="cNr-jV-kYx" id="ezZ-VQ-qoz"/>
+                        <outlet property="stopButton" destination="EiK-aU-5yP" id="zdF-IU-6u4"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J1V-ro-fsT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1558" y="751"/>
+            <point key="canvasLocation" x="1558" y="734"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="t8h-P3-RRj">
@@ -907,8 +941,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Tx4-Yq-4tp"/>
-        <segue reference="DT0-AQ-5qu"/>
         <segue reference="WP8-Vg-0VX"/>
+        <segue reference="DT0-AQ-5qu"/>
     </inferredMetricsTieBreakers>
 </document>

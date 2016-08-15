@@ -15,7 +15,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        // Setup CoreData
+        let coreDataManager = CoreDataManager(xcDataModelFileName: "Model", storeType: .SQLite)
+        
+        // Pass the NSManagedObjectContext to the first ViewController
+        let tabBarController = self.window?.rootViewController as! UITabBarController
+        let navigationViewController = tabBarController.viewControllers!.first as! UINavigationController
+        let masterViewController = navigationViewController.viewControllers.first as! BodyPartCategoryTableViewController
+        masterViewController.coreDataManager = coreDataManager
+        masterViewController.managedObjectContext = coreDataManager.managedObjectContext
+        
         return true
     }
 

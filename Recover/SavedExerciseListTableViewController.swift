@@ -11,12 +11,11 @@ import UIKit
 class SavedExerciseListTableViewController: BasicTableViewController {
     
     // MARK: - Global Variables
-    var previousExerciseButtonIsHidden: Bool = true
     var sessionIsActivate: Bool = false
-    var sessionIsPaused: Bool = true
-    var nextExerciseButtonIsHidden: Bool = true
+    var sessionIsPaused: Bool = false
     
     // MARK: - Outlet
+    @IBOutlet weak var stopButton: UIBarButtonItem!
     @IBOutlet weak var previousExerciseButton: UIBarButtonItem!
     @IBOutlet weak var startButton: UIBarButtonItem!
     @IBOutlet weak var nextExerciseButton: UIBarButtonItem!
@@ -24,22 +23,34 @@ class SavedExerciseListTableViewController: BasicTableViewController {
     // MARK: - Inital Setup
     
     override func viewDidLoad() {
-        
+        setButtonStates()
     }
     
-    func setToolbarButtonStates() {
+    func setButtonStates() {
         setPreviousExerciseButtonState()
         setStartButtonState()
         setNextExerciseButtonState()
+        setStopButtonState()
+    }
+    
+    func setStopButtonState() {
+        if sessionIsActivate {
+            stopButton.enabled = true
+            stopButton.tintColor = nil
+        } else {
+            stopButton.enabled = false
+            stopButton.tintColor = UIColor.clearColor()
+        }
+
     }
     
     func setPreviousExerciseButtonState() {
-        if previousExerciseButtonIsHidden{
-            previousExerciseButton.enabled      = false
-            previousExerciseButton.tintColor    = UIColor.clearColor()
-        }else{
-            previousExerciseButton.enabled      = true
-            previousExerciseButton.tintColor    = nil
+        if sessionIsActivate {
+            previousExerciseButton.enabled = true
+            previousExerciseButton.tintColor = nil
+        } else {
+            previousExerciseButton.enabled = false
+            previousExerciseButton.tintColor = UIColor.clearColor()
         }
     }
     
@@ -56,13 +67,29 @@ class SavedExerciseListTableViewController: BasicTableViewController {
     }
     
     func setNextExerciseButtonState() {
-        if nextExerciseButtonIsHidden{
-            nextExerciseButton.enabled      = false
-            nextExerciseButton.tintColor    = UIColor.clearColor()
-        }else{
+        if sessionIsActivate{
             nextExerciseButton.enabled      = true
             nextExerciseButton.tintColor    = nil
+        }else{
+            nextExerciseButton.enabled      = false
+            nextExerciseButton.tintColor    = UIColor.clearColor()
         }
+    }
+    
+    // MARK: - Exercise Session Logic
+    func resumeExerciseSession() {
+        sessionIsPaused = false
+        setButtonStates()
+    }
+    
+    func pauseExerciseSession() {
+        sessionIsPaused = true
+        setButtonStates()
+    }
+    
+    func startExerciseSession() {
+        sessionIsActivate = true
+        setButtonStates()
     }
 
     
@@ -74,20 +101,14 @@ class SavedExerciseListTableViewController: BasicTableViewController {
         return cell
     }
     
-    // MARK: - Logic 
-    func resumeExerciseSession() {
-        
-    }
-    
-    func pauseExerciseSession() {
-        
-    }
-    
-    func startExerciseSession() {
-        
-    }
     
     // MARK: - Actions
+    @IBAction func stopButtonPressed(sender: AnyObject) {
+        sessionIsActivate = false
+        setButtonStates()
+    }
+    @IBAction func reorderButtonPressed(sender: AnyObject) {
+    }
     @IBAction func previousExerciseButtonPressed(sender: AnyObject) {
     }
     @IBAction func startButtonPressed(sender: AnyObject) {
@@ -102,6 +123,17 @@ class SavedExerciseListTableViewController: BasicTableViewController {
         }
     }
     @IBAction func nextExerciseButtonPressed(sender: AnyObject) {
+    }
+    
+    // MARK: - Segues
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "savedListToDetail") {
+            guard let destination = segue.destinationViewController as? SavedExerciseDetailTableViewController else {
+                fatalError("Did not find SavedExerciseDetailTableViewController in segue.destinationViewController")
+            }
+            destination.sessionIsActivate = self.sessionIsActivate
+            destination.sessionIsPaused = self.sessionIsPaused
+        }
     }
 
 }
