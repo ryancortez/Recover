@@ -14,12 +14,14 @@ class ExerciseViewModel: NSObject {
     var reps: Int16? = 0 // Number of times exercise is performed
     var time: Int16? = 0 // Time it takes to do the exercise in seconds
     var instructions: String?
+    var bodyPart: BodyPart!
     
-    init(name: String, image: UIImage?, instructions: String?, reps: Int16?, time: Int16?) {
+    init(name: String, image: UIImage?, instructions: String?, bodyPart: BodyPart, reps: Int16?, time: Int16?) {
         super.init()
         self.name = name
         self.reps = reps
         self.time = time
         self.instructions = instructions
+        self.bodyPart = bodyPart
     }
 }

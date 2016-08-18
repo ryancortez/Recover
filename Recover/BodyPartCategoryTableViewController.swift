@@ -11,25 +11,31 @@ import CoreData
 
 class BodyPartCategoryTableViewController: BasicTableViewController, EditExerciseTableViewControllerDelegate {
     
+    var bodyParts: Array<BodyPart> = []
+    
+    // MARK: - Inital View Setup - 
+    
+    // MARK: ViewController Lifecycle
+    override func viewDidLoad() {
+        fetchExerciseData()
+    }
+    
     // MARK: - CoreData -
     
     // MARK: Saving to CoreData
     func saveNew(exercise: ExerciseViewModel) {
-        
-        guard let exerciseEntry = NSEntityDescription.insertNewObjectForEntityForName("Exercise", inManagedObjectContext: self.managedObjectContext) as? Exercise else {
+        guard let newExercise = NSEntityDescription.insertNewObjectForEntityForName("Exercise", inManagedObjectContext: self.managedObjectContext) as? Exercise else {
             print("Could not insert new exercise into CoreData"); return
         }
-        exerciseEntry.setValue(exercise.name, forKey: "name")
-        exerciseEntry.setValue(exercise.reps as! AnyObject?, forKey: "reps")
-        exerciseEntry.setValue(exercise.time as! AnyObject?, forKey: "time")
-        exerciseEntry.setValue(exercise.instructions, forKey: "instructions")
+        newExercise.setValue(exercise.name, forKey: "name")
+        newExercise.setValue(exercise.reps as! AnyObject?, forKey: "reps")
+        newExercise.setValue(exercise.time as! AnyObject?, forKey: "time")
+        newExercise.setValue(exercise.instructions, forKey: "instructions")
         
-        do {
-            try self.managedObjectContext.save()
-        } catch {
-            print("Unable to save new exercise entry")
-            return
-        }
+        let bodyPart = exercise.bodyPart
+        bodyPart.exercises.insert(newExercise)
+        
+        saveToCoreData()
         tableView.reloadData()
     }
     func edit(currentExercise currentExercise: Exercise, withNewExerciseData newExerciseData: ExerciseViewModel) {
@@ -52,6 +58,9 @@ class BodyPartCategoryTableViewController: BasicTableViewController, EditExercis
         } else {
             currentExercise.time = 0
         }
+        let bodyPart = newExerciseData.bodyPart
+        bodyPart.exercises.insert(currentExercise)
+        
         saveToCoreData()
         tableView.reloadData()
     }
@@ -64,11 +73,31 @@ class BodyPartCategoryTableViewController: BasicTableViewController, EditExercis
         }
     }
     
-    // MARK: - TableView DataSource
+    // MARK: Fetch from CoreData
+    func fetchExerciseData() {
+        requestExercisesFromFetchResultsController()
+    }
+    func requestExercisesFromFetchResultsController() {
+        let entityName = "BodyPart"
+        let sortingKey = "name"
+        guard let objects = fetchEntityObjectsUsingFetchResultsController(withEntityName: entityName, sortBy: sortingKey, inAscendingOrder: false) as? Array<BodyPart> else {
+            print("Unable to get objects of entity name \(entityName) with sortingKey \(sortingKey)"); return
+        }
+        bodyParts = objects
+        tableView.reloadData()
+    }
+    
+    // MARK: - TableView -
+    
+    // MARK: TableView DataSource
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return bodyParts.count
+    }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("CatalogExerciseCell", forIndexPath: indexPath)
         cell.selectionStyle = .None
-        cell.textLabel?.text = "Body Part"
+        cell.textLabel?.text = bodyParts[indexPath.row].name
         return cell
     }
     
@@ -84,6 +113,10 @@ class BodyPartCategoryTableViewController: BasicTableViewController, EditExercis
             destinationViewController.coreDataManager = self.coreDataManager
             destinationViewController.fetchResultsController = self.fetchResultsController
             destinationViewController.managedObjectContext = self.managedObjectContext
+            guard let row = tableView.indexPathForSelectedRow?.row else {
+                print("Did not find a selected cell"); return
+            }
+            destinationViewController.bodyPart = bodyParts[row]
         }
         
         let addExerciseSegue = "bodyPartListToAdd"
@@ -95,7 +128,7 @@ class BodyPartCategoryTableViewController: BasicTableViewController, EditExercis
                 print("Did not find AddExerciseTableViewController when performing segue (\("bodyPartToAdd"))"); return
             }
             destinationViewController.delegate = self
+            destinationViewController.managedObjectContext = self.managedObjectContext
         }
-
     }
 }

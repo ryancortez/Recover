@@ -15,7 +15,6 @@
 		941BB6EC1D63A93400A8380D /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941BB6EB1D63A93400A8380D /* ImageTableViewCell.swift */; };
 		941BB6EE1D63A9A800A8380D /* RepAndTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941BB6ED1D63A9A800A8380D /* RepAndTimeTableViewCell.swift */; };
 		941BB6F01D63A9B700A8380D /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941BB6EF1D63A9B700A8380D /* DescriptionTableViewCell.swift */; };
-		943270BC1D5E587A00BE2D1A /* AddExerciseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943270BB1D5E587A00BE2D1A /* AddExerciseTableViewController.swift */; };
 		943270C11D5E5AC900BE2D1A /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943270BF1D5E5AC900BE2D1A /* CloudKitManager.swift */; };
 		943270C21D5E5AC900BE2D1A /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943270C01D5E5AC900BE2D1A /* UserDefaultsManager.swift */; };
 		94475E3B1D5EB6B900D919C4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94475E391D5EB6B900D919C4 /* Main.storyboard */; };
@@ -33,6 +32,7 @@
 		94C323E21D5E151F00227ACE /* ExerciseDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C323E11D5E151F00227ACE /* ExerciseDetailTableViewController.swift */; };
 		94C323E61D5E177500227ACE /* SavedExerciseListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C323E51D5E177500227ACE /* SavedExerciseListTableViewController.swift */; };
 		94C323E81D5E18BD00227ACE /* SavedExerciseDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C323E71D5E18BD00227ACE /* SavedExerciseDetailTableViewController.swift */; };
+		94C4BEF91D660F51004F4E5B /* BodyPart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C4BEF81D660F51004F4E5B /* BodyPart.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,7 +61,6 @@
 		941BB6EB1D63A93400A8380D /* ImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
 		941BB6ED1D63A9A800A8380D /* RepAndTimeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepAndTimeTableViewCell.swift; sourceTree = "<group>"; };
 		941BB6EF1D63A9B700A8380D /* DescriptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionTableViewCell.swift; sourceTree = "<group>"; };
-		943270BB1D5E587A00BE2D1A /* AddExerciseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddExerciseTableViewController.swift; sourceTree = "<group>"; };
 		943270BF1D5E5AC900BE2D1A /* CloudKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
 		943270C01D5E5AC900BE2D1A /* UserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		94475E3A1D5EB6B900D919C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -85,6 +84,7 @@
 		94C323E11D5E151F00227ACE /* ExerciseDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseDetailTableViewController.swift; sourceTree = "<group>"; };
 		94C323E51D5E177500227ACE /* SavedExerciseListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedExerciseListTableViewController.swift; sourceTree = "<group>"; };
 		94C323E71D5E18BD00227ACE /* SavedExerciseDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedExerciseDetailTableViewController.swift; sourceTree = "<group>"; };
+		94C4BEF81D660F51004F4E5B /* BodyPart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodyPart.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,7 +128,6 @@
 			children = (
 				94475E3C1D5EB7BB00D919C4 /* SettingsTableViewController.swift */,
 				94475E441D5ED07200D919C4 /* ExerciseTableViewController.swift */,
-				943270BB1D5E587A00BE2D1A /* AddExerciseTableViewController.swift */,
 				94475E421D5ED02300D919C4 /* EditExerciseTableViewController.swift */,
 			);
 			name = ModalViews;
@@ -188,6 +187,7 @@
 				949AC22C1D5D69DD0029328B /* Info.plist */,
 				941BB6E31D62333D00A8380D /* Model.xcdatamodeld */,
 				941BB6DF1D6224AE00A8380D /* Exercise.swift */,
+				94C4BEF81D660F51004F4E5B /* BodyPart.swift */,
 				941BB6E61D63859D00A8380D /* ExerciseViewModel.swift */,
 				941BB6E11D622BBF00A8380D /* CoreDataManager.swift */,
 				943270BF1D5E5AC900BE2D1A /* CloudKitManager.swift */,
@@ -391,13 +391,13 @@
 				94C323DA1D5E116F00227ACE /* BasicTableViewController.swift in Sources */,
 				941BB6E51D62333D00A8380D /* Model.xcdatamodeld in Sources */,
 				941BB6EC1D63A93400A8380D /* ImageTableViewCell.swift in Sources */,
+				94C4BEF91D660F51004F4E5B /* BodyPart.swift in Sources */,
 				94C323E01D5E149F00227ACE /* ExerciseListTableViewController.swift in Sources */,
 				941BB6E71D63859D00A8380D /* ExerciseViewModel.swift in Sources */,
 				94475E3D1D5EB7BB00D919C4 /* SettingsTableViewController.swift in Sources */,
 				94C323E61D5E177500227ACE /* SavedExerciseListTableViewController.swift in Sources */,
 				941BB6EA1D63A91E00A8380D /* TitleTableViewCell.swift in Sources */,
 				941BB6F01D63A9B700A8380D /* DescriptionTableViewCell.swift in Sources */,
-				943270BC1D5E587A00BE2D1A /* AddExerciseTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -24,7 +24,6 @@ class BasicTableViewController: UITableViewController,  NSFetchedResultsControll
     func fetchEntityObjectsUsingFetchResultsController(withEntityName entityName: String, sortBy sortKey:String, inAscendingOrder isAscendingOrder: Bool) -> [AnyObject]? {
         let fetchRequest = NSFetchRequest(entityName: entityName)
         
-        // Diary Entries will be display in descending order from the date created
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: sortKey, ascending: isAscendingOrder)]
         
         fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)

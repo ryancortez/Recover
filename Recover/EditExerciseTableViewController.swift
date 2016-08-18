@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 protocol EditExerciseTableViewControllerDelegate {
     func saveNew(exercise: ExerciseViewModel)
@@ -19,10 +20,12 @@ class EditExerciseTableViewController: UITableViewController, UITextViewDelegate
     var exercise: Exercise!
     var delegate: EditExerciseTableViewControllerDelegate!
     var isFirstTimeExerciseDescriptionIsBeginningEditing: Bool  = true
+    var managedObjectContext: NSManagedObjectContext!
     
     // MARK: - Outlets
     @IBOutlet weak var exerciseTitle: UITextField!
     @IBOutlet weak var exerciseInstructions: UITextView!
+    @IBOutlet weak var bodyPart: UITextField!
     @IBOutlet weak var addPhotoButton: UIButton!
     @IBOutlet weak var numberOfReps: UILabel!
     @IBOutlet weak var exerciseTime: UILabel!
@@ -33,7 +36,6 @@ class EditExerciseTableViewController: UITableViewController, UITextViewDelegate
     override func viewDidLoad() {
         setupUI()
     }
-    
     func setupUI() {
         setupNavBar()
         setupTitle()
@@ -53,6 +55,7 @@ class EditExerciseTableViewController: UITableViewController, UITextViewDelegate
         }
     }
     func setupInstructions() {
+        exerciseInstructions.delegate = self
         if (exercise != nil) {
             exerciseInstructions.textColor = UIColor.blackColor()
             exerciseInstructions.text = exercise.instructions
@@ -85,6 +88,69 @@ class EditExerciseTableViewController: UITableViewController, UITextViewDelegate
         }
     }
     
+    // MARK: - CoreData -
+    
+    // MARK: Save to CoreData
+    func saveNew(bodyPartWithName bodyPartName: String) -> BodyPart? {
+        guard let newBodyPart = NSEntityDescription.insertNewObjectForEntityForName("BodyPart", inManagedObjectContext: self.managedObjectContext) as? BodyPart else {
+            print("Could not cast fetched object as BodyPart")
+            return nil
+        }
+        newBodyPart.setValue(bodyPartName, forKey: "name")
+        
+        do {
+            try self.managedObjectContext.save()
+            return newBodyPart
+        } catch {
+            print("Unable to save new BodyPart entity")
+            return nil
+        }
+    }
+    func pass(exerciseViewModelToCoreData exerciseViewModel: ExerciseViewModel) {
+        if (exercise == nil) {
+            delegate.saveNew(exerciseViewModel)
+        } else {
+            delegate.edit(currentExercise:exercise, withNewExerciseData: exerciseViewModel)
+        }
+    }
+    func fetchMiscBodyPart() -> BodyPart {
+        guard let miscBodyPart = fetch(bodyPartWithName: "Miscellaneous") else {
+            return saveNewMiscBodyPart()!
+        }
+        return miscBodyPart
+    }
+    func saveNewMiscBodyPart() -> BodyPart? {
+        guard let miscBodyPart = saveNew(bodyPartWithName: "Miscellaneous") else {
+            print("Could not save new \"Miscellaneous\" BodyPart")
+            return nil
+        }
+        return miscBodyPart
+    }
+
+    
+    // MARK: Fetch from CoreData
+    func fetch(bodyPartWithName bodyPartName: String) -> BodyPart? {
+        
+        var fetchedObjects = []
+        let fetchRequest = NSFetchRequest(entityName: "BodyPart")
+        fetchRequest.predicate = NSPredicate(format: "ANY name contains %@", argumentArray: [bodyPartName])
+        do {
+            try fetchedObjects = managedObjectContext.executeFetchRequest(fetchRequest)
+        } catch {
+           print("Did not find any body part matching that name")
+        }
+        
+        if (fetchedObjects.count >= 1) {
+            guard let fetchedBodyPart = fetchedObjects.objectAtIndex(0) as? BodyPart else {
+                print("Could not create BodyPart from fetched object"); return nil
+            }
+            return fetchedBodyPart
+            
+        } else {
+            return nil
+        }
+    }
+    
     // MARK: - TextView Delegate
     func textViewDidBeginEditing(textView: UITextView) {
         if isFirstTimeExerciseDescriptionIsBeginningEditing {
@@ -110,12 +176,27 @@ class EditExerciseTableViewController: UITableViewController, UITextViewDelegate
             print("Did not retrieve any exercise instructions")
             return
         }
-        let exerciseViewModel = ExerciseViewModel(name: name, image: nil, instructions: instructions, reps: nil, time: nil)
-        if (exercise == nil) {
-            delegate.saveNew(exerciseViewModel)
-        } else {
-            delegate.edit(currentExercise:exercise, withNewExerciseData: exerciseViewModel)
+        guard let bodyPartName = bodyPart.text else {
+            print("Did not reciece any associated body part, fetching/creating misc BodyPart")
+            let miscBodyPart = fetchMiscBodyPart()
+            let exerciseViewModel = ExerciseViewModel(name: name, image: nil, instructions: instructions, bodyPart: miscBodyPart, reps: nil, time: nil)
+            pass(exerciseViewModelToCoreData: exerciseViewModel)
+            dismissViewControllerAnimated(true, completion: nil)
+            return
         }
+        guard let fetchedBodyPart = fetch(bodyPartWithName: bodyPartName) else {
+            print("Did not find bodyPart, attempting to create BodyPart")
+            guard let newBodyPart = saveNew(bodyPartWithName: bodyPartName) else {
+                print("Creating newBodyPart (\(bodyPartName)) did not succeed")
+                return
+            }
+            let exerciseViewModel = ExerciseViewModel(name: name, image: nil, instructions: instructions, bodyPart: newBodyPart, reps: nil, time: nil)
+            pass(exerciseViewModelToCoreData: exerciseViewModel)
+            dismissViewControllerAnimated(true, completion: nil)
+            return
+        }
+        let exerciseViewModel = ExerciseViewModel(name: name, image: nil, instructions: instructions, bodyPart: fetchedBodyPart, reps: nil, time: nil)
+        pass(exerciseViewModelToCoreData: exerciseViewModel)
         dismissViewControllerAnimated(true, completion: nil)
     }
     @IBAction func repStepperPressed(sender: AnyObject) {

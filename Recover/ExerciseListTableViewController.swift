@@ -10,13 +10,15 @@ import UIKit
 import CoreData
 
 class ExerciseListTableViewController: BasicTableViewController, EditExerciseTableViewControllerDelegate {
-
+    
+    var bodyPart: BodyPart!
+    
     // MARK: - Initial Setup -
     
     // MARK: ViewController LifeCycle
     override func viewDidLoad() {
+        exercises = Array(bodyPart.exercises)
         setupInitalUI()
-        fetchExerciseData()
     }
     
     // MARK: Inital UI
@@ -26,7 +28,7 @@ class ExerciseListTableViewController: BasicTableViewController, EditExerciseTab
     func setupNavBar() {
         let navBarTitle = "Body Part"
         self.title = navBarTitle
-
+        
     }
     
     // MARK: - Core Data -
@@ -43,6 +45,30 @@ class ExerciseListTableViewController: BasicTableViewController, EditExerciseTab
         }
         exercises = objects
         tableView.reloadData()
+    }
+    
+    func fetchAllExercisesFromBodyPart() {
+        let entityName = "BodyPart"
+        let sortKey = "name"
+        let fetchRequest = NSFetchRequest(entityName: entityName)
+         fetchRequest.predicate = NSPredicate(format: "ANY name contains %@", argumentArray: [bodyPart.name])
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: sortKey, ascending: false)]
+        
+        fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+        self.fetchResultsController.delegate = self
+        
+        do {
+            try self.fetchResultsController.performFetch()
+        } catch {
+            print("fetchResultsController was unable to perform fetch")
+            return
+        }
+        guard let fetchedObjects = fetchResultsController.fetchedObjects else {
+            print ("Unable to fetch objects from Entity: \(entityName)")
+            return
+        }
+        
+        exercises = fetchedObjects
     }
     
     // MARK: Saving to CoreData
@@ -97,19 +123,18 @@ class ExerciseListTableViewController: BasicTableViewController, EditExerciseTab
     }
     
     // MARK: - TableView -
-
+    
     // MARK: TableView Data Source
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return exercises.count
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("CatalogExerciseCell", forIndexPath: indexPath)
-        let exercise = exercises[indexPath.row]
         cell.selectionStyle = .None
-        cell.textLabel?.text = exercise.name
+        cell.textLabel?.text = exercises[indexPath.row].name
         return cell
     }
-
+    
     // MARK: - Segues -
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let segueToDetail = "exerciseListToDetail"
@@ -138,6 +163,7 @@ class ExerciseListTableViewController: BasicTableViewController, EditExerciseTab
                 print("Did not find AddExerciseTableViewController when performing segue (\("bodyPartToAdd"))"); return
             }
             destinationViewController.delegate = self
-        }        
+            destinationViewController.managedObjectContext = self.managedObjectContext
+        }
     }
 }
