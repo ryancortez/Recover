@@ -21,6 +21,10 @@ class ExerciseListTableViewController: BasicTableViewController, EditExerciseTab
         setupInitalUI()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        tableView.reloadData()
+    }
+    
     // MARK: Inital UI
     func setupInitalUI() {
         setupNavBar()

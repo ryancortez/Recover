@@ -164,6 +164,7 @@ class ExerciseDetailTableViewController: BasicTableViewController, EditExerciseT
             }
             destinationViewController.exercise = self.exercise
             destinationViewController.delegate = self
+            destinationViewController.managedObjectContext = self.managedObjectContext
         }
     }
 
