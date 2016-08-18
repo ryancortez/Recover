@@ -19,6 +19,7 @@ class SavedExerciseListTableViewController: BasicTableViewController {
     @IBOutlet weak var previousExerciseButton: UIBarButtonItem!
     @IBOutlet weak var startButton: UIBarButtonItem!
     @IBOutlet weak var nextExerciseButton: UIBarButtonItem!
+    @IBOutlet weak var reorderButton: UIBarButtonItem!
     
     // MARK: - Inital Setup
     
@@ -93,7 +94,9 @@ class SavedExerciseListTableViewController: BasicTableViewController {
     }
 
     
-    // MARK: - TableView DataSource
+    // MARK: - TableView
+    
+    // MARK: Data Source
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("SavedExerciseCell", forIndexPath: indexPath)
         cell.selectionStyle = .None
@@ -101,6 +104,11 @@ class SavedExerciseListTableViewController: BasicTableViewController {
         return cell
     }
     
+    // MARK: Delegate
+    
+    override func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+        
+    }
     
     // MARK: - Actions
     @IBAction func stopButtonPressed(sender: AnyObject) {
@@ -108,6 +116,15 @@ class SavedExerciseListTableViewController: BasicTableViewController {
         setButtonStates()
     }
     @IBAction func reorderButtonPressed(sender: AnyObject) {
+        if tableView.editing {
+            tableView.setEditing(false, animated: true)
+            reorderButton.title = "Reorder"
+            reorderButton.style = .Plain
+        } else {
+            tableView.setEditing(true, animated: true)
+            reorderButton.title = "Done"
+            reorderButton.style = .Done
+        }
     }
     @IBAction func previousExerciseButtonPressed(sender: AnyObject) {
     }

@@ -9,76 +9,59 @@
 import UIKit
 import CoreData
 
-class BodyPartCategoryTableViewController: BasicTableViewController, NSFetchedResultsControllerDelegate, AddExerciseTableViewControllerDelegate {
+class BodyPartCategoryTableViewController: BasicTableViewController, EditExerciseTableViewControllerDelegate {
     
-    // MARK: - Global Variables
-    var managedObjectContext: NSManagedObjectContext!
-    var coreDataManager: CoreDataManager!
-    var fetchResultsController: NSFetchedResultsController!
-    var exercises = [AnyObject]()
+    // MARK: - CoreData -
     
-    // MARK: - Inital Setup
-    override func viewDidLoad() {
+    // MARK: Saving to CoreData
+    func saveNew(exercise: ExerciseViewModel) {
         
-    }
-    
-    // MARK: - Core Data
-    func requestExercisesFromFetchResultsController() {
-        let entityName = "Exercise"
-        let sortingKey = "name"
-        guard let objects = fetchEntityObjectsUsingFetchResultsController(withEntityName: entityName, sortBy: sortingKey, inAscendingOrder: false) else {
-            print("Unable to get objects of entity name \(entityName) with sortingKey \(sortingKey)"); return
+        guard let exerciseEntry = NSEntityDescription.insertNewObjectForEntityForName("Exercise", inManagedObjectContext: self.managedObjectContext) as? Exercise else {
+            print("Could not insert new exercise into CoreData"); return
         }
-        exercises = objects
-    }
-    
-    func fetchEntityObjectsUsingFetchResultsController(withEntityName entityName: String, sortBy sortKey:String, inAscendingOrder isAscendingOrder: Bool) -> [AnyObject]? {
-        let fetchRequest = NSFetchRequest(entityName: entityName)
-        
-        // Diary Entries will be display in descending order from the date created
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: sortKey, ascending: isAscendingOrder)]
-        
-        fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
-        
-        self.fetchResultsController.delegate = self
-        
-        do {
-            try self.fetchResultsController.performFetch()
-        } catch {
-            print("fetchResultsController was unable to perform fetch")
-            return nil
-        }
-        guard let fetchedObjects = fetchResultsController.fetchedObjects else {
-            print ("Unable to fetch objects from Entity: \(entityName)")
-            return nil
-        }
-        
-        return fetchedObjects
-    }
-    
-    func saveNew(exercise: Exercise) {
-        print("Saving new exercise was fired!")
-        let diaryEntry = NSEntityDescription.insertNewObjectForEntityForName("Exercise", inManagedObjectContext: self.managedObjectContext)
-        diaryEntry.setValue(title, forKey: "name")
-        diaryEntry.setValue(entry, forKey: "reps")
-        diaryEntry.setValue(date, forKey: "time")
-        diaryEntry.setValue(date, forKey: "instruction")
+        exerciseEntry.setValue(exercise.name, forKey: "name")
+        exerciseEntry.setValue(exercise.reps as! AnyObject?, forKey: "reps")
+        exerciseEntry.setValue(exercise.time as! AnyObject?, forKey: "time")
+        exerciseEntry.setValue(exercise.instructions, forKey: "instructions")
         
         do {
             try self.managedObjectContext.save()
         } catch {
-            print("Unable to save new diary entry from addButtonPress")
+            print("Unable to save new exercise entry")
             return
         }
-
+        tableView.reloadData()
     }
-    
-    func setupIntialExerciseDatabase() {
-    
-    }
-    
-    func fetchUsersExerciseDatabase() {
+    func edit(currentExercise currentExercise: Exercise, withNewExerciseData newExerciseData: ExerciseViewModel) {
         
+        currentExercise.name = newExerciseData.name
+        
+        guard let instructions = newExerciseData.instructions else {
+            print("Did not find any instuctions saved in currentExercise")
+            return
+        }
+        currentExercise.instructions = instructions
+        
+        if let reps = newExerciseData.reps {
+            currentExercise.reps = reps
+        } else {
+            currentExercise.reps = 0
+        }
+        if let time = newExerciseData.time {
+            currentExercise.time = time
+        } else {
+            currentExercise.time = 0
+        }
+        saveToCoreData()
+        tableView.reloadData()
+    }
+    func saveToCoreData() {
+        do {
+            try self.managedObjectContext.save()
+        } catch {
+            print("Unable to edit exercise entry")
+            return
+        }
     }
     
     // MARK: - TableView DataSource
@@ -88,5 +71,31 @@ class BodyPartCategoryTableViewController: BasicTableViewController, NSFetchedRe
         cell.textLabel?.text = "Body Part"
         return cell
     }
+    
+    // MARK: - Segue
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        super.prepareForSegue(segue, sender: sender)
+        
+        let exerciseListSegue = "bodyPartToExerciseList"
+        if (segue.identifier == exerciseListSegue) {
+            guard let destinationViewController = segue.destinationViewController as? ExerciseListTableViewController else {
+                print("Did not find ExerciseListTableViewController in segue.desintationViewControllerf for segue (\(exerciseListSegue))"); return
+            }
+            destinationViewController.coreDataManager = self.coreDataManager
+            destinationViewController.fetchResultsController = self.fetchResultsController
+            destinationViewController.managedObjectContext = self.managedObjectContext
+        }
+        
+        let addExerciseSegue = "bodyPartListToAdd"
+        if (segue.identifier == addExerciseSegue) {
+            guard let navigationController = segue.destinationViewController as? UINavigationController else {
+                print("Did not find UINavigationController when performing segue (\("bodyPartToAdd"))"); return
+            }
+            guard let destinationViewController = navigationController.viewControllers.first as? EditExerciseTableViewController  else {
+                print("Did not find AddExerciseTableViewController when performing segue (\("bodyPartToAdd"))"); return
+            }
+            destinationViewController.delegate = self
+        }
 
+    }
 }

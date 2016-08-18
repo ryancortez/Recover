@@ -2,17 +2,18 @@
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15G31" minimumToolsVersion="Xcode 7.0">
     <entity name="BodyPart" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="relationship" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Exercise" inverseName="relationship" inverseEntity="Exercise" syncable="YES"/>
+        <relationship name="exercises" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Exercise" inverseName="bodyPart" inverseEntity="Exercise" syncable="YES"/>
     </entity>
-    <entity name="Exercise" syncable="YES">
+    <entity name="Exercise" representedClassName=".Exercise" syncable="YES">
+        <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="instructions" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="reps" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="time" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <relationship name="relationship" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="BodyPart" inverseName="relationship" inverseEntity="BodyPart" syncable="YES"/>
+        <relationship name="bodyPart" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BodyPart" inverseName="exercises" inverseEntity="BodyPart" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Exercise" positionX="-63" positionY="-18" width="128" height="118"/>
         <element name="BodyPart" positionX="-110" positionY="258" width="128" height="75"/>
+        <element name="Exercise" positionX="-63" positionY="-18" width="128" height="135"/>
     </elements>
 </model>

@@ -10,6 +10,11 @@
 		941BB6E01D6224AE00A8380D /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941BB6DF1D6224AE00A8380D /* Exercise.swift */; };
 		941BB6E21D622BBF00A8380D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941BB6E11D622BBF00A8380D /* CoreDataManager.swift */; };
 		941BB6E51D62333D00A8380D /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 941BB6E31D62333D00A8380D /* Model.xcdatamodeld */; };
+		941BB6E71D63859D00A8380D /* ExerciseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941BB6E61D63859D00A8380D /* ExerciseViewModel.swift */; };
+		941BB6EA1D63A91E00A8380D /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941BB6E91D63A91E00A8380D /* TitleTableViewCell.swift */; };
+		941BB6EC1D63A93400A8380D /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941BB6EB1D63A93400A8380D /* ImageTableViewCell.swift */; };
+		941BB6EE1D63A9A800A8380D /* RepAndTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941BB6ED1D63A9A800A8380D /* RepAndTimeTableViewCell.swift */; };
+		941BB6F01D63A9B700A8380D /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941BB6EF1D63A9B700A8380D /* DescriptionTableViewCell.swift */; };
 		943270BC1D5E587A00BE2D1A /* AddExerciseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943270BB1D5E587A00BE2D1A /* AddExerciseTableViewController.swift */; };
 		943270C11D5E5AC900BE2D1A /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943270BF1D5E5AC900BE2D1A /* CloudKitManager.swift */; };
 		943270C21D5E5AC900BE2D1A /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943270C01D5E5AC900BE2D1A /* UserDefaultsManager.swift */; };
@@ -51,6 +56,11 @@
 		941BB6DF1D6224AE00A8380D /* Exercise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		941BB6E11D622BBF00A8380D /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataManager.swift; path = ../../GroceryList/GroceryList/CoreDataManager.swift; sourceTree = "<group>"; };
 		941BB6E41D62333D00A8380D /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		941BB6E61D63859D00A8380D /* ExerciseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseViewModel.swift; sourceTree = "<group>"; };
+		941BB6E91D63A91E00A8380D /* TitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
+		941BB6EB1D63A93400A8380D /* ImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
+		941BB6ED1D63A9A800A8380D /* RepAndTimeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepAndTimeTableViewCell.swift; sourceTree = "<group>"; };
+		941BB6EF1D63A9B700A8380D /* DescriptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionTableViewCell.swift; sourceTree = "<group>"; };
 		943270BB1D5E587A00BE2D1A /* AddExerciseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddExerciseTableViewController.swift; sourceTree = "<group>"; };
 		943270BF1D5E5AC900BE2D1A /* CloudKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
 		943270C01D5E5AC900BE2D1A /* UserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
@@ -102,6 +112,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		941BB6E81D63A8F800A8380D /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				941BB6E91D63A91E00A8380D /* TitleTableViewCell.swift */,
+				941BB6EB1D63A93400A8380D /* ImageTableViewCell.swift */,
+				941BB6ED1D63A9A800A8380D /* RepAndTimeTableViewCell.swift */,
+				941BB6EF1D63A9B700A8380D /* DescriptionTableViewCell.swift */,
+			);
+			name = TableViewCells;
+			sourceTree = "<group>";
+		};
 		943270BA1D5E582B00BE2D1A /* ModalViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,6 +158,8 @@
 			isa = PBXGroup;
 			children = (
 				94C323D51D5E10C600227ACE /* Model */,
+				94C323D71D5E10C700227ACE /* Views */,
+				94C323D61D5E10C700227ACE /* Controllers */,
 			);
 			path = Recover;
 			sourceTree = "<group>";
@@ -165,10 +188,10 @@
 				949AC22C1D5D69DD0029328B /* Info.plist */,
 				941BB6E31D62333D00A8380D /* Model.xcdatamodeld */,
 				941BB6DF1D6224AE00A8380D /* Exercise.swift */,
+				941BB6E61D63859D00A8380D /* ExerciseViewModel.swift */,
 				941BB6E11D622BBF00A8380D /* CoreDataManager.swift */,
 				943270BF1D5E5AC900BE2D1A /* CloudKitManager.swift */,
 				943270C01D5E5AC900BE2D1A /* UserDefaultsManager.swift */,
-				94C323D61D5E10C700227ACE /* Controllers */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -176,10 +199,9 @@
 		94C323D61D5E10C700227ACE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				943270BA1D5E582B00BE2D1A /* ModalViews */,
 				949AC21E1D5D69DD0029328B /* AppDelegate.swift */,
+				943270BA1D5E582B00BE2D1A /* ModalViews */,
 				94C323D81D5E10C900227ACE /* TableViewControllers */,
-				94C323D71D5E10C700227ACE /* Views */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -198,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				94C323D91D5E116F00227ACE /* BasicTableViewController.swift */,
+				941BB6E81D63A8F800A8380D /* TableViewCells */,
 				94C323E31D5E155C00227ACE /* Catalog */,
 				94C323E41D5E156100227ACE /* Saved Exercises */,
 			);
@@ -358,6 +381,7 @@
 				949AC21F1D5D69DD0029328B /* AppDelegate.swift in Sources */,
 				94C323E21D5E151F00227ACE /* ExerciseDetailTableViewController.swift in Sources */,
 				941BB6E21D622BBF00A8380D /* CoreDataManager.swift in Sources */,
+				941BB6EE1D63A9A800A8380D /* RepAndTimeTableViewCell.swift in Sources */,
 				94C323DE1D5E146600227ACE /* BodyPartCategoryTableViewController.swift in Sources */,
 				94475E451D5ED07200D919C4 /* ExerciseTableViewController.swift in Sources */,
 				941BB6E01D6224AE00A8380D /* Exercise.swift in Sources */,
@@ -366,9 +390,13 @@
 				943270C11D5E5AC900BE2D1A /* CloudKitManager.swift in Sources */,
 				94C323DA1D5E116F00227ACE /* BasicTableViewController.swift in Sources */,
 				941BB6E51D62333D00A8380D /* Model.xcdatamodeld in Sources */,
+				941BB6EC1D63A93400A8380D /* ImageTableViewCell.swift in Sources */,
 				94C323E01D5E149F00227ACE /* ExerciseListTableViewController.swift in Sources */,
+				941BB6E71D63859D00A8380D /* ExerciseViewModel.swift in Sources */,
 				94475E3D1D5EB7BB00D919C4 /* SettingsTableViewController.swift in Sources */,
 				94C323E61D5E177500227ACE /* SavedExerciseListTableViewController.swift in Sources */,
+				941BB6EA1D63A91E00A8380D /* TitleTableViewCell.swift in Sources */,
+				941BB6F01D63A9B700A8380D /* DescriptionTableViewCell.swift in Sources */,
 				943270BC1D5E587A00BE2D1A /* AddExerciseTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

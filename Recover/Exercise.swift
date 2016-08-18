@@ -7,18 +7,13 @@
 //
 
 import Foundation
+import UIKit
+import CoreData
 
-class Exercise: NSObject {
-    var name: String = "" // Name of the exercise
-    var reps: Int? // Number of times exercise is performed
-    var time: Int? // Time it takes to do the exercise in seconds
-    var bodyPartCategories: Array<String> = [] // Places on the body the exercise focuses on
-    
-    init(name: String, bodyPartCategories: Array<String>, reps: Int?, time: Int?) {
-        super.init()
-        self.name = name
-        self.reps = reps
-        self.time = time
-        self.bodyPartCategories = bodyPartCategories
-    }
+class Exercise: NSManagedObject {
+    @NSManaged var image: NSData
+    @NSManaged var name: String // Name of the exercise
+    @NSManaged var reps: Int16 // Number of times exercise is performed
+    @NSManaged var time: Int16 // Time it takes to do the exercise in seconds
+    @NSManaged var instructions: String
 }
