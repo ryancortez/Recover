@@ -136,23 +136,31 @@ class SavedExerciseDetailTableViewController: ExerciseDetailTableViewController,
     }
     func goToPreviousExercise() {
         speechSynthesizer.stopSpeakingAtBoundary(.Immediate)
-        self.navigationController?.popViewControllerAnimated(true)
+        if (exerciseIndex - 1 >= 0) {
+            exercise = exercises[exerciseIndex - 1]
+            exerciseIndex = exerciseIndex - 1
+            if (exerciseIndex == 0) {
+                isFirstExercise = true
+                setButtonStates()
+            }
+            tableView.reloadData()
+            checkIfSessionIsPaused()
+        } else {
+            delegate.stopButtonWasPressed()
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
     }
     func goToNextExercise() {
             speechSynthesizer.stopSpeakingAtBoundary(.Immediate)
-        let savedExerciseDetailViewController = createViewController(inStoryBoard: mainStoryboardName, withIdentifier: "SaveExerciseDetail") as! SavedExerciseDetailTableViewController
         if (exerciseIndex + 1 < exercises.count) {
-            savedExerciseDetailViewController.exercise = exercises[exerciseIndex + 1]
-            if (savedExerciseDetailViewController.exercise != nil) {
-                savedExerciseDetailViewController.exerciseIndex = exerciseIndex + 1
-                savedExerciseDetailViewController.exercises = exercises
-                savedExerciseDetailViewController.sessionIsActive = sessionIsActive
-                savedExerciseDetailViewController.isFirstExercise = false
-                savedExerciseDetailViewController.sessionIsPaused = sessionIsPaused
-                savedExerciseDetailViewController.delegate = delegate
-                self.navigationController?.pushViewController(savedExerciseDetailViewController, animated: true)
-            }
+            isFirstExercise = false
+            setButtonStates()
+            exercise = exercises[exerciseIndex + 1]
+            exerciseIndex = exerciseIndex + 1
+            tableView.reloadData()
+            checkIfSessionIsPaused()
         } else {
+            delegate.stopButtonWasPressed()
             self.dismissViewControllerAnimated(true, completion: nil)
         }
     }
