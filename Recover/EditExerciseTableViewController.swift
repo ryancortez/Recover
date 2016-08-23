@@ -17,6 +17,7 @@ protocol EditExerciseTableViewControllerDelegate {
 class EditExerciseTableViewController: UITableViewController, UITextViewDelegate {
     
     // MARK: - Global Variables
+    var bodyPart: BodyPart!
     var exercise: Exercise!
     var delegate: EditExerciseTableViewControllerDelegate!
     var isFirstTimeExerciseDescriptionIsBeginningEditing: Bool  = true
@@ -25,7 +26,7 @@ class EditExerciseTableViewController: UITableViewController, UITextViewDelegate
     // MARK: - Outlets
     @IBOutlet weak var exerciseTitle: UITextField!
     @IBOutlet weak var exerciseInstructions: UITextView!
-    @IBOutlet weak var bodyPart: UITextField!
+    @IBOutlet weak var bodyPartTextField: UITextField!
     @IBOutlet weak var addPhotoButton: UIButton!
     @IBOutlet weak var numberOfReps: UILabel!
     @IBOutlet weak var exerciseTime: UILabel!
@@ -41,6 +42,7 @@ class EditExerciseTableViewController: UITableViewController, UITextViewDelegate
         setupTitle()
         setupInstructions()
         setupSteppers()
+        setupBodyPartTextField()
     }
     func setupNavBar() {
         if (exercise != nil) {
@@ -59,6 +61,12 @@ class EditExerciseTableViewController: UITableViewController, UITextViewDelegate
         if (exercise != nil) {
             exerciseInstructions.textColor = UIColor.blackColor()
             exerciseInstructions.text = exercise.instructions
+        }
+    }
+    func setupBodyPartTextField() {
+        if (bodyPart != nil) {
+            bodyPartTextField.text = bodyPart.name
+            bodyPartTextField.enabled = false
         }
     }
     func setupSteppers() {
@@ -166,8 +174,7 @@ class EditExerciseTableViewController: UITableViewController, UITextViewDelegate
         dismissViewControllerAnimated(true, completion: nil)
     }
     @IBAction func saveButtonPressed(sender: AnyObject) {
-        exerciseTitle.resignFirstResponder()
-        exerciseInstructions.resignFirstResponder()
+        resignFirstResponderFromAllFieldsAndViews()
         guard let name = exerciseTitle.text else {
             print("Did not retrieve a exercise name")
             return
@@ -176,7 +183,7 @@ class EditExerciseTableViewController: UITableViewController, UITextViewDelegate
             print("Did not retrieve any exercise instructions")
             return
         }
-        guard let bodyPartName = bodyPart.text else {
+        guard let bodyPartName = bodyPartTextField.text else {
             print("Did not reciece any associated body part, fetching/creating misc BodyPart")
             let miscBodyPart = fetchMiscBodyPart()
             let exerciseViewModel = ExerciseViewModel(name: name, image: nil, instructions: instructions, bodyPart: miscBodyPart, reps: nil, time: nil)
@@ -184,16 +191,26 @@ class EditExerciseTableViewController: UITableViewController, UITextViewDelegate
             dismissViewControllerAnimated(true, completion: nil)
             return
         }
-        guard let fetchedBodyPart = fetch(bodyPartWithName: bodyPartName) else {
-            print("Did not find bodyPart, attempting to create BodyPart")
-            guard let newBodyPart = saveNew(bodyPartWithName: bodyPartName) else {
-                print("Creating newBodyPart (\(bodyPartName)) did not succeed")
-                return
-            }
-            let exerciseViewModel = ExerciseViewModel(name: name, image: nil, instructions: instructions, bodyPart: newBodyPart, reps: nil, time: nil)
+        
+        if (bodyPartName == "") {
+            let miscBodyPart = fetchMiscBodyPart()
+            let exerciseViewModel = ExerciseViewModel(name: name, image: nil, instructions: instructions, bodyPart: miscBodyPart, reps: nil, time: nil)
             pass(exerciseViewModelToCoreData: exerciseViewModel)
             dismissViewControllerAnimated(true, completion: nil)
             return
+        }
+        
+        guard let fetchedBodyPart = fetch(bodyPartWithName: bodyPartName) else {
+            print("Did not find bodyPart, attempting to create BodyPart")
+            
+                guard let newBodyPart = saveNew(bodyPartWithName: bodyPartName) else {
+                    print("Creating newBodyPart (\(bodyPartName)) did not succeed")
+                    return
+                }
+                let exerciseViewModel = ExerciseViewModel(name: name, image: nil, instructions: instructions, bodyPart: newBodyPart, reps: nil, time: nil)
+                pass(exerciseViewModelToCoreData: exerciseViewModel)
+                dismissViewControllerAnimated(true, completion: nil)
+                return
         }
         let exerciseViewModel = ExerciseViewModel(name: name, image: nil, instructions: instructions, bodyPart: fetchedBodyPart, reps: nil, time: nil)
         pass(exerciseViewModelToCoreData: exerciseViewModel)

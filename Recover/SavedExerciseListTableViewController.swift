@@ -7,46 +7,43 @@
 //
 
 import UIKit
+import CoreData
 
-class SavedExerciseListTableViewController: BasicTableViewController {
+class SavedExerciseListTableViewController: BasicTableViewController, SavedExerciseDetailTableViewControllerDelegate {
     
     // MARK: - Global Variables
-    var sessionIsActivate: Bool = false
+    var sessionIsActive: Bool = false
     var sessionIsPaused: Bool = false
+    var savedExerciseList: SavedExerciseList!
     
     // MARK: - Outlet
-    @IBOutlet weak var stopButton: UIBarButtonItem!
     @IBOutlet weak var previousExerciseButton: UIBarButtonItem!
     @IBOutlet weak var startButton: UIBarButtonItem!
     @IBOutlet weak var nextExerciseButton: UIBarButtonItem!
     @IBOutlet weak var reorderButton: UIBarButtonItem!
     
-    // MARK: - Inital Setup
+    // MARK: - Inital Setup -
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         setButtonStates()
     }
-    
+    override func viewWillAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        let name = "My Exercise List"
+        guard let savedExerciseList = fetchSavedExerciseList(withName: name) else {
+            print("Did not find SavedExerciseList of the name (\(name)")
+            return
+        }
+        fetchExercises(fromSavedExercise: savedExerciseList)
+    }
     func setButtonStates() {
         setPreviousExerciseButtonState()
         setStartButtonState()
         setNextExerciseButtonState()
-        setStopButtonState()
     }
-    
-    func setStopButtonState() {
-        if sessionIsActivate {
-            stopButton.enabled = true
-            stopButton.tintColor = nil
-        } else {
-            stopButton.enabled = false
-            stopButton.tintColor = UIColor.clearColor()
-        }
-
-    }
-    
     func setPreviousExerciseButtonState() {
-        if sessionIsActivate {
+        if sessionIsActive {
             previousExerciseButton.enabled = true
             previousExerciseButton.tintColor = nil
         } else {
@@ -54,9 +51,8 @@ class SavedExerciseListTableViewController: BasicTableViewController {
             previousExerciseButton.tintColor = UIColor.clearColor()
         }
     }
-    
     func setStartButtonState() {
-        if sessionIsActivate {
+        if sessionIsActive {
             if sessionIsPaused {
                 startButton.title = "Resume"
             } else {
@@ -66,9 +62,8 @@ class SavedExerciseListTableViewController: BasicTableViewController {
             startButton.title = "Start"
         }
     }
-    
     func setNextExerciseButtonState() {
-        if sessionIsActivate{
+        if sessionIsActive {
             nextExerciseButton.enabled      = true
             nextExerciseButton.tintColor    = nil
         }else{
@@ -76,45 +71,85 @@ class SavedExerciseListTableViewController: BasicTableViewController {
             nextExerciseButton.tintColor    = UIColor.clearColor()
         }
     }
+
+    // MARK: - Exercise Session Logic -
     
-    // MARK: - Exercise Session Logic
     func resumeExerciseSession() {
         sessionIsPaused = false
         setButtonStates()
     }
-    
     func pauseExerciseSession() {
         sessionIsPaused = true
         setButtonStates()
     }
-    
     func startExerciseSession() {
-        sessionIsActivate = true
-        setButtonStates()
+        if (tableView.visibleCells != []) {
+            sessionIsActive = true
+            setButtonStates()
+            let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+            tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .Top)
+            performSegueWithIdentifier("startSession" , sender: self)
+        }
     }
-
     
-    // MARK: - TableView
+    // MARK: - Core Data -
     
-    // MARK: Data Source
+    // MARK: Fetch from Core Data
+    func fetchSavedExerciseList(withName name: String) -> SavedExerciseList? {
+        let entityName = "SavedExerciseList"
+        let sortingKey = "name"
+        let sortDescriptors = [NSSortDescriptor(key: sortingKey, ascending: true)]
+        let predicate = NSPredicate(format: "ANY name contains %@", argumentArray: [name])
+        let fetchRequest = getFetchRequest(withEntityName: entityName, withSortDescriptors: sortDescriptors, andPredicate: predicate)
+        guard let objects = getObjects(withFetchRequest: fetchRequest) else {
+            print("Did not recieve any objects from fetchRequest")
+            return nil
+        }
+        guard let object = objects.first else {
+            print("Found no SavedExerciseList matching name: \(name)")
+            return nil
+        }
+        guard let savedExerciseList = object as? SavedExerciseList else {
+            print("Could not cast the object pulled from entity (\(entityName) with name (\(name) CoreData")
+            return nil
+        }
+        return savedExerciseList
+    }
+    func fetchExercises(fromSavedExercise savedExerciseList: SavedExerciseList) {
+        exercises = Array(savedExerciseList.exercises)
+        tableView.reloadData()
+    }
+    
+    // MARK: - TableView -
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return exercises.count
+    }
+    
+    // MARK: TableView Data Source
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("SavedExerciseCell", forIndexPath: indexPath)
+        guard let cell = tableView.dequeueReusableCellWithIdentifier("SavedExerciseCell", forIndexPath: indexPath) as? SavedExerciseTableViewCell else {
+            print("Could not create SavedExerciseTableViewCell")
+            return tableView.dequeueReusableCellWithIdentifier("SavedExerciseCell", forIndexPath: indexPath)
+        }
+        let exercise = exercises[indexPath.row]
+        cell.exerciseName.text = exercise.name
         cell.selectionStyle = .None
-        cell.textLabel?.text = "Exercise Name"
         return cell
     }
     
-    // MARK: Delegate
-    
+    // MARK: TableView Delegate
     override func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
         
     }
     
-    // MARK: - Actions
-    @IBAction func stopButtonPressed(sender: AnyObject) {
-        sessionIsActivate = false
+    // MARK: SavedExerciseDetail Delegate
+    func stopButtonWasPressed() {
+        sessionIsActive = false
         setButtonStates()
     }
+    
+    // MARK: - Actions
     @IBAction func reorderButtonPressed(sender: AnyObject) {
         if tableView.editing {
             tableView.setEditing(false, animated: true)
@@ -129,7 +164,7 @@ class SavedExerciseListTableViewController: BasicTableViewController {
     @IBAction func previousExerciseButtonPressed(sender: AnyObject) {
     }
     @IBAction func startButtonPressed(sender: AnyObject) {
-        if sessionIsActivate {
+        if sessionIsActive {
             if sessionIsPaused {
                 resumeExerciseSession()
             } else {
@@ -144,12 +179,19 @@ class SavedExerciseListTableViewController: BasicTableViewController {
     
     // MARK: - Segues
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "savedListToDetail") {
-            guard let destination = segue.destinationViewController as? SavedExerciseDetailTableViewController else {
+        if (segue.identifier == "savedListToDetail" || segue.identifier ==  "startSession") {
+            
+            guard let navigationController = segue.destinationViewController as? UINavigationController else {
+                fatalError("Did not find NavigationController in segue.destinationViewController")
+            }
+            guard let destination = navigationController.viewControllers.first as? SavedExerciseDetailTableViewController else {
                 fatalError("Did not find SavedExerciseDetailTableViewController in segue.destinationViewController")
             }
-            destination.sessionIsActivate = self.sessionIsActivate
+            destination.sessionIsActive = self.sessionIsActive
             destination.sessionIsPaused = self.sessionIsPaused
+            destination.exerciseIndex = tableView.indexPathForSelectedRow?.row
+            destination.exercises = self.exercises
+            destination.exercise = self.exercises[(tableView.indexPathForSelectedRow?.row)!]
         }
     }
 

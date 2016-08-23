@@ -9,8 +9,9 @@
 import UIKit
 import CoreData
 
-class ExerciseDetailTableViewController: BasicTableViewController, EditExerciseTableViewControllerDelegate {
+class ExerciseDetailTableViewController: BasicTableViewController, EditExerciseTableViewControllerDelegate, AddToSavedExerciseListTableViewCellDelegate {
     
+    var bodyPart: BodyPart!
     var exercise: Exercise!
     
     // MARK: - Initial Setup
@@ -22,8 +23,7 @@ class ExerciseDetailTableViewController: BasicTableViewController, EditExerciseT
         setupTableView()
     }
     func setupNavBar() {
-        let navBarTitle = "Selected Exercise"
-        self.title = navBarTitle
+        self.title = ""
     }
     func setupTableView() {
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -32,7 +32,16 @@ class ExerciseDetailTableViewController: BasicTableViewController, EditExerciseT
     
     // MARK: - CoreData - 
     
-    // MARK: Saving to CoreData
+    func saveCoreDataState() {
+        do {
+            try self.managedObjectContext.save()
+        } catch {
+            print("Unable to edit exercise entry")
+            return
+        }
+    }
+    
+    // MARK: Saving Exercises to CoreData
     func saveNew(exercise: ExerciseViewModel) {
         
         guard let exerciseEntry = NSEntityDescription.insertNewObjectForEntityForName("Exercise", inManagedObjectContext: self.managedObjectContext) as? Exercise else {
@@ -71,23 +80,34 @@ class ExerciseDetailTableViewController: BasicTableViewController, EditExerciseT
         } else {
             currentExercise.time = 0
         }
-        saveToCoreData()
+        saveCoreDataState()
         tableView.reloadData()
     }
-    func saveToCoreData() {
-        do {
-            try self.managedObjectContext.save()
-        } catch {
-            print("Unable to edit exercise entry")
-            return
+    
+    // MARK: Fetch from CoreData
+    
+    func fetchSavedExerciseLists() -> [SavedExerciseList]? {
+        let entityName = "SavedExerciseList"
+        let sortingKey = "name"
+        let sortDescriptors = [NSSortDescriptor(key: sortingKey, ascending: false)]
+        let fetchRequest = getFetchRequest(withEntityName: entityName, withSortDescriptors: sortDescriptors, andPredicate: nil)
+        guard let objects = getObjects(withFetchRequest: fetchRequest) else {
+            print("Did not recieve any objects from fetchRequest")
+            return nil
         }
+        guard let savedExerciseLists = objects as? Array<SavedExerciseList> else {
+            print("Could not cast objects as Array<SavedExerciseList>")
+            return nil
+        }
+        return savedExerciseLists
     }
     
-    // MARK: - TableView
+    // MARK: - TableView -
     
     // MARK: TableView DataSource
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var count = 1
+        var count = 2
+        
         if (exercise.reps != 0 || exercise.time != 0) {
             count += 1
         }
@@ -100,19 +120,18 @@ class ExerciseDetailTableViewController: BasicTableViewController, EditExerciseT
         
         switch indexPath.row {
         case 0:
-            let cell = createTitleCell(withIndexPath: indexPath)
-            return cell
+            return createTitleCell(withIndexPath: indexPath)
         case 1:
             if (exercise.reps != 0 || exercise.time != 0) {
-               let cell = createRepsAndTimeLabelCell(withIndexPath: indexPath)
-                return cell
+               return createRepsAndTimeLabelCell(withIndexPath: indexPath)
             }
             else if (exercise.instructions != "") {
-               let cell = createInstructionCell(withIndexPath: indexPath)
-                return cell
+                return createInstructionCell(withIndexPath: indexPath)
             } else {
                return UITableViewCell()
             }
+        case 2:
+            return createAddToSavedExerciseListCell(withIndexPath: indexPath)
         default:
             return UITableViewCell()
         }
@@ -153,8 +172,32 @@ class ExerciseDetailTableViewController: BasicTableViewController, EditExerciseT
         cell.instructionLabel.text = exercise.instructions
         return cell
     }
+    func createAddToSavedExerciseListCell(withIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let titleCellID = "AddToSavedExerciseListCell"
+        guard let cell = tableView.dequeueReusableCellWithIdentifier(titleCellID, forIndexPath: indexPath) as? AddToSavedExerciseListTableViewCell else {
+            print("Did not find a TitleTableViewCell when using identifier \(titleCellID)")
+            return UITableViewCell()
+        }
+        cell.selectionStyle = .None
+        cell.accessoryType = .None
+        cell.delegate = self
+        return cell
+    }
+    
+    // MARK: - TableView Cell Delegates -
+    
+    // MARK: AddToSavedExerciseListTableViewCell Delegate
+    func addToSavedExerciseListButtonPressed() {
+        let savedExerciseLists = fetchSavedExerciseLists()
+        let saveExerciseList = savedExerciseLists?.first
+        saveExerciseList?.exercises.insert(exercise)
+        saveCoreDataState()
+    }
+    
+    // MARK: - Segues -
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let editExerciseID = "editExercise"
+        let editExerciseID = "detailToEdit"
         if (segue.identifier == editExerciseID) {
             guard let navigationViewController = segue.destinationViewController as? UINavigationController else {
                 print("Did not find UINavigationController when peforming segue (\(editExerciseID))"); return
@@ -162,10 +205,10 @@ class ExerciseDetailTableViewController: BasicTableViewController, EditExerciseT
             guard let destinationViewController = navigationViewController.viewControllers.first as? EditExerciseTableViewController else {
                 print("Did not find EditExerciseTableViewController when peforming segue (\(editExerciseID))"); return
             }
+            destinationViewController.bodyPart = bodyPart
             destinationViewController.exercise = self.exercise
             destinationViewController.delegate = self
             destinationViewController.managedObjectContext = self.managedObjectContext
         }
     }
-
 }

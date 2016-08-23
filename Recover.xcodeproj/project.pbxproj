@@ -21,6 +21,10 @@
 		94475E3D1D5EB7BB00D919C4 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94475E3C1D5EB7BB00D919C4 /* SettingsTableViewController.swift */; };
 		94475E431D5ED02300D919C4 /* EditExerciseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94475E421D5ED02300D919C4 /* EditExerciseTableViewController.swift */; };
 		94475E451D5ED07200D919C4 /* ExerciseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94475E441D5ED07200D919C4 /* ExerciseTableViewController.swift */; };
+		946737841D6752CF009803E0 /* AddToSavedExerciseListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946737831D6752CF009803E0 /* AddToSavedExerciseListTableViewCell.swift */; };
+		946737861D6758CE009803E0 /* SavedExerciseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946737851D6758CE009803E0 /* SavedExerciseList.swift */; };
+		946737891D67952F009803E0 /* ExerciseTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946737881D67952E009803E0 /* ExerciseTabViewController.swift */; };
+		9467378B1D6B6E17009803E0 /* SavedExerciseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467378A1D6B6E17009803E0 /* SavedExerciseTableViewCell.swift */; };
 		949AC21F1D5D69DD0029328B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949AC21E1D5D69DD0029328B /* AppDelegate.swift */; };
 		949AC2281D5D69DD0029328B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 949AC2271D5D69DD0029328B /* Assets.xcassets */; };
 		949AC22B1D5D69DD0029328B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 949AC2291D5D69DD0029328B /* LaunchScreen.storyboard */; };
@@ -67,6 +71,10 @@
 		94475E3C1D5EB7BB00D919C4 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		94475E421D5ED02300D919C4 /* EditExerciseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditExerciseTableViewController.swift; sourceTree = "<group>"; };
 		94475E441D5ED07200D919C4 /* ExerciseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseTableViewController.swift; sourceTree = "<group>"; };
+		946737831D6752CF009803E0 /* AddToSavedExerciseListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddToSavedExerciseListTableViewCell.swift; sourceTree = "<group>"; };
+		946737851D6758CE009803E0 /* SavedExerciseList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedExerciseList.swift; sourceTree = "<group>"; };
+		946737881D67952E009803E0 /* ExerciseTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseTabViewController.swift; sourceTree = "<group>"; };
+		9467378A1D6B6E17009803E0 /* SavedExerciseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedExerciseTableViewCell.swift; sourceTree = "<group>"; };
 		949AC21B1D5D69DD0029328B /* Recover.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recover.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		949AC21E1D5D69DD0029328B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		949AC2271D5D69DD0029328B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -119,6 +127,8 @@
 				941BB6EB1D63A93400A8380D /* ImageTableViewCell.swift */,
 				941BB6ED1D63A9A800A8380D /* RepAndTimeTableViewCell.swift */,
 				941BB6EF1D63A9B700A8380D /* DescriptionTableViewCell.swift */,
+				946737831D6752CF009803E0 /* AddToSavedExerciseListTableViewCell.swift */,
+				9467378A1D6B6E17009803E0 /* SavedExerciseTableViewCell.swift */,
 			);
 			name = TableViewCells;
 			sourceTree = "<group>";
@@ -188,6 +198,7 @@
 				941BB6E31D62333D00A8380D /* Model.xcdatamodeld */,
 				941BB6DF1D6224AE00A8380D /* Exercise.swift */,
 				94C4BEF81D660F51004F4E5B /* BodyPart.swift */,
+				946737851D6758CE009803E0 /* SavedExerciseList.swift */,
 				941BB6E61D63859D00A8380D /* ExerciseViewModel.swift */,
 				941BB6E11D622BBF00A8380D /* CoreDataManager.swift */,
 				943270BF1D5E5AC900BE2D1A /* CloudKitManager.swift */,
@@ -200,6 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				949AC21E1D5D69DD0029328B /* AppDelegate.swift */,
+				946737881D67952E009803E0 /* ExerciseTabViewController.swift */,
 				943270BA1D5E582B00BE2D1A /* ModalViews */,
 				94C323D81D5E10C900227ACE /* TableViewControllers */,
 			);
@@ -377,19 +389,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				946737891D67952F009803E0 /* ExerciseTabViewController.swift in Sources */,
 				94C323E81D5E18BD00227ACE /* SavedExerciseDetailTableViewController.swift in Sources */,
 				949AC21F1D5D69DD0029328B /* AppDelegate.swift in Sources */,
 				94C323E21D5E151F00227ACE /* ExerciseDetailTableViewController.swift in Sources */,
 				941BB6E21D622BBF00A8380D /* CoreDataManager.swift in Sources */,
 				941BB6EE1D63A9A800A8380D /* RepAndTimeTableViewCell.swift in Sources */,
+				9467378B1D6B6E17009803E0 /* SavedExerciseTableViewCell.swift in Sources */,
 				94C323DE1D5E146600227ACE /* BodyPartCategoryTableViewController.swift in Sources */,
 				94475E451D5ED07200D919C4 /* ExerciseTableViewController.swift in Sources */,
 				941BB6E01D6224AE00A8380D /* Exercise.swift in Sources */,
+				946737841D6752CF009803E0 /* AddToSavedExerciseListTableViewCell.swift in Sources */,
 				943270C21D5E5AC900BE2D1A /* UserDefaultsManager.swift in Sources */,
 				94475E431D5ED02300D919C4 /* EditExerciseTableViewController.swift in Sources */,
 				943270C11D5E5AC900BE2D1A /* CloudKitManager.swift in Sources */,
 				94C323DA1D5E116F00227ACE /* BasicTableViewController.swift in Sources */,
 				941BB6E51D62333D00A8380D /* Model.xcdatamodeld in Sources */,
+				946737861D6758CE009803E0 /* SavedExerciseList.swift in Sources */,
 				941BB6EC1D63A93400A8380D /* ImageTableViewCell.swift in Sources */,
 				94C4BEF91D660F51004F4E5B /* BodyPart.swift in Sources */,
 				94C323E01D5E149F00227ACE /* ExerciseListTableViewController.swift in Sources */,

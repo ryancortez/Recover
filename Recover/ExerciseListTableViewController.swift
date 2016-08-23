@@ -17,12 +17,12 @@ class ExerciseListTableViewController: BasicTableViewController, EditExerciseTab
     
     // MARK: ViewController LifeCycle
     override func viewDidLoad() {
+        requestExercises(fromBodyPart: bodyPart)
         exercises = Array(bodyPart.exercises)
         setupInitalUI()
     }
-    
     override func viewWillAppear(animated: Bool) {
-        tableView.reloadData()
+        requestExercises(fromBodyPart: bodyPart)
     }
     
     // MARK: Inital UI
@@ -30,7 +30,7 @@ class ExerciseListTableViewController: BasicTableViewController, EditExerciseTab
         setupNavBar()
     }
     func setupNavBar() {
-        let navBarTitle = "Body Part"
+        let navBarTitle = bodyPart.name
         self.title = navBarTitle
         
     }
@@ -38,41 +38,24 @@ class ExerciseListTableViewController: BasicTableViewController, EditExerciseTab
     // MARK: - Core Data -
     
     // MARK: Fetch from Core Data
-    func fetchExerciseData() {
-        requestExercisesFromFetchResultsController()
-    }
-    func requestExercisesFromFetchResultsController() {
-        let entityName = "Exercise"
-        let sortingKey = "name"
-        guard let objects = fetchEntityObjectsUsingFetchResultsController(withEntityName: entityName, sortBy: sortingKey, inAscendingOrder: false) else {
-            print("Unable to get objects of entity name \(entityName) with sortingKey \(sortingKey)"); return
-        }
-        exercises = objects
-        tableView.reloadData()
-    }
-    
-    func fetchAllExercisesFromBodyPart() {
+    func requestExercises(fromBodyPart bodyPart: BodyPart) {
         let entityName = "BodyPart"
-        let sortKey = "name"
-        let fetchRequest = NSFetchRequest(entityName: entityName)
-         fetchRequest.predicate = NSPredicate(format: "ANY name contains %@", argumentArray: [bodyPart.name])
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: sortKey, ascending: false)]
-        
-        fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
-        self.fetchResultsController.delegate = self
-        
-        do {
-            try self.fetchResultsController.performFetch()
-        } catch {
-            print("fetchResultsController was unable to perform fetch")
+        let sortingKey = "name"
+        let sortDescriptors = [NSSortDescriptor(key: sortingKey, ascending: false)]
+        let predicate = NSPredicate(format: "name == %@", bodyPart.name)
+        let fetchRequest = getFetchRequest(withEntityName: entityName, withSortDescriptors: sortDescriptors, andPredicate: predicate)
+        guard let objects = getObjects(withFetchRequest: fetchRequest) else {
+            print("Did not recieve any objects from fetchRequest")
             return
         }
-        guard let fetchedObjects = fetchResultsController.fetchedObjects else {
-            print ("Unable to fetch objects from Entity: \(entityName)")
+        guard let object = objects.first else {
+            exercises = Array(bodyPart.exercises)
+            tableView.reloadData()
             return
         }
-        
-        exercises = fetchedObjects
+        let bodyPart = object as! BodyPart
+        exercises = Array(bodyPart.exercises)
+        tableView.reloadData()
     }
     
     // MARK: Saving to CoreData
@@ -139,35 +122,51 @@ class ExerciseListTableViewController: BasicTableViewController, EditExerciseTab
         return cell
     }
     
+    // MARK: TableView Delegate
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if (editingStyle == .Delete) {
+            guard let exercise = fetchResultsController.objectAtIndexPath(indexPath) as? NSManagedObject else {
+                print("Could not case object found as an NSManagedObject at indexPath: \(indexPath.description)"); return
+            }
+            managedObjectContext.deleteObject(exercise)
+            saveToCoreData()
+            requestExercises(fromBodyPart: bodyPart)
+        }
+    }
+    
     // MARK: - Segues -
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let segueToDetail = "exerciseListToDetail"
         if (segue.identifier == segueToDetail) {
-            guard let destinationViewController = segue.destinationViewController as? ExerciseDetailTableViewController else {
-                print("Did not find ExerciseDetailTableViewController when using segue (\(segueToDetail))"); return
-            }
-            guard let row = tableView.indexPathForSelectedRow?.row else {
-                print("Did not find selected row in tableView.indexPathForSelectedRow?.row"); return
-            }
-            guard let exercise = exercises[row] as? Exercise else {
-                print("Did not find Exercise in exercises[\(row)]")
-                print("Found this instead \(exercises[row].description)")
-                return
-            }
-            destinationViewController.exercise = exercise
-            destinationViewController.managedObjectContext = self.managedObjectContext
+            prepareForExerciseDetailSegue(segue)
         }
         let exerciseListToAddSegue = "exerciseListToAdd"
         let bodyListToAddSegue = "bodyPartListToAdd"
         if (segue.identifier == exerciseListToAddSegue || segue.identifier == bodyListToAddSegue) {
-            guard let navigationController = segue.destinationViewController as? UINavigationController else {
-                print("Did not find UINavigationController when performing segue (\("bodyPartToAdd"))"); return
-            }
-            guard let destinationViewController = navigationController.viewControllers.first as? EditExerciseTableViewController  else {
-                print("Did not find AddExerciseTableViewController when performing segue (\("bodyPartToAdd"))"); return
-            }
-            destinationViewController.delegate = self
-            destinationViewController.managedObjectContext = self.managedObjectContext
+            prepareForExerciseEditSegue(segue)
         }
+    }
+    func prepareForExerciseDetailSegue(segue: UIStoryboardSegue) {
+        guard let destinationViewController = segue.destinationViewController as? ExerciseDetailTableViewController else {
+            print("Did not find ExerciseDetailTableViewController when using segue (exerciseListToDetail)"); return
+        }
+        guard let row = tableView.indexPathForSelectedRow?.row else {
+            print("Did not find selected row in tableView.indexPathForSelectedRow?.row"); return
+        }
+        let exercise = exercises[row]
+        
+        destinationViewController.exercise = exercise
+        destinationViewController.bodyPart = bodyPart
+        destinationViewController.managedObjectContext = self.managedObjectContext
+    }
+    func prepareForExerciseEditSegue(segue: UIStoryboardSegue) {
+        guard let navigationController = segue.destinationViewController as? UINavigationController else {
+            print("Did not find UINavigationController when performing segue (\("bodyPartToAdd"))"); return
+        }
+        guard let destinationViewController = navigationController.viewControllers.first as? EditExerciseTableViewController  else {
+            print("Did not find AddExerciseTableViewController when performing segue (\("bodyPartToAdd"))"); return
+        }
+        destinationViewController.delegate = self
+        destinationViewController.managedObjectContext = self.managedObjectContext
     }
 }

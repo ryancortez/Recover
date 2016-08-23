@@ -7,24 +7,42 @@
 //
 
 import UIKit
+import AVFoundation
 
-class SavedExerciseDetailTableViewController: BasicTableViewController {
+protocol SavedExerciseDetailTableViewControllerDelegate {
+    func stopButtonWasPressed()
+}
+
+class SavedExerciseDetailTableViewController: ExerciseDetailTableViewController, AVSpeechSynthesizerDelegate {
     
     // MARK: - Global Variables
-    var sessionIsActivate: Bool = false
+    var exerciseIndex: Int!
+    var sessionIsActive: Bool = false
     var sessionIsPaused: Bool = false
+    var isFirstExercise: Bool = true
+    var nextButtonWasPressed: Bool = false
+    let speechSynthesizer = AVSpeechSynthesizer()
+    var delegate: SavedExerciseDetailTableViewControllerDelegate!
     
-    @IBOutlet weak var stopButton: UIBarButtonItem!
+    let announcmentBeforeSession = "Beginning new Physical Therapy Session"
+    let announcementBeforeExercise = "Get Ready for "
+    
+    
     @IBOutlet weak var editButton: UIBarButtonItem!
     @IBOutlet weak var previousButton: UIBarButtonItem!
     @IBOutlet weak var startButton: UIBarButtonItem!
     @IBOutlet weak var nextButton: UIBarButtonItem!
     
-    // MARK: - Inital Setup
+    // MARK: - Inital Setup -
     override func viewDidLoad() {
-        let navBarTitle = "Selected Exercise"
-        self.title = navBarTitle
+        super.viewDidLoad()
+        setupNavBar()
+        setupSpeechSynthesizer()
         setButtonStates()
+        checkIfSessionIsActive()
+    }
+    override func viewWillDisappear(animated: Bool) {
+        
     }
     
     func setButtonStates() {
@@ -32,21 +50,26 @@ class SavedExerciseDetailTableViewController: BasicTableViewController {
         setStartButtonState()
         setNextExerciseButtonState()
         setStopButtonState()
+        setEditButtonState()
     }
-    
     func setStopButtonState() {
-        if sessionIsActivate {
-            stopButton.enabled = true
-            stopButton.tintColor = nil
+        if sessionIsActive {
         } else {
-            stopButton.enabled = false
-            stopButton.tintColor = UIColor.clearColor()
+            
         }
         
     }
-    
+    func setEditButtonState() {
+        if sessionIsActive {
+            editButton.enabled = false
+            editButton.tintColor = UIColor.clearColor()
+        } else {
+            editButton.enabled = true
+            editButton.tintColor = nil
+        }
+    }
     func setPreviousExerciseButtonState() {
-        if sessionIsActivate {
+        if sessionIsActive {
             previousButton.enabled = true
             previousButton.tintColor = nil
         } else {
@@ -54,9 +77,8 @@ class SavedExerciseDetailTableViewController: BasicTableViewController {
             previousButton.tintColor = UIColor.clearColor()
         }
     }
-    
     func setStartButtonState() {
-        if sessionIsActivate {
+        if sessionIsActive {
             if sessionIsPaused {
                 startButton.title = "Resume"
             } else {
@@ -66,9 +88,8 @@ class SavedExerciseDetailTableViewController: BasicTableViewController {
             startButton.title = "Start"
         }
     }
-    
     func setNextExerciseButtonState() {
-        if sessionIsActivate{
+        if sessionIsActive{
             nextButton.enabled      = true
             nextButton.tintColor    = nil
         }else{
@@ -77,44 +98,145 @@ class SavedExerciseDetailTableViewController: BasicTableViewController {
         }
     }
     
-    // MARK: - Exercise Session Logic
+    // MARK: - Exercise Session Logic -
+    func checkIfSessionIsActive() {
+        if sessionIsActive {
+            checkIfSessionIsPaused()
+        }
+    }
+    func checkIfThisIsTheFirstExercise() {
+        if isFirstExercise {
+            beginSession()
+        } else {
+            continueSession()
+        }
+    }
+    func checkIfSessionIsPaused() {
+        if sessionIsPaused {
+            pauseExerciseSession()
+        } else {
+            checkIfThisIsTheFirstExercise()
+        }
+    }
     func resumeExerciseSession() {
         sessionIsPaused = false
+        if (speechSynthesizer.paused) {
+            speechSynthesizer.continueSpeaking()
+        } else {
+            continueSession()
+        }
         setButtonStates()
     }
-    
     func pauseExerciseSession() {
         sessionIsPaused = true
+        speechSynthesizer.pauseSpeakingAtBoundary(.Word)
         setButtonStates()
     }
-    
     func startExerciseSession() {
-        sessionIsActivate = true
+        sessionIsActive = true
         setButtonStates()
+        beginSession()
+    }
+    func goToPreviousExercise() {
+        speechSynthesizer.stopSpeakingAtBoundary(.Word)
+        sessionIsActive = false
+        sessionIsPaused = false
+        setButtonStates()
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    func goToNextExercise() {
+            speechSynthesizer.stopSpeakingAtBoundary(.Immediate)
+        let savedExerciseDetailViewController = createViewController(inStoryBoard: mainStoryboardName, withIdentifier: "SaveExerciseDetail") as! SavedExerciseDetailTableViewController
+        if (exerciseIndex + 1 < exercises.count) {
+            savedExerciseDetailViewController.exercise = exercises[exerciseIndex + 1]
+            if (savedExerciseDetailViewController.exercise != nil) {
+                savedExerciseDetailViewController.exerciseIndex = exerciseIndex + 1
+                savedExerciseDetailViewController.exercises = exercises
+                savedExerciseDetailViewController.sessionIsActive = sessionIsActive
+                savedExerciseDetailViewController.isFirstExercise = false
+                savedExerciseDetailViewController.sessionIsPaused = sessionIsPaused
+                self.navigationController?.pushViewController(savedExerciseDetailViewController, animated: true)
+            }
+        } else {
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+    }
+    func previousExerciseButtonWasPressed() {
+        
     }
     
-    // MARK: - TableView DataSource
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+    // MARK - Text-to-Speech - 
+    func setupSpeechSynthesizer() {
+        speechSynthesizer.delegate = self
     }
+    func speak(thisText text: String) {
+        let speakUtterence = AVSpeechUtterance(string: text)
+        speakUtterence.rate = 0.42
+        speechSynthesizer.speakUtterance(speakUtterence)
+    }
+    func beginSession() {
+        let text = "\(announcmentBeforeSession) \(announcementBeforeExercise) \(exercise.name) \(exercise.instructions)"
+        speak(thisText: text)
+    }
+    func continueSession() {
+        let text = "\(announcementBeforeExercise) \(exercise.name) \(exercise.instructions)"
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("SavedExerciseCell", forIndexPath: indexPath)
-        cell.selectionStyle = .None
-        cell.accessoryType = .None
-        cell.textLabel?.text = "Exercise Details"
-        return cell
+        speak(thisText: text)
     }
+    
+    // MARK: AVSpeechSynthesizer Delegate
+    
+    func speechSynthesizer(synthesizer: AVSpeechSynthesizer, didFinishSpeechUtterance utterance: AVSpeechUtterance) {
+        goToNextExercise()
+    }
+    
+    // MARK: - TableView -
+    
+    // MARK: TableView DataSource
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        var count = 1
+        
+            if (exercise.reps != 0 || exercise.time != 0) {
+                count += 1
+            }
+            if (exercise.instructions != "") {
+                count += 1
+            }
+        return count
+    }
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        switch indexPath.row {
+        case 0:
+            return createTitleCell(withIndexPath: indexPath)
+        case 1:
+            if (exercise.reps != 0 || exercise.time != 0) {
+                return createRepsAndTimeLabelCell(withIndexPath: indexPath)
+            }
+            else if (exercise.instructions != "") {
+                return createInstructionCell(withIndexPath: indexPath)
+            } else {
+                return UITableViewCell()
+            }
+        default:
+            return UITableViewCell()
+        }
+    }
+    
     @IBAction func stopButtonPressed(sender: AnyObject) {
-        sessionIsActivate = false
+        delegate.stopButtonWasPressed()
+        sessionIsActive = false
         setButtonStates()
+        speechSynthesizer.stopSpeakingAtBoundary(.Word)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     @IBAction func editButtonPressed(sender: AnyObject) {
     }
     @IBAction func previousButtonPressed(sender: AnyObject) {
+        goToPreviousExercise()
     }
     @IBAction func startButtonPressed(sender: AnyObject) {
-        if sessionIsActivate {
+        if sessionIsActive {
             if sessionIsPaused {
                 resumeExerciseSession()
             } else {
@@ -125,6 +247,7 @@ class SavedExerciseDetailTableViewController: BasicTableViewController {
         }
     }
     @IBAction func nextButtonPressed(sender: AnyObject) {
+        goToNextExercise()
     }
     
 }

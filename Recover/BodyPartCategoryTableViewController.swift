@@ -17,7 +17,10 @@ class BodyPartCategoryTableViewController: BasicTableViewController, EditExercis
     
     // MARK: ViewController Lifecycle
     override func viewDidLoad() {
-        fetchExerciseData()
+        fetchBodyParts()
+    }
+    override func viewWillAppear(animated: Bool) {
+        tableView.reloadData()
     }
     
     // MARK: - CoreData -
@@ -36,7 +39,7 @@ class BodyPartCategoryTableViewController: BasicTableViewController, EditExercis
         bodyPart.exercises.insert(newExercise)
         
         saveToCoreData()
-        tableView.reloadData()
+        fetchBodyParts()
     }
     func edit(currentExercise currentExercise: Exercise, withNewExerciseData newExerciseData: ExerciseViewModel) {
         
@@ -74,13 +77,13 @@ class BodyPartCategoryTableViewController: BasicTableViewController, EditExercis
     }
     
     // MARK: Fetch from CoreData
-    func fetchExerciseData() {
-        requestExercisesFromFetchResultsController()
+    func fetchBodyParts() {
+        requestBodyPartsFromFetchResultsController()
     }
-    func requestExercisesFromFetchResultsController() {
+    func requestBodyPartsFromFetchResultsController() {
         let entityName = "BodyPart"
         let sortingKey = "name"
-        guard let objects = fetchEntityObjectsUsingFetchResultsController(withEntityName: entityName, sortBy: sortingKey, inAscendingOrder: false) as? Array<BodyPart> else {
+        guard let objects = fetchEntityObjectsUsingFetchResultsController(withEntityName: entityName, sortBy: sortingKey, inAscendingOrder: true) as? Array<BodyPart> else {
             print("Unable to get objects of entity name \(entityName) with sortingKey \(sortingKey)"); return
         }
         bodyParts = objects
@@ -90,7 +93,6 @@ class BodyPartCategoryTableViewController: BasicTableViewController, EditExercis
     // MARK: - TableView -
     
     // MARK: TableView DataSource
-    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return bodyParts.count
     }
@@ -99,6 +101,17 @@ class BodyPartCategoryTableViewController: BasicTableViewController, EditExercis
         cell.selectionStyle = .None
         cell.textLabel?.text = bodyParts[indexPath.row].name
         return cell
+    }
+    // MARK: TableView Delegate
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if (editingStyle == .Delete) {
+            guard let bodyPart = fetchResultsController.objectAtIndexPath(indexPath) as? NSManagedObject else {
+                print("Could not case object found as an NSManagedObject at indexPath: \(indexPath.description)"); return
+            }
+            managedObjectContext.deleteObject(bodyPart)
+            saveToCoreData()
+            fetchBodyParts()
+        }
     }
     
     // MARK: - Segue
