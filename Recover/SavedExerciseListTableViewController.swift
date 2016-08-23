@@ -192,6 +192,7 @@ class SavedExerciseListTableViewController: BasicTableViewController, SavedExerc
             destination.exerciseIndex = tableView.indexPathForSelectedRow?.row
             destination.exercises = self.exercises
             destination.exercise = self.exercises[(tableView.indexPathForSelectedRow?.row)!]
+            destination.delegate = self
         }
     }
 

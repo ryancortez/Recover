@@ -38,11 +38,8 @@ class SavedExerciseDetailTableViewController: ExerciseDetailTableViewController,
         super.viewDidLoad()
         setupNavBar()
         setupSpeechSynthesizer()
-        setButtonStates()
         checkIfSessionIsActive()
-    }
-    override func viewWillDisappear(animated: Bool) {
-        
+        setButtonStates()
     }
     
     func setButtonStates() {
@@ -69,7 +66,7 @@ class SavedExerciseDetailTableViewController: ExerciseDetailTableViewController,
         }
     }
     func setPreviousExerciseButtonState() {
-        if sessionIsActive {
+        if (sessionIsActive && isFirstExercise == false) {
             previousButton.enabled = true
             previousButton.tintColor = nil
         } else {
@@ -104,18 +101,18 @@ class SavedExerciseDetailTableViewController: ExerciseDetailTableViewController,
             checkIfSessionIsPaused()
         }
     }
-    func checkIfThisIsTheFirstExercise() {
-        if isFirstExercise {
-            beginSession()
-        } else {
-            continueSession()
-        }
-    }
     func checkIfSessionIsPaused() {
         if sessionIsPaused {
             pauseExerciseSession()
         } else {
             checkIfThisIsTheFirstExercise()
+        }
+    }
+    func checkIfThisIsTheFirstExercise() {
+        if isFirstExercise {
+            beginSession()
+        } else {
+            continueSession()
         }
     }
     func resumeExerciseSession() {
@@ -129,7 +126,7 @@ class SavedExerciseDetailTableViewController: ExerciseDetailTableViewController,
     }
     func pauseExerciseSession() {
         sessionIsPaused = true
-        speechSynthesizer.pauseSpeakingAtBoundary(.Word)
+        speechSynthesizer.pauseSpeakingAtBoundary(.Immediate)
         setButtonStates()
     }
     func startExerciseSession() {
@@ -138,10 +135,7 @@ class SavedExerciseDetailTableViewController: ExerciseDetailTableViewController,
         beginSession()
     }
     func goToPreviousExercise() {
-        speechSynthesizer.stopSpeakingAtBoundary(.Word)
-        sessionIsActive = false
-        sessionIsPaused = false
-        setButtonStates()
+        speechSynthesizer.stopSpeakingAtBoundary(.Immediate)
         self.navigationController?.popViewControllerAnimated(true)
     }
     func goToNextExercise() {
@@ -155,6 +149,7 @@ class SavedExerciseDetailTableViewController: ExerciseDetailTableViewController,
                 savedExerciseDetailViewController.sessionIsActive = sessionIsActive
                 savedExerciseDetailViewController.isFirstExercise = false
                 savedExerciseDetailViewController.sessionIsPaused = sessionIsPaused
+                savedExerciseDetailViewController.delegate = delegate
                 self.navigationController?.pushViewController(savedExerciseDetailViewController, animated: true)
             }
         } else {
@@ -227,7 +222,7 @@ class SavedExerciseDetailTableViewController: ExerciseDetailTableViewController,
         delegate.stopButtonWasPressed()
         sessionIsActive = false
         setButtonStates()
-        speechSynthesizer.stopSpeakingAtBoundary(.Word)
+        speechSynthesizer.stopSpeakingAtBoundary(.Immediate)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     @IBAction func editButtonPressed(sender: AnyObject) {
