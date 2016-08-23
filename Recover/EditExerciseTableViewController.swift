@@ -75,13 +75,19 @@ class EditExerciseTableViewController: UITableViewController, UITextViewDelegate
     }
     func setupTimeStepper() {
         timeStepper.maximumValue = 6000
+        timeStepper.minimumValue = 0.0
         
         if (exercise != nil) {
-            timeStepper.value = 30
-            timeStepper.stepValue = 30
             if (exercise.time == 0) {
-                 timeStepper.value = Double(exercise.time)
+                timeStepper.value = 0
+                exerciseTime.text = "0 sec"
+            } else {
+                timeStepper.value = Double(exercise.time)
             }
+        }
+        
+        if (timeStepper.value == 0) {
+            timeStepper.stepValue = 30
         }
     }
     func setupRepStepper() {
@@ -89,7 +95,8 @@ class EditExerciseTableViewController: UITableViewController, UITextViewDelegate
 
         if (exercise != nil) {
             if (exercise.reps == 0) {
-                repStepper.value = 1
+                repStepper.value = 0
+                numberOfReps.text = "0"
             } else {
                 repStepper.value = Double(exercise.reps)
             }
@@ -221,7 +228,6 @@ class EditExerciseTableViewController: UITableViewController, UITextViewDelegate
         print(repStepper.value)
     }
     @IBAction func timeStepperPressed(sender: AnyObject) {
-        print(timeStepper.value)
         
         if (timeStepper.value <= 30) {
             timeStepper.stepValue = 30

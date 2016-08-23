@@ -164,9 +164,6 @@ class SavedExerciseDetailTableViewController: ExerciseDetailTableViewController,
             self.dismissViewControllerAnimated(true, completion: nil)
         }
     }
-    func previousExerciseButtonWasPressed() {
-        
-    }
     
     // MARK - Text-to-Speech - 
     func setupSpeechSynthesizer() {
@@ -178,19 +175,32 @@ class SavedExerciseDetailTableViewController: ExerciseDetailTableViewController,
         speechSynthesizer.speakUtterance(speakUtterence)
     }
     func beginSession() {
-        let text = "\(announcmentBeforeSession) \(announcementBeforeExercise) \(exercise.name) \(exercise.instructions)"
-        speak(thisText: text)
+        speak(thisText: "\(announcmentBeforeSession)")
+        speak(thisText: "\(announcementBeforeExercise)")
+        speak(thisText:"\(exercise.name)")
+        speak(thisText: "\(exercise.instructions)")
+        announcmentAfterExercise()
     }
     func continueSession() {
-        let text = "\(announcementBeforeExercise) \(exercise.name) \(exercise.instructions)"
-
-        speak(thisText: text)
+        speak(thisText: "\(announcementBeforeExercise)")
+        speak(thisText:"\(exercise.name)")
+        speak(thisText: "\(exercise.instructions)")
+        announcmentAfterExercise()
+    }
+    func announcmentAfterExercise() {
+        speak(thisText: "5")
+        speak(thisText: "4")
+        speak(thisText: "3")
+        speak(thisText: "2")
+        speak(thisText: "1")
     }
     
     // MARK: AVSpeechSynthesizer Delegate
     
     func speechSynthesizer(synthesizer: AVSpeechSynthesizer, didFinishSpeechUtterance utterance: AVSpeechUtterance) {
-        goToNextExercise()
+        if (utterance.speechString == "1") {
+            goToNextExercise()
+        }
     }
     
     // MARK: - TableView -
