@@ -788,7 +788,7 @@
                                             <rect key="frame" x="8" y="8" width="584" height="33.5"/>
                                             <state key="normal">
                                                 <attributedString key="attributedTitle">
-                                                    <fragment content="Replace Saved Exercise List with Exercise List from iCloud">
+                                                    <fragment content="Replace local Saved Exercise List with Exercise List from iCloud">
                                                         <attributes>
                                                             <color key="NSColor" red="1" green="0.2683974174" blue="0.28335944660000001" alpha="1" colorSpace="calibratedRGB"/>
                                                             <font key="NSFont" size="15" name="HelveticaNeue"/>
