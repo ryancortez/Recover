@@ -15,6 +15,12 @@ class ExerciseDetailTableViewController: BasicTableViewController, EditExerciseT
     var exercise: Exercise!
     var image: UIImage?
     
+    var imageCellMade: Bool = false
+    var titleCellMade: Bool = false
+    var repAndTimeCellMade: Bool = false
+    var instructionCellMade: Bool = false
+    var addToSavedExerciseListCellMade: Bool = false
+    
     // MARK: - Initial Setup
     override func viewDidLoad() {
         setupUI()
@@ -80,33 +86,52 @@ class ExerciseDetailTableViewController: BasicTableViewController, EditExerciseT
         return count
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
+    
         switch indexPath.row {
         case 0:
-                return createImageCell(withIndexPath: indexPath)
-        case 1:
             if (image != nil) {
+                imageCellMade = true
+                return createImageCell(withIndexPath: indexPath)
+            } else {
+                titleCellMade = true
                 return createTitleCell(withIndexPath: indexPath)
-            } else if (exercise.reps != 0 || exercise.time != 0) {
+            }
+        case 1:
+            if imageCellMade {
+                titleCellMade = true
+                return createTitleCell(withIndexPath: indexPath)
+            } else if (titleCellMade && (exercise.reps != 0 || exercise.time != 0)) {
+                repAndTimeCellMade = true
                return createRepsAndTimeLabelCell(withIndexPath: indexPath)
-            } else if (exercise.instructions != "") {
+            } else if (titleCellMade && (exercise.instructions != "")) {
+                instructionCellMade = true
                 return createInstructionCell(withIndexPath: indexPath)
             } else {
                return UITableViewCell()
             }
         case 2:
-            if (exercise.reps != 0 || exercise.time != 0) {
+            if (!repAndTimeCellMade && (exercise.reps != 0 || exercise.time != 0)) {
+                repAndTimeCellMade = true
                 return createRepsAndTimeLabelCell(withIndexPath: indexPath)
-            } else if (exercise.instructions != "") {
+            } else if (!instructionCellMade && (exercise.instructions != "")) {
+                instructionCellMade = true
                 return createInstructionCell(withIndexPath: indexPath)
-            } else {
+            } else if !addToSavedExerciseListCellMade {
+                addToSavedExerciseListCellMade = true
                 return createAddToSavedExerciseListCell(withIndexPath: indexPath)
+            } else {
+                return UITableViewCell()
             }
+            
         case 3:
-            if (exercise.instructions != "") {
+            if (!instructionCellMade && (exercise.instructions != "")) {
+                instructionCellMade = true
                 return createInstructionCell(withIndexPath: indexPath)
-            } else {
+            } else if !addToSavedExerciseListCellMade {
+                addToSavedExerciseListCellMade = true
                 return createAddToSavedExerciseListCell(withIndexPath: indexPath)
+            } else {
+                return UITableViewCell()
             }
         case 4:
             return createAddToSavedExerciseListCell(withIndexPath: indexPath)
