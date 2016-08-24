@@ -13,10 +13,12 @@ class ExerciseDetailTableViewController: BasicTableViewController, EditExerciseT
     
     var bodyPart: BodyPart!
     var exercise: Exercise!
+    var image: UIImage?
     
     // MARK: - Initial Setup
     override func viewDidLoad() {
         setupUI()
+        image = UIImage(data: exercise.image)
     }
     func setupUI() {
         setupNavBar()
@@ -106,8 +108,11 @@ class ExerciseDetailTableViewController: BasicTableViewController, EditExerciseT
     
     // MARK: TableView DataSource
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var count = 2
+        var count = 3
         
+        if (image != nil) {
+            count += 1
+        }
         if (exercise.reps != 0 || exercise.time != 0) {
             count += 1
         }
@@ -120,17 +125,32 @@ class ExerciseDetailTableViewController: BasicTableViewController, EditExerciseT
         
         switch indexPath.row {
         case 0:
-            return createTitleCell(withIndexPath: indexPath)
+                return createImageCell(withIndexPath: indexPath)
         case 1:
-            if (exercise.reps != 0 || exercise.time != 0) {
+            if (image != nil) {
+                return createTitleCell(withIndexPath: indexPath)
+            } else if (exercise.reps != 0 || exercise.time != 0) {
                return createRepsAndTimeLabelCell(withIndexPath: indexPath)
-            }
-            else if (exercise.instructions != "") {
+            } else if (exercise.instructions != "") {
                 return createInstructionCell(withIndexPath: indexPath)
             } else {
                return UITableViewCell()
             }
         case 2:
+            if (exercise.reps != 0 || exercise.time != 0) {
+                return createRepsAndTimeLabelCell(withIndexPath: indexPath)
+            } else if (exercise.instructions != "") {
+                return createInstructionCell(withIndexPath: indexPath)
+            } else {
+                return createAddToSavedExerciseListCell(withIndexPath: indexPath)
+            }
+        case 3:
+            if (exercise.instructions != "") {
+                return createInstructionCell(withIndexPath: indexPath)
+            } else {
+                return createAddToSavedExerciseListCell(withIndexPath: indexPath)
+            }
+        case 4:
             return createAddToSavedExerciseListCell(withIndexPath: indexPath)
         default:
             return UITableViewCell()
@@ -183,6 +203,19 @@ class ExerciseDetailTableViewController: BasicTableViewController, EditExerciseT
         cell.delegate = self
         return cell
     }
+    func createImageCell(withIndexPath indexPath: NSIndexPath)  -> UITableViewCell{
+        let imageCellID = "ImageCell"
+        guard let cell = tableView.dequeueReusableCellWithIdentifier(imageCellID, forIndexPath: indexPath) as? ImageTableViewCell else {
+            print("Did not find a TitleTableViewCell when using identifier \(imageCellID)")
+            return UITableViewCell()
+        }
+        cell.selectionStyle = .None
+        cell.accessoryType = .None
+        let image = UIImage(data: exercise.image)
+        cell.exerciseImage.image = image
+        return cell
+    }
+
     
     // MARK: - TableView Cell Delegates -
     

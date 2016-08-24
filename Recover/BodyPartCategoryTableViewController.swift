@@ -27,17 +27,33 @@ class BodyPartCategoryTableViewController: BasicTableViewController, EditExercis
     
     // MARK: Saving to CoreData
     func saveNew(exercise: ExerciseViewModel) {
+        
         guard let newExercise = NSEntityDescription.insertNewObjectForEntityForName("Exercise", inManagedObjectContext: self.managedObjectContext) as? Exercise else {
             print("Could not insert new exercise into CoreData"); return
         }
+        
         newExercise.setValue(exercise.name, forKey: "name")
-        newExercise.setValue(exercise.reps as! AnyObject?, forKey: "reps")
-        newExercise.setValue(exercise.time as! AnyObject?, forKey: "time")
         newExercise.setValue(exercise.instructions, forKey: "instructions")
+        
+        if (exercise.instructions != nil) {
+            newExercise.setValue(NSInteger(exercise.time!), forKey: "time")
+        }
+        if (exercise.reps != nil) {
+            newExercise.setValue(NSInteger(exercise.reps!), forKey: "reps")
+        }
+        
+        guard let image = exercise.image else {
+            let bodyPart = exercise.bodyPart
+            bodyPart.exercises.insert(newExercise)
+            saveToCoreData()
+            fetchBodyParts()
+            return
+        }
+        let imageData = UIImageJPEGRepresentation(image, 1)
+        newExercise.setValue(imageData, forKey: "image")
         
         let bodyPart = exercise.bodyPart
         bodyPart.exercises.insert(newExercise)
-        
         saveToCoreData()
         fetchBodyParts()
     }

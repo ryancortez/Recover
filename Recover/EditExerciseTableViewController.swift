@@ -14,7 +14,7 @@ protocol EditExerciseTableViewControllerDelegate {
     func edit(currentExercise currentExercise: Exercise, withNewExerciseData newExerciseData: ExerciseViewModel)
 }
 
-class EditExerciseTableViewController: UITableViewController, UITextViewDelegate {
+class EditExerciseTableViewController: UITableViewController, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
     // MARK: - Global Variables
     var bodyPart: BodyPart!
@@ -22,6 +22,7 @@ class EditExerciseTableViewController: UITableViewController, UITextViewDelegate
     var delegate: EditExerciseTableViewControllerDelegate!
     var isFirstTimeExerciseDescriptionIsBeginningEditing: Bool  = true
     var managedObjectContext: NSManagedObjectContext!
+    let imagePicker = UIImagePickerController()
     
     // MARK: - Outlets
     @IBOutlet weak var exerciseTitle: UITextField!
@@ -32,10 +33,12 @@ class EditExerciseTableViewController: UITableViewController, UITextViewDelegate
     @IBOutlet weak var exerciseTime: UILabel!
     @IBOutlet weak var repStepper: UIStepper!
     @IBOutlet weak var timeStepper: UIStepper!
+    @IBOutlet weak var imageView: UIImageView!
     
     // MARK: - Inital Setup
     override func viewDidLoad() {
         setupUI()
+        setupImagePicker()
     }
     func setupUI() {
         setupNavBar()
@@ -102,6 +105,17 @@ class EditExerciseTableViewController: UITableViewController, UITextViewDelegate
             }
         }
     }
+    func setupImageView() {
+        if (exercise != nil) {
+            guard let image = UIImage.init(data: exercise.image) else {
+                return
+            }
+            imageView.image = image
+        }
+    }
+    func setupImagePicker() {
+        imagePicker.delegate = self
+    }
     
     // MARK: - CoreData -
     
@@ -141,7 +155,6 @@ class EditExerciseTableViewController: UITableViewController, UITextViewDelegate
         }
         return miscBodyPart
     }
-
     
     // MARK: Fetch from CoreData
     func fetch(bodyPartWithName bodyPartName: String) -> BodyPart? {
@@ -166,13 +179,22 @@ class EditExerciseTableViewController: UITableViewController, UITextViewDelegate
         }
     }
     
-    // MARK: - TextView Delegate
+    // MARK: - TextView Delegate -
     func textViewDidBeginEditing(textView: UITextView) {
         if isFirstTimeExerciseDescriptionIsBeginningEditing {
             isFirstTimeExerciseDescriptionIsBeginningEditing = false
             textView.text = ""
             textView.textColor = UIColor.blackColor()
         }
+    }
+    
+    // MARK: - Image Picker Delegate -
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        imageView.contentMode = .ScaleAspectFit
+        imageView.image = image
+        addPhotoButton.tintColor = UIColor.clearColor()
+        imagePicker.dismissViewControllerAnimated(true, completion: nil)
     }
     
     // MARK: - Actions
@@ -182,18 +204,25 @@ class EditExerciseTableViewController: UITableViewController, UITextViewDelegate
     }
     @IBAction func saveButtonPressed(sender: AnyObject) {
         resignFirstResponderFromAllFieldsAndViews()
-        guard let name = exerciseTitle.text else {
-            print("Did not retrieve a exercise name")
-            return
-        }
-        guard let instructions = exerciseInstructions.text else {
-            print("Did not retrieve any exercise instructions")
-            return
-        }
+        
+        var name: String
+        var instructions: String?
+        var reps: Int16?
+        var time: Int16?
+        var image: UIImage?
+        
+        guard let nameString = exerciseTitle.text else { return }
+        
+        name = nameString
+        instructions = exerciseInstructions.text
+        reps = Int16(numberOfReps.text!)
+        time = Int16(timeStepper.value)
+        image = imageView.image
+        
         guard let bodyPartName = bodyPartTextField.text else {
-            print("Did not reciece any associated body part, fetching/creating misc BodyPart")
+            print("Did not recieve any associated body part, fetching/creating misc BodyPart")
             let miscBodyPart = fetchMiscBodyPart()
-            let exerciseViewModel = ExerciseViewModel(name: name, image: nil, instructions: instructions, bodyPart: miscBodyPart, reps: nil, time: nil)
+            let exerciseViewModel = ExerciseViewModel(name: name, image: image, instructions: instructions, bodyPart: miscBodyPart, reps: reps, time: time)
             pass(exerciseViewModelToCoreData: exerciseViewModel)
             dismissViewControllerAnimated(true, completion: nil)
             return
@@ -201,31 +230,29 @@ class EditExerciseTableViewController: UITableViewController, UITextViewDelegate
         
         if (bodyPartName == "") {
             let miscBodyPart = fetchMiscBodyPart()
-            let exerciseViewModel = ExerciseViewModel(name: name, image: nil, instructions: instructions, bodyPart: miscBodyPart, reps: nil, time: nil)
+            let exerciseViewModel = ExerciseViewModel(name: name, image: image, instructions: instructions, bodyPart: miscBodyPart, reps: reps, time: time)
             pass(exerciseViewModelToCoreData: exerciseViewModel)
             dismissViewControllerAnimated(true, completion: nil)
             return
         }
         
         guard let fetchedBodyPart = fetch(bodyPartWithName: bodyPartName) else {
-            print("Did not find bodyPart, attempting to create BodyPart")
-            
-                guard let newBodyPart = saveNew(bodyPartWithName: bodyPartName) else {
-                    print("Creating newBodyPart (\(bodyPartName)) did not succeed")
-                    return
-                }
-                let exerciseViewModel = ExerciseViewModel(name: name, image: nil, instructions: instructions, bodyPart: newBodyPart, reps: nil, time: nil)
-                pass(exerciseViewModelToCoreData: exerciseViewModel)
-                dismissViewControllerAnimated(true, completion: nil)
+            guard let newBodyPart = saveNew(bodyPartWithName: bodyPartName) else {
+                print("Creating newBodyPart (\(bodyPartName)) did not succeed")
                 return
+            }
+            let exerciseViewModel = ExerciseViewModel(name: name, image: image, instructions: instructions, bodyPart: newBodyPart, reps: reps, time: time)
+            pass(exerciseViewModelToCoreData: exerciseViewModel)
+            dismissViewControllerAnimated(true, completion: nil)
+            return
         }
-        let exerciseViewModel = ExerciseViewModel(name: name, image: nil, instructions: instructions, bodyPart: fetchedBodyPart, reps: nil, time: nil)
+        
+        let exerciseViewModel = ExerciseViewModel(name: name, image: image, instructions: instructions, bodyPart: fetchedBodyPart, reps: reps, time: time)
         pass(exerciseViewModelToCoreData: exerciseViewModel)
         dismissViewControllerAnimated(true, completion: nil)
     }
     @IBAction func repStepperPressed(sender: AnyObject) {
         numberOfReps.text = "\(Int(repStepper.value))"
-        print(repStepper.value)
     }
     @IBAction func timeStepperPressed(sender: AnyObject) {
         
@@ -246,6 +273,9 @@ class EditExerciseTableViewController: UITableViewController, UITextViewDelegate
         }
     }
     @IBAction func addPhotoButtonPressed(sender: AnyObject) {
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .PhotoLibrary
+        presentViewController(imagePicker, animated: true, completion: nil)
     }
     
     // MARK: - Switching Views
