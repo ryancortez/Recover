@@ -34,55 +34,13 @@ class ExerciseDetailTableViewController: BasicTableViewController, EditExerciseT
     
     // MARK: - CoreData - 
     
-    func saveCoreDataState() {
-        do {
-            try self.managedObjectContext.save()
-        } catch {
-            print("Unable to edit exercise entry")
-            return
-        }
-    }
-    
     // MARK: Saving Exercises to CoreData
-    func saveNew(exercise: ExerciseViewModel) {
-        
-        guard let exerciseEntry = NSEntityDescription.insertNewObjectForEntityForName("Exercise", inManagedObjectContext: self.managedObjectContext) as? Exercise else {
-            print("Could not insert new exercise into CoreData"); return
-        }
-        exerciseEntry.setValue(exercise.name, forKey: "name")
-        exerciseEntry.setValue(exercise.reps as! AnyObject?, forKey: "reps")
-        exerciseEntry.setValue(exercise.time as! AnyObject?, forKey: "time")
-        exerciseEntry.setValue(exercise.instructions, forKey: "instructions")
-        
-        do {
-            try self.managedObjectContext.save()
-        } catch {
-            print("Unable to save new exercise entry")
-            return
-        }
+    override func saveNew(exercise: ExerciseViewModel) {
+        super.saveNew(exercise)
         tableView.reloadData()
     }
-    func edit(currentExercise currentExercise: Exercise, withNewExerciseData newExerciseData: ExerciseViewModel) {
-        
-        currentExercise.name = newExerciseData.name
-        
-        guard let instructions = newExerciseData.instructions else {
-            print("Did not find any instuctions saved in currentExercise")
-            return
-        }
-        currentExercise.instructions = instructions
-        
-        if let reps = newExerciseData.reps {
-            currentExercise.reps = reps
-        } else {
-            currentExercise.reps = 0
-        }
-        if let time = newExerciseData.time {
-            currentExercise.time = time
-        } else {
-            currentExercise.time = 0
-        }
-        saveCoreDataState()
+    override func edit(currentExercise currentExercise: Exercise, withNewExerciseData newExerciseData: ExerciseViewModel) {
+       super.edit(currentExercise: currentExercise, withNewExerciseData: newExerciseData)
         tableView.reloadData()
     }
     

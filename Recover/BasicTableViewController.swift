@@ -18,7 +18,78 @@ class BasicTableViewController: UITableViewController,  NSFetchedResultsControll
     var fetchResultsController: NSFetchedResultsController!
     var exercises = [Exercise]()
     
+    // MARK: - Core Data - 
+    
+    // MARK: Save to CoreData
+    
+    func saveNew(exercise: ExerciseViewModel) {        
+        guard let newExercise = NSEntityDescription.insertNewObjectForEntityForName("Exercise", inManagedObjectContext: self.managedObjectContext) as? Exercise else {
+            print("Could not insert new exercise into CoreData"); return
+        }
+        
+        newExercise.setValue(exercise.name, forKey: "name")
+        newExercise.setValue(exercise.instructions, forKey: "instructions")
+        
+        if (exercise.instructions != nil) {
+            newExercise.setValue(NSInteger(exercise.time!), forKey: "time")
+        }
+        if (exercise.reps != nil) {
+            newExercise.setValue(NSInteger(exercise.reps!), forKey: "reps")
+        }
+        
+        guard let image = exercise.image else {
+            let bodyPart = exercise.bodyPart
+            bodyPart.exercises.insert(newExercise)
+            saveCoreDataState()
+            return
+        }
+        let imageData = UIImageJPEGRepresentation(image, 1)
+        newExercise.setValue(imageData, forKey: "image")
+        
+        let bodyPart = exercise.bodyPart
+        bodyPart.exercises.insert(newExercise)
+        saveCoreDataState()
+    }
+    func edit(currentExercise currentExercise: Exercise, withNewExerciseData newExerciseData: ExerciseViewModel) {
+        
+        currentExercise.name = newExerciseData.name
+        
+        guard let instructions = newExerciseData.instructions else {
+            print("Did not find any instuctions saved in currentExercise")
+            return
+        }
+        currentExercise.instructions = instructions
+        
+        if let reps = newExerciseData.reps {
+            currentExercise.reps = reps
+        } else {
+            currentExercise.reps = 0
+        }
+        if let time = newExerciseData.time {
+            currentExercise.time = time
+        } else {
+            currentExercise.time = 0
+        }
+        let bodyPart = newExerciseData.bodyPart
+        bodyPart.exercises.insert(currentExercise)
+        
+        saveCoreDataState()
+        tableView.reloadData()
+    }
+    
+    func saveCoreDataState() {
+        do {
+            try self.managedObjectContext.save()
+        } catch {
+            print("Unable to edit exercise entry")
+            return
+        }
+    }
+    
+    
     // MARK: Fetch from Core Data 
+    
+    
     func getFetchRequest(withEntityName entityName: String, withSortDescriptors sortDescriptiors: Array<NSSortDescriptor>?, andPredicate predicate: NSPredicate?) -> NSFetchRequest {
         let fetchRequest = NSFetchRequest(entityName: entityName)
         fetchRequest.sortDescriptors = sortDescriptiors

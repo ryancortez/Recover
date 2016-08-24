@@ -37,6 +37,16 @@ class ExerciseListTableViewController: BasicTableViewController, EditExerciseTab
     
     // MARK: - Core Data -
     
+    // MARK: Save to Core Data 
+    override func saveNew(exercise: ExerciseViewModel) {
+        super.saveNew(exercise)
+        tableView.reloadData()
+    }
+    override func edit(currentExercise currentExercise: Exercise, withNewExerciseData newExerciseData: ExerciseViewModel) {
+        super.edit(currentExercise: currentExercise, withNewExerciseData: newExerciseData)
+        tableView.reloadData()
+    }
+    
     // MARK: Fetch from Core Data
     func requestExercises(fromBodyPart bodyPart: BodyPart) {
         let entityName = "BodyPart"
@@ -56,57 +66,6 @@ class ExerciseListTableViewController: BasicTableViewController, EditExerciseTab
         let bodyPart = object as! BodyPart
         exercises = Array(bodyPart.exercises)
         tableView.reloadData()
-    }
-    
-    // MARK: Saving to CoreData
-    func saveNew(exercise: ExerciseViewModel) {
-        
-        guard let exerciseEntry = NSEntityDescription.insertNewObjectForEntityForName("Exercise", inManagedObjectContext: self.managedObjectContext) as? Exercise else {
-            print("Could not insert new exercise into CoreData"); return
-        }
-        exerciseEntry.setValue(exercise.name, forKey: "name")
-        exerciseEntry.setValue(exercise.reps as! AnyObject?, forKey: "reps")
-        exerciseEntry.setValue(exercise.time as! AnyObject?, forKey: "time")
-        exerciseEntry.setValue(exercise.instructions, forKey: "instructions")
-        
-        do {
-            try self.managedObjectContext.save()
-        } catch {
-            print("Unable to save new exercise entry")
-            return
-        }
-        tableView.reloadData()
-    }
-    func edit(currentExercise currentExercise: Exercise, withNewExerciseData newExerciseData: ExerciseViewModel) {
-        
-        currentExercise.name = newExerciseData.name
-        
-        guard let instructions = newExerciseData.instructions else {
-            print("Did not find any instuctions saved in currentExercise")
-            return
-        }
-        currentExercise.instructions = instructions
-        
-        if let reps = newExerciseData.reps {
-            currentExercise.reps = reps
-        } else {
-            currentExercise.reps = 0
-        }
-        if let time = newExerciseData.time {
-            currentExercise.time = time
-        } else {
-            currentExercise.time = 0
-        }
-        saveToCoreData()
-        tableView.reloadData()
-    }
-    func saveToCoreData() {
-        do {
-            try self.managedObjectContext.save()
-        } catch {
-            print("Unable to edit exercise entry")
-            return
-        }
     }
     
     // MARK: - TableView -
@@ -129,7 +88,6 @@ class ExerciseListTableViewController: BasicTableViewController, EditExerciseTab
                 print("Could not case object found as an NSManagedObject at indexPath: \(indexPath.description)"); return
             }
             managedObjectContext.deleteObject(exercise)
-            saveToCoreData()
             requestExercises(fromBodyPart: bodyPart)
         }
     }
