@@ -9,13 +9,16 @@
 import UIKit
 import CoreData
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var managedObjectContext: NSManagedObjectContext!
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(application: UIApplication,didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        setupAppearance()
         
         // Setup CoreData
         let coreDataManager = CoreDataManager(xcDataModelFileName: "Model", storeType: .SQLite)
@@ -26,6 +29,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         passContextToExerciseCatalog(fromCoreDataManager: coreDataManager)
         passContextToSavedExercises(fromCoreDataManager: coreDataManager)
         return true
+    }
+    
+    func setupAppearance() {
+        
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
+        UINavigationBar.appearance().barTintColor = UIColor.customGreen()
+        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+        
+        UIBarButtonItem.appearance().tintColor = UIColor.whiteColor()
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        UITabBar.appearance().tintColor = UIColor.customGreen()
+        
+        UIButton.appearanceWhenContainedInInstancesOfClasses([BasicTableViewController.self]).tintColor = UIColor.customGreen()
+        UIButton.appearanceWhenContainedInInstancesOfClasses([SettingsTableViewController.self]).tintColor = UIColor.customGreen()
+        UIBarButtonItem.appearanceWhenContainedInInstancesOfClasses([UIToolbar.self]).tintColor = UIColor.customGreen()
+        UIButton.appearanceWhenContainedInInstancesOfClasses([UIToolbar.self]).tintColor = UIColor.customGreen()
+        UIToolbar.appearance().tintColor = UIColor.customGreen()
+        
+        
     }
     
     func passContextToExerciseCatalog(fromCoreDataManager coreDataManager: CoreDataManager) {

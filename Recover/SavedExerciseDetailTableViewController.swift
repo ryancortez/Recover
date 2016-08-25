@@ -24,11 +24,9 @@ class SavedExerciseDetailTableViewController: ExerciseDetailTableViewController,
     let speechSynthesizer = AVSpeechSynthesizer()
     var delegate: SavedExerciseDetailTableViewControllerDelegate!
     
-    let announcmentBeforeSession = "Beginning new Physical Therapy Session"
+    let announcementBeforeSession = "Beginning new session!"
     let announcementBeforeExercise = "Get Ready for "
     
-    
-    @IBOutlet weak var editButton: UIBarButtonItem!
     @IBOutlet weak var previousButton: UIBarButtonItem!
     @IBOutlet weak var startButton: UIBarButtonItem!
     @IBOutlet weak var nextButton: UIBarButtonItem!
@@ -41,13 +39,15 @@ class SavedExerciseDetailTableViewController: ExerciseDetailTableViewController,
         checkIfSessionIsActive()
         setButtonStates()
     }
+    override func setupTableView() {
+        super.setupTableView()
+    }
     
     func setButtonStates() {
         setPreviousExerciseButtonState()
         setStartButtonState()
         setNextExerciseButtonState()
         setStopButtonState()
-        setEditButtonState()
     }
     func setStopButtonState() {
         if sessionIsActive {
@@ -56,17 +56,8 @@ class SavedExerciseDetailTableViewController: ExerciseDetailTableViewController,
         }
         
     }
-    func setEditButtonState() {
-        if sessionIsActive {
-            editButton.enabled = false
-            editButton.tintColor = UIColor.clearColor()
-        } else {
-            editButton.enabled = true
-            editButton.tintColor = nil
-        }
-    }
     func setPreviousExerciseButtonState() {
-        if (sessionIsActive && isFirstExercise == false) {
+        if (sessionIsActive) {
             previousButton.enabled = true
             previousButton.tintColor = nil
         } else {
@@ -82,7 +73,7 @@ class SavedExerciseDetailTableViewController: ExerciseDetailTableViewController,
                 startButton.title = "Pause"
             }
         } else {
-            startButton.title = "Start"
+            startButton.title = "Start Session"
         }
     }
     func setNextExerciseButtonState() {
@@ -143,21 +134,20 @@ class SavedExerciseDetailTableViewController: ExerciseDetailTableViewController,
                 isFirstExercise = true
                 setButtonStates()
             }
-            tableView.reloadData()
+            refreshTableViewData()
             checkIfSessionIsPaused()
         } else {
-            delegate.stopButtonWasPressed()
-            self.dismissViewControllerAnimated(true, completion: nil)
+            continueSession()
         }
     }
     func goToNextExercise() {
-            speechSynthesizer.stopSpeakingAtBoundary(.Immediate)
+        speechSynthesizer.stopSpeakingAtBoundary(.Immediate)
         if (exerciseIndex + 1 < exercises.count) {
             isFirstExercise = false
             setButtonStates()
             exercise = exercises[exerciseIndex + 1]
             exerciseIndex = exerciseIndex + 1
-            tableView.reloadData()
+            refreshTableViewData()
             checkIfSessionIsPaused()
         } else {
             delegate.stopButtonWasPressed()
@@ -165,34 +155,88 @@ class SavedExerciseDetailTableViewController: ExerciseDetailTableViewController,
         }
     }
     
-    // MARK - Text-to-Speech - 
+    // MARK - Text-to-Speech -
     func setupSpeechSynthesizer() {
         speechSynthesizer.delegate = self
     }
-    func speak(thisText text: String) {
+    func speak(thisText text: String, withPreUtteranceDelay preUtteranceDelay: NSTimeInterval?, andPostUtterenceDelay postUtterenceDelay: NSTimeInterval?) {
         let speakUtterence = AVSpeechUtterance(string: text)
-        speakUtterence.rate = 0.42
+        if (preUtteranceDelay != nil) {
+            speakUtterence.preUtteranceDelay = preUtteranceDelay!
+        }
+        if (postUtterenceDelay != nil) {
+            speakUtterence.postUtteranceDelay = postUtterenceDelay!
+        }
+        speakUtterence.rate = 0.43
+        speechSynthesizer.speakUtterance(speakUtterence)
+    }
+    func speak(thisText text: String, withPreUtteranceDelay preUtteranceDelay: NSTimeInterval?, andPostUtterenceDelay postUtterenceDelay: NSTimeInterval?, withSpeakingRate rate: Float) {
+        let speakUtterence = AVSpeechUtterance(string: text)
+        if (preUtteranceDelay != nil) {
+            speakUtterence.preUtteranceDelay = preUtteranceDelay!
+        }
+        if (postUtterenceDelay != nil) {
+            speakUtterence.postUtteranceDelay = postUtterenceDelay!
+        }
+        speakUtterence.rate = rate
         speechSynthesizer.speakUtterance(speakUtterence)
     }
     func beginSession() {
-        speak(thisText: "\(announcmentBeforeSession)")
-        speak(thisText: "\(announcementBeforeExercise)")
-        speak(thisText:"\(exercise.name)")
-        speak(thisText: "\(exercise.instructions)")
-        announcmentAfterExercise()
+        speak(thisText: "\(announcementBeforeSession)", withPreUtteranceDelay: 0.1, andPostUtterenceDelay: 0.0)
+        announceExercise()
     }
     func continueSession() {
-        speak(thisText: "\(announcementBeforeExercise)")
-        speak(thisText:"\(exercise.name)")
-        speak(thisText: "\(exercise.instructions)")
-        announcmentAfterExercise()
+        announceExercise()
     }
-    func announcmentAfterExercise() {
-        speak(thisText: "5")
-        speak(thisText: "4")
-        speak(thisText: "3")
-        speak(thisText: "2")
-        speak(thisText: "1")
+    func announceExercise() {
+        speak(thisText: "\(announcementBeforeExercise)", withPreUtteranceDelay: 0.0, andPostUtterenceDelay: 0.0)
+        speak(thisText: "\(exercise.name)", withPreUtteranceDelay: 0.0, andPostUtterenceDelay: 0.1)
+        speak(thisText: "\(exercise.instructions)", withPreUtteranceDelay: 0.0, andPostUtterenceDelay: 0.0)
+        announceReps()
+        announceExerciseTime()
+        var timeInterval: NSTimeInterval = 2.0
+        if (exercise.time != 0) {
+            timeInterval = Double(exercise.time)
+        }
+        readyAnnouncement(withExerciseTimeInterval: timeInterval)
+        countdownAnnouncement()
+        if (exerciseIndex + 1 == exercises.count) {
+            endingAnnouncement()
+        }
+    }
+    func announceReps() {
+        if (exercise.reps != 0) {
+            speak(thisText: "Perform this exercise \(exercise.reps) times", withPreUtteranceDelay: 0.0, andPostUtterenceDelay: 0.0)
+        }
+    }
+    func announceExerciseTime() {
+        if (exercise.time != 0) {
+            var timeString: String = ""
+            if (exercise.time >= 60) {
+                timeString = "\(exercise.time / 60) minutes"
+            } else {
+                timeString = "\(exercise.time) seconds"
+            }
+            if (exercise.reps != 0) {
+               speak(thisText: "within \(timeString)", withPreUtteranceDelay: 0.0, andPostUtterenceDelay: 0.0)
+            } else {
+              speak(thisText: "Perform this exercise for \(timeString)", withPreUtteranceDelay: 0.0, andPostUtterenceDelay: 0.0)
+            }
+        }
+    2}
+    func countdownAnnouncement() {
+        speak(thisText: "5", withPreUtteranceDelay: 0.0, andPostUtterenceDelay: 0.04)
+        speak(thisText: "4", withPreUtteranceDelay: 0.0, andPostUtterenceDelay: 0.04)
+        speak(thisText: "3", withPreUtteranceDelay: 0.0, andPostUtterenceDelay: 0.04)
+        speak(thisText: "2", withPreUtteranceDelay: 0.0, andPostUtterenceDelay: 0.04)
+        speak(thisText: "1", withPreUtteranceDelay: 0.0, andPostUtterenceDelay: 0.04)
+    }
+    func readyAnnouncement(withExerciseTimeInterval timeInterval: NSTimeInterval) {
+         speak(thisText: "Ready?", withPreUtteranceDelay: 0.0, andPostUtterenceDelay: 0.0)
+         speak(thisText: "Let's Begin", withPreUtteranceDelay: 0.0, andPostUtterenceDelay: timeInterval)
+    }
+    func endingAnnouncement() {
+        speak(thisText: "Ending session. Great job!", withPreUtteranceDelay: 0.0, andPostUtterenceDelay: 0.0, withSpeakingRate: 0.52)
     }
     
     // MARK: AVSpeechSynthesizer Delegate
@@ -203,47 +247,12 @@ class SavedExerciseDetailTableViewController: ExerciseDetailTableViewController,
         }
     }
     
-    // MARK: - TableView -
-    
-    // MARK: TableView DataSource
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var count = 1
-        
-            if (exercise.reps != 0 || exercise.time != 0) {
-                count += 1
-            }
-            if (exercise.instructions != "") {
-                count += 1
-            }
-        return count
-    }
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        switch indexPath.row {
-        case 0:
-            return createTitleCell(withIndexPath: indexPath)
-        case 1:
-            if (exercise.reps != 0 || exercise.time != 0) {
-                return createRepsAndTimeLabelCell(withIndexPath: indexPath)
-            }
-            else if (exercise.instructions != "") {
-                return createInstructionCell(withIndexPath: indexPath)
-            } else {
-                return UITableViewCell()
-            }
-        default:
-            return UITableViewCell()
-        }
-    }
-    
     @IBAction func stopButtonPressed(sender: AnyObject) {
         delegate.stopButtonWasPressed()
         sessionIsActive = false
         setButtonStates()
         speechSynthesizer.stopSpeakingAtBoundary(.Immediate)
         self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    @IBAction func editButtonPressed(sender: AnyObject) {
     }
     @IBAction func previousButtonPressed(sender: AnyObject) {
         goToPreviousExercise()

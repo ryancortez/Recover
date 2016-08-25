@@ -59,7 +59,7 @@ class SavedExerciseListTableViewController: BasicTableViewController, SavedExerc
                 startButton.title = "Pause"
             }
         } else {
-            startButton.title = "Start"
+            startButton.title = "Start Session"
         }
     }
     func setNextExerciseButtonState() {

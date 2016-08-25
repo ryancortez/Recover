@@ -10,4 +10,8 @@ import UIKit
 
 class ExerciseTabViewController: UITabBarController {
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
 }

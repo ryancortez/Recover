@@ -13,18 +13,25 @@ class ExerciseDetailTableViewController: BasicTableViewController, EditExerciseT
     
     var bodyPart: BodyPart!
     var exercise: Exercise!
-    var image: UIImage?
     
-    var imageCellMade: Bool = false
-    var titleCellMade: Bool = false
-    var repAndTimeCellMade: Bool = false
-    var instructionCellMade: Bool = false
-    var addToSavedExerciseListCellMade: Bool = false
+    // MARK: - Outlets -
     
-    // MARK: - Initial Setup
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var exerciseTitle: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var repLabel: UILabel!
+    @IBOutlet weak var instructionsLabel: UILabel!
+    
+    @IBOutlet weak var titleCell: TitleTableViewCell!
+    @IBOutlet weak var imageCell: ImageTableViewCell!
+    @IBOutlet weak var repsAndTimeCell: RepAndTimeTableViewCell!
+    @IBOutlet weak var instructionsCell: InstructionTableViewCell!
+    @IBOutlet weak var addToSavedExerciseListCell: AddToSavedExerciseListTableViewCell!
+    
+    // MARK: - Initial Setup -
+    
     override func viewDidLoad() {
         setupUI()
-        image = UIImage(data: exercise.image)
     }
     func setupUI() {
         setupNavBar()
@@ -34,8 +41,35 @@ class ExerciseDetailTableViewController: BasicTableViewController, EditExerciseT
         self.title = ""
     }
     func setupTableView() {
+        self.tableView.contentInset = UIEdgeInsetsMake(-36, 0, 0, 0)
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
+        setupAddToSavedListCell()
+        refreshTableViewData()
+    }
+    func refreshTableViewData() {
+        if (exerciseTitle != nil) {
+            exerciseTitle.text = exercise.name
+        }
+
+        repLabel.text = "\(exercise.reps)"
+        
+        if (exercise.time >= 60) {
+            timeLabel.text = "\(exercise.time / 60) min"
+        } else {
+            timeLabel.text = "\(exercise.time) sec"
+        }
+        
+        instructionsLabel.text = "\(exercise.instructions)"
+        guard let image = UIImage(data: exercise.image) else {
+            return
+        }
+        imageView.image = image
+    }
+    func setupAddToSavedListCell() {
+        if (addToSavedExerciseListCell != nil) {
+            addToSavedExerciseListCell.delegate = self
+        }
     }
     
     // MARK: - CoreData - 
@@ -70,135 +104,9 @@ class ExerciseDetailTableViewController: BasicTableViewController, EditExerciseT
     
     // MARK: - TableView -
     
-    // MARK: TableView DataSource
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var count = 3
-        
-        if (image != nil) {
-            count += 1
-        }
-        if (exercise.reps != 0 || exercise.time != 0) {
-            count += 1
-        }
-        if (exercise.instructions != "") {
-            count += 1
-        }
-        return count
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
     }
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    
-        switch indexPath.row {
-        case 0:
-            if (image != nil) {
-                imageCellMade = true
-                return createImageCell(withIndexPath: indexPath)
-            } else {
-                titleCellMade = true
-                return createTitleCell(withIndexPath: indexPath)
-            }
-        case 1:
-            if imageCellMade {
-                titleCellMade = true
-                return createTitleCell(withIndexPath: indexPath)
-            } else if (titleCellMade && (exercise.reps != 0 || exercise.time != 0)) {
-                repAndTimeCellMade = true
-               return createRepsAndTimeLabelCell(withIndexPath: indexPath)
-            } else if (titleCellMade && (exercise.instructions != "")) {
-                instructionCellMade = true
-                return createInstructionCell(withIndexPath: indexPath)
-            } else {
-               return UITableViewCell()
-            }
-        case 2:
-            if (!repAndTimeCellMade && (exercise.reps != 0 || exercise.time != 0)) {
-                repAndTimeCellMade = true
-                return createRepsAndTimeLabelCell(withIndexPath: indexPath)
-            } else if (!instructionCellMade && (exercise.instructions != "")) {
-                instructionCellMade = true
-                return createInstructionCell(withIndexPath: indexPath)
-            } else if !addToSavedExerciseListCellMade {
-                addToSavedExerciseListCellMade = true
-                return createAddToSavedExerciseListCell(withIndexPath: indexPath)
-            } else {
-                return UITableViewCell()
-            }
-            
-        case 3:
-            if (!instructionCellMade && (exercise.instructions != "")) {
-                instructionCellMade = true
-                return createInstructionCell(withIndexPath: indexPath)
-            } else if !addToSavedExerciseListCellMade {
-                addToSavedExerciseListCellMade = true
-                return createAddToSavedExerciseListCell(withIndexPath: indexPath)
-            } else {
-                return UITableViewCell()
-            }
-        case 4:
-            return createAddToSavedExerciseListCell(withIndexPath: indexPath)
-        default:
-            return UITableViewCell()
-        }
-    }
-    
-    // MARK: TableView Helper Methods
-    func createTitleCell(withIndexPath indexPath: NSIndexPath)  -> UITableViewCell{
-        let titleCellID = "TitleCell"
-        guard let cell = tableView.dequeueReusableCellWithIdentifier(titleCellID, forIndexPath: indexPath) as? TitleTableViewCell else {
-            print("Did not find a TitleTableViewCell when using identifier \(titleCellID)")
-            return UITableViewCell()
-        }
-        cell.selectionStyle = .None
-        cell.accessoryType = .None
-        cell.exerciseTitle.text = exercise.name
-        return cell
-    }
-    func createRepsAndTimeLabelCell(withIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let repsAndTimeCellID = "RepsAndTimeCell"
-        guard let cell = tableView.dequeueReusableCellWithIdentifier(repsAndTimeCellID, forIndexPath: indexPath) as? RepAndTimeTableViewCell else {
-            print("Did not find a TitleTableViewCell when using identifier \(repsAndTimeCellID)")
-            return UITableViewCell()
-        }
-        cell.selectionStyle = .None
-        cell.accessoryType = .None
-        cell.repsCounts.text = "\(exercise.reps)"
-        cell.timeLabel.text = "\(exercise.time)"
-        return cell
-    }
-    func createInstructionCell(withIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let repsAndTimeCellID = "InstructionsCell"
-        guard let cell = tableView.dequeueReusableCellWithIdentifier(repsAndTimeCellID, forIndexPath: indexPath) as? InstructionTableViewCell else {
-            print("Did not find a TitleTableViewCell when using identifier \(repsAndTimeCellID)")
-            return UITableViewCell()
-        }
-        cell.selectionStyle = .None
-        cell.accessoryType = .None
-        cell.instructionLabel.text = exercise.instructions
-        return cell
-    }
-    func createAddToSavedExerciseListCell(withIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let titleCellID = "AddToSavedExerciseListCell"
-        guard let cell = tableView.dequeueReusableCellWithIdentifier(titleCellID, forIndexPath: indexPath) as? AddToSavedExerciseListTableViewCell else {
-            print("Did not find a TitleTableViewCell when using identifier \(titleCellID)")
-            return UITableViewCell()
-        }
-        cell.selectionStyle = .None
-        cell.accessoryType = .None
-        cell.delegate = self
-        return cell
-    }
-    func createImageCell(withIndexPath indexPath: NSIndexPath)  -> UITableViewCell{
-        let imageCellID = "ImageCell"
-        guard let cell = tableView.dequeueReusableCellWithIdentifier(imageCellID, forIndexPath: indexPath) as? ImageTableViewCell else {
-            print("Did not find a TitleTableViewCell when using identifier \(imageCellID)")
-            return UITableViewCell()
-        }
-        cell.selectionStyle = .None
-        cell.accessoryType = .None
-        let image = UIImage(data: exercise.image)
-        cell.exerciseImage.image = image
-        return cell
-    }
-
     
     // MARK: - TableView Cell Delegates -
     

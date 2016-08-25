@@ -21,8 +21,28 @@ class BasicTableViewController: UITableViewController,  NSFetchedResultsControll
     // MARK: - Core Data - 
     
     // MARK: Save to CoreData
-    
-    func saveNew(exercise: ExerciseViewModel) {        
+    func save(bodyPartWithName bodyPartName: String) -> BodyPart? {
+        guard let bodyPart = fetch(bodyPartWithName: bodyPartName) else {
+            return saveNew(bodyPartWithName: bodyPartName)
+        }
+        return bodyPart
+    }
+    func saveNew(bodyPartWithName bodyPartName: String) -> BodyPart? {
+        guard let newBodyPart = NSEntityDescription.insertNewObjectForEntityForName("BodyPart", inManagedObjectContext: self.managedObjectContext) as? BodyPart else {
+            print("Could not cast fetched object as BodyPart")
+            return nil
+        }
+        newBodyPart.setValue(bodyPartName, forKey: "name")
+        
+        do {
+            try self.managedObjectContext.save()
+            return newBodyPart
+        } catch {
+            print("Unable to save new BodyPart entity")
+            return nil
+        }
+    }
+    func saveNew(exercise: ExerciseViewModel) {
         guard let newExercise = NSEntityDescription.insertNewObjectForEntityForName("Exercise", inManagedObjectContext: self.managedObjectContext) as? Exercise else {
             print("Could not insert new exercise into CoreData"); return
         }
@@ -30,7 +50,7 @@ class BasicTableViewController: UITableViewController,  NSFetchedResultsControll
         newExercise.setValue(exercise.name, forKey: "name")
         newExercise.setValue(exercise.instructions, forKey: "instructions")
         
-        if (exercise.instructions != nil) {
+        if (exercise.time != nil) {
             newExercise.setValue(NSInteger(exercise.time!), forKey: "time")
         }
         if (exercise.reps != nil) {
@@ -76,7 +96,6 @@ class BasicTableViewController: UITableViewController,  NSFetchedResultsControll
         saveCoreDataState()
         tableView.reloadData()
     }
-    
     func saveCoreDataState() {
         do {
             try self.managedObjectContext.save()
@@ -86,10 +105,49 @@ class BasicTableViewController: UITableViewController,  NSFetchedResultsControll
         }
     }
     
-    
-    // MARK: Fetch from Core Data 
-    
-    
+    // MARK: Fetch from Core Data
+    func fetch(exerciseName exerciseName: String) -> Exercise? {
+        
+        var fetchedObjects = []
+        let fetchRequest = NSFetchRequest(entityName: "Exercise")
+        fetchRequest.predicate = NSPredicate(format: "ANY name contains %@", argumentArray: [exerciseName])
+        do {
+            try fetchedObjects = managedObjectContext.executeFetchRequest(fetchRequest)
+        } catch {
+            print("Did not find any body part matching that name")
+        }
+        
+        if (fetchedObjects.count >= 1) {
+            guard let fetchedExercise = fetchedObjects.objectAtIndex(0) as? Exercise else {
+                print("Could not create BodyPart from fetched object"); return nil
+            }
+            return fetchedExercise
+            
+        } else {
+            return nil
+        }
+    }
+    func fetch(bodyPartWithName bodyPartName: String) -> BodyPart? {
+        
+        var fetchedObjects = []
+        let fetchRequest = NSFetchRequest(entityName: "BodyPart")
+        fetchRequest.predicate = NSPredicate(format: "ANY name contains %@", argumentArray: [bodyPartName])
+        do {
+            try fetchedObjects = managedObjectContext.executeFetchRequest(fetchRequest)
+        } catch {
+            print("Did not find any body part matching that name")
+        }
+        
+        if (fetchedObjects.count >= 1) {
+            guard let fetchedBodyPart = fetchedObjects.objectAtIndex(0) as? BodyPart else {
+                print("Could not create BodyPart from fetched object"); return nil
+            }
+            return fetchedBodyPart
+            
+        } else {
+            return nil
+        }
+    }
     func getFetchRequest(withEntityName entityName: String, withSortDescriptors sortDescriptiors: Array<NSSortDescriptor>?, andPredicate predicate: NSPredicate?) -> NSFetchRequest {
         let fetchRequest = NSFetchRequest(entityName: entityName)
         fetchRequest.sortDescriptors = sortDescriptiors

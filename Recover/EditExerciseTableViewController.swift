@@ -14,14 +14,13 @@ protocol EditExerciseTableViewControllerDelegate {
     func edit(currentExercise currentExercise: Exercise, withNewExerciseData newExerciseData: ExerciseViewModel)
 }
 
-class EditExerciseTableViewController: UITableViewController, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+class EditExerciseTableViewController: BasicTableViewController, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
     // MARK: - Global Variables
     var bodyPart: BodyPart!
     var exercise: Exercise!
     var delegate: EditExerciseTableViewControllerDelegate!
     var isFirstTimeExerciseDescriptionIsBeginningEditing: Bool  = true
-    var managedObjectContext: NSManagedObjectContext!
     let imagePicker = UIImagePickerController()
     
     // MARK: - Outlets
@@ -118,23 +117,6 @@ class EditExerciseTableViewController: UITableViewController, UITextViewDelegate
     }
     
     // MARK: - CoreData -
-    
-    // MARK: Save to CoreData
-    func saveNew(bodyPartWithName bodyPartName: String) -> BodyPart? {
-        guard let newBodyPart = NSEntityDescription.insertNewObjectForEntityForName("BodyPart", inManagedObjectContext: self.managedObjectContext) as? BodyPart else {
-            print("Could not cast fetched object as BodyPart")
-            return nil
-        }
-        newBodyPart.setValue(bodyPartName, forKey: "name")
-        
-        do {
-            try self.managedObjectContext.save()
-            return newBodyPart
-        } catch {
-            print("Unable to save new BodyPart entity")
-            return nil
-        }
-    }
     func pass(exerciseViewModelToCoreData exerciseViewModel: ExerciseViewModel) {
         if (exercise == nil) {
             delegate.saveNew(exerciseViewModel)
@@ -154,29 +136,6 @@ class EditExerciseTableViewController: UITableViewController, UITextViewDelegate
             return nil
         }
         return miscBodyPart
-    }
-    
-    // MARK: Fetch from CoreData
-    func fetch(bodyPartWithName bodyPartName: String) -> BodyPart? {
-        
-        var fetchedObjects = []
-        let fetchRequest = NSFetchRequest(entityName: "BodyPart")
-        fetchRequest.predicate = NSPredicate(format: "ANY name contains %@", argumentArray: [bodyPartName])
-        do {
-            try fetchedObjects = managedObjectContext.executeFetchRequest(fetchRequest)
-        } catch {
-           print("Did not find any body part matching that name")
-        }
-        
-        if (fetchedObjects.count >= 1) {
-            guard let fetchedBodyPart = fetchedObjects.objectAtIndex(0) as? BodyPart else {
-                print("Could not create BodyPart from fetched object"); return nil
-            }
-            return fetchedBodyPart
-            
-        } else {
-            return nil
-        }
     }
     
     // MARK: - TextView Delegate -

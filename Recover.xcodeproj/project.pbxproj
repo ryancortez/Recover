@@ -25,6 +25,8 @@
 		946737861D6758CE009803E0 /* SavedExerciseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946737851D6758CE009803E0 /* SavedExerciseList.swift */; };
 		946737891D67952F009803E0 /* ExerciseTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946737881D67952E009803E0 /* ExerciseTabViewController.swift */; };
 		9467378B1D6B6E17009803E0 /* SavedExerciseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467378A1D6B6E17009803E0 /* SavedExerciseTableViewCell.swift */; };
+		9467378D1D6E1471009803E0 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467378C1D6E1471009803E0 /* UIColor+Extensions.swift */; };
+		9467378F1D6E31BF009803E0 /* ExerciseCatalogDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467378E1D6E31BF009803E0 /* ExerciseCatalogDetailTableViewController.swift */; };
 		949AC21F1D5D69DD0029328B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949AC21E1D5D69DD0029328B /* AppDelegate.swift */; };
 		949AC2281D5D69DD0029328B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 949AC2271D5D69DD0029328B /* Assets.xcassets */; };
 		949AC22B1D5D69DD0029328B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 949AC2291D5D69DD0029328B /* LaunchScreen.storyboard */; };
@@ -75,6 +77,8 @@
 		946737851D6758CE009803E0 /* SavedExerciseList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedExerciseList.swift; sourceTree = "<group>"; };
 		946737881D67952E009803E0 /* ExerciseTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseTabViewController.swift; sourceTree = "<group>"; };
 		9467378A1D6B6E17009803E0 /* SavedExerciseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedExerciseTableViewCell.swift; sourceTree = "<group>"; };
+		9467378C1D6E1471009803E0 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		9467378E1D6E31BF009803E0 /* ExerciseCatalogDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseCatalogDetailTableViewController.swift; sourceTree = "<group>"; };
 		949AC21B1D5D69DD0029328B /* Recover.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recover.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		949AC21E1D5D69DD0029328B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		949AC2271D5D69DD0029328B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -203,6 +207,7 @@
 				941BB6E11D622BBF00A8380D /* CoreDataManager.swift */,
 				943270BF1D5E5AC900BE2D1A /* CloudKitManager.swift */,
 				943270C01D5E5AC900BE2D1A /* UserDefaultsManager.swift */,
+				9467378C1D6E1471009803E0 /* UIColor+Extensions.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -232,6 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				94C323D91D5E116F00227ACE /* BasicTableViewController.swift */,
+				94C323E11D5E151F00227ACE /* ExerciseDetailTableViewController.swift */,
 				941BB6E81D63A8F800A8380D /* TableViewCells */,
 				94C323E31D5E155C00227ACE /* Catalog */,
 				94C323E41D5E156100227ACE /* Saved Exercises */,
@@ -244,7 +250,7 @@
 			children = (
 				94C323DD1D5E146600227ACE /* BodyPartCategoryTableViewController.swift */,
 				94C323DF1D5E149F00227ACE /* ExerciseListTableViewController.swift */,
-				94C323E11D5E151F00227ACE /* ExerciseDetailTableViewController.swift */,
+				9467378E1D6E31BF009803E0 /* ExerciseCatalogDetailTableViewController.swift */,
 			);
 			name = Catalog;
 			sourceTree = "<group>";
@@ -392,7 +398,9 @@
 				946737891D67952F009803E0 /* ExerciseTabViewController.swift in Sources */,
 				94C323E81D5E18BD00227ACE /* SavedExerciseDetailTableViewController.swift in Sources */,
 				949AC21F1D5D69DD0029328B /* AppDelegate.swift in Sources */,
+				9467378D1D6E1471009803E0 /* UIColor+Extensions.swift in Sources */,
 				94C323E21D5E151F00227ACE /* ExerciseDetailTableViewController.swift in Sources */,
+				9467378F1D6E31BF009803E0 /* ExerciseCatalogDetailTableViewController.swift in Sources */,
 				941BB6E21D622BBF00A8380D /* CoreDataManager.swift in Sources */,
 				941BB6EE1D63A9A800A8380D /* RepAndTimeTableViewCell.swift in Sources */,
 				9467378B1D6B6E17009803E0 /* SavedExerciseTableViewCell.swift in Sources */,
