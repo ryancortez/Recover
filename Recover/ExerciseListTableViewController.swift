@@ -78,6 +78,7 @@ class ExerciseListTableViewController: BasicTableViewController, EditExerciseTab
         let cell = tableView.dequeueReusableCellWithIdentifier("CatalogExerciseCell", forIndexPath: indexPath)
         cell.selectionStyle = .None
         cell.textLabel?.text = exercises[indexPath.row].name
+        cell.textLabel?.numberOfLines = 0
         return cell
     }
     

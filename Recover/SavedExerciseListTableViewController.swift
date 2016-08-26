@@ -135,6 +135,7 @@ class SavedExerciseListTableViewController: BasicTableViewController, SavedExerc
         let exercise = exercises[indexPath.row]
         cell.exerciseName.text = exercise.name
         cell.selectionStyle = .None
+        cell.textLabel?.numberOfLines = 0
         return cell
     }
     

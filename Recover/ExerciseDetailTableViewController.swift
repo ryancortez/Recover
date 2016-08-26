@@ -40,7 +40,8 @@ class ExerciseDetailTableViewController: BasicTableViewController, EditExerciseT
     func setupNavBar() {
         self.title = ""
     }
-    func setupTableView() {
+    override func setupTableView() {
+        super.setupTableView()
         self.tableView.contentInset = UIEdgeInsetsMake(-36, 0, 0, 0)
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
@@ -52,12 +53,20 @@ class ExerciseDetailTableViewController: BasicTableViewController, EditExerciseT
             exerciseTitle.text = exercise.name
         }
 
-        repLabel.text = "\(exercise.reps)"
+        if (exercise.reps == 0) {
+            repLabel.text = "--"
+        } else {
+            repLabel.text = "\(exercise.reps)"
+        }
         
         if (exercise.time >= 60) {
             timeLabel.text = "\(exercise.time / 60) min"
         } else {
-            timeLabel.text = "\(exercise.time) sec"
+            if (exercise.time == 0) {
+                timeLabel.text = "--"
+            } else {
+                timeLabel.text = "\(exercise.time) sec"
+            }
         }
         
         instructionsLabel.text = "\(exercise.instructions)"

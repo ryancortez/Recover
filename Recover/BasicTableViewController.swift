@@ -18,6 +18,16 @@ class BasicTableViewController: UITableViewController,  NSFetchedResultsControll
     var fetchResultsController: NSFetchedResultsController!
     var exercises = [Exercise]()
     
+    // MARK: - Intial Setup -
+    
+    override func viewDidLoad() {
+        setupTableView()
+    }
+    func setupTableView() {
+        self.tableView.estimatedRowHeight = 88.0
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+    }
+    
     // MARK: - Core Data - 
     
     // MARK: Save to CoreData
@@ -224,6 +234,12 @@ class BasicTableViewController: UITableViewController,  NSFetchedResultsControll
     // MARK: - TableView -
     
     // MARK: TableView Delegate
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }

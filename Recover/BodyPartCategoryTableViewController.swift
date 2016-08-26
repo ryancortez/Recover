@@ -153,6 +153,7 @@ class BodyPartCategoryTableViewController: BasicTableViewController, EditExercis
         let cell = tableView.dequeueReusableCellWithIdentifier("CatalogExerciseCell", forIndexPath: indexPath)
         cell.selectionStyle = .None
         cell.textLabel?.text = bodyParts[indexPath.row].name
+        cell.textLabel?.numberOfLines = 0
         return cell
     }
     // MARK: TableView Delegate
