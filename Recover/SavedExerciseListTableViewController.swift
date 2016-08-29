@@ -173,13 +173,14 @@ class SavedExerciseListTableViewController: AdjustableTableViewController, Saved
     // MARK: - Actions
     @IBAction func reorderButtonPressed(sender: AnyObject) {
         if tableView.editing {
-            tableView.setEditing(false, animated: true)
-            reorderButton.title = "Reorder"
+            reorderButton.title = "Edit"
             reorderButton.style = .Plain
+            tableView.setEditing(false, animated: true)
         } else {
-            tableView.setEditing(true, animated: true)
             reorderButton.title = "Done"
             reorderButton.style = .Done
+            tableView.setEditing(true, animated: true)
+            
         }
     }
     @IBAction func previousExerciseButtonPressed(sender: AnyObject) {

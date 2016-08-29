@@ -75,7 +75,6 @@ class BodyPartCategoryTableViewController: AdjustableTableViewController, EditEx
                 print("Count not create Dictionary<String, AnyObject> by performing JSON serialization of the NSData object")
                 return
             }
-            print(jsonDictionary)
             guard let categoriesDictionary = jsonDictionary["Categories"] as? Dictionary<String, AnyObject> else {
                 return
             }

@@ -142,7 +142,7 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="zKf-LV-gOu"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Therapy Session" id="b3M-xm-phY">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="edit" id="WuA-3s-ffu">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" style="plain" id="WuA-3s-ffu">
                             <connections>
                                 <action selector="reorderButtonPressed:" destination="kfN-kQ-k1Q" id="oGT-Ex-llD"/>
                             </connections>
@@ -166,7 +166,7 @@
         <scene sceneID="IVp-73-q4b">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="T4g-Jt-agf" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Exercise Catalog" image="first" selectedImage="first" id="P3l-Em-J2e"/>
+                    <tabBarItem key="tabBarItem" title="Exercise Catalog" image="second" selectedImage="second" id="P3l-Em-J2e"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="c2b-vA-Chi">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -185,7 +185,7 @@
         <scene sceneID="xlW-ZQ-f5i">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="fLN-Xi-MV5" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Therapy Session" image="second" selectedImage="second" id="ir8-X0-gAE"/>
+                    <tabBarItem key="tabBarItem" title="Therapy Session" image="first" selectedImage="first" id="ir8-X0-gAE"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Lr2-Ac-eqS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
