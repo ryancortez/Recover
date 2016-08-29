@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class BasicTableViewController: UITableViewController,  NSFetchedResultsControllerDelegate {
+class BasicTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
     // MARK: - Global Variables -
     let mainStoryboardName = "Main"
@@ -17,6 +17,11 @@ class BasicTableViewController: UITableViewController,  NSFetchedResultsControll
     var managedObjectContext: NSManagedObjectContext!
     var fetchResultsController: NSFetchedResultsController!
     var exercises = [Exercise]()
+    
+    // MARK: - View Controller Lifecycle -
+    override func viewDidLoad() {
+        
+    }
     
     // MARK: - Core Data - 
     

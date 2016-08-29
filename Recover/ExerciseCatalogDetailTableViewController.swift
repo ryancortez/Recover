@@ -13,7 +13,6 @@ class ExerciseCatalogDetailTableViewController: ExerciseDetailTableViewControlle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = exercise.name
     }
     override func setupNavBar() {
         super.setupNavBar()

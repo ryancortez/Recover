@@ -11,13 +11,19 @@ import CoreData
 
 class BodyPartCategoryTableViewController: AdjustableTableViewController, EditExerciseTableViewControllerDelegate {
     
+    // MARK: - Global Variables -
     var bodyParts: Array<BodyPart> = []
+    
+    // MARK: - Outlets -
+    @IBOutlet weak var settingsButton: UIBarButtonItem!
+    
     
     // MARK: - Inital View Setup -
     
     // MARK: ViewController Lifecycle
     override func viewDidLoad() {
         setupTabBar()
+        setupNavBar()
         checkIfAppHasLaunchedBefore()
         refreshTableView()
     }
@@ -29,6 +35,11 @@ class BodyPartCategoryTableViewController: AdjustableTableViewController, EditEx
             return
         }
         self.tabBarController!.tabBarItem.image = scale(image, toSize: CGSizeMake(30, 30))
+    }
+    func setupNavBar() {
+        if let font = UIFont(name: "Avenir-Medium", size: 17) {
+            settingsButton.setTitleTextAttributes([NSFontAttributeName: font], forState: UIControlState.Normal)
+        }
     }
     func checkIfAppHasLaunchedBefore() {
         if (!NSUserDefaults.standardUserDefaults().boolForKey("hasLaunchedBefore")) {
@@ -152,10 +163,11 @@ class BodyPartCategoryTableViewController: AdjustableTableViewController, EditEx
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("CatalogExerciseCell", forIndexPath: indexPath)
         cell.selectionStyle = .None
+        cell.textLabel?.font = UIFont(name: "Avenir-Book", size: 17)
         cell.textLabel?.text = bodyParts[indexPath.row].name
         cell.textLabel?.numberOfLines = 0
         return cell
-    }
+     }
     // MARK: TableView Delegate
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if (editingStyle == .Delete) {

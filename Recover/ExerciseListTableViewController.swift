@@ -78,6 +78,7 @@ class ExerciseListTableViewController: AdjustableTableViewController, EditExerci
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("CatalogExerciseCell", forIndexPath: indexPath)
         cell.selectionStyle = .None
+        cell.textLabel?.font = UIFont(name: "Avenir-Book", size: 17)
         cell.textLabel?.text = exercises[indexPath.row].name
         cell.textLabel?.numberOfLines = 0
         return cell
