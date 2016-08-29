@@ -87,10 +87,10 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1SB-lo-48s">
-                                            <rect key="frame" x="16" y="8" width="263" height="71"/>
+                                            <rect key="frame" x="16" y="24" width="263" height="38.5"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Exercise Name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XuF-Hu-E2M">
-                                                    <rect key="frame" x="0.0" y="0.0" width="263" height="71"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Exercise Name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XuF-Hu-E2M">
+                                                    <rect key="frame" x="0.0" y="0.0" width="263" height="38.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -102,8 +102,8 @@
                                     <constraints>
                                         <constraint firstAttribute="trailingMargin" secondItem="1SB-lo-48s" secondAttribute="trailing" id="6he-vr-1CZ"/>
                                         <constraint firstItem="1SB-lo-48s" firstAttribute="leading" secondItem="NSV-BS-OtL" secondAttribute="leadingMargin" constant="8" id="ChQ-mt-eEM"/>
-                                        <constraint firstItem="1SB-lo-48s" firstAttribute="top" secondItem="NSV-BS-OtL" secondAttribute="topMargin" id="LhK-a0-s6H"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="1SB-lo-48s" secondAttribute="bottom" id="SO2-w5-0GI"/>
+                                        <constraint firstItem="1SB-lo-48s" firstAttribute="top" secondItem="NSV-BS-OtL" secondAttribute="topMargin" constant="16" id="LhK-a0-s6H"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="1SB-lo-48s" secondAttribute="bottom" constant="16" id="SO2-w5-0GI"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -454,25 +454,25 @@
                         <sections>
                             <tableViewSection id="Fsd-XG-eWi">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="TitleCell" rowHeight="58" id="Qdo-fp-X4P" customClass="TitleTableViewCell" customModule="Recover" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="99" width="320" height="58"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="TitleCell" rowHeight="90" id="Qdo-fp-X4P" customClass="TitleTableViewCell" customModule="Recover" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="99" width="320" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Qdo-fp-X4P" id="nzt-6Y-onT">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="57.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="89.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qee-ZN-dHr">
-                                                    <rect key="frame" x="8" y="16" width="304" height="25.5"/>
+                                                    <rect key="frame" x="16" y="24" width="288" height="41.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="qee-ZN-dHr" secondAttribute="trailing" id="7as-h3-iBM"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="qee-ZN-dHr" secondAttribute="bottom" constant="8" id="X4U-2f-bEK"/>
-                                                <constraint firstItem="qee-ZN-dHr" firstAttribute="leading" secondItem="nzt-6Y-onT" secondAttribute="leadingMargin" id="a3t-2L-mdy"/>
-                                                <constraint firstItem="qee-ZN-dHr" firstAttribute="top" secondItem="nzt-6Y-onT" secondAttribute="topMargin" constant="8" id="pbQ-cI-4wu"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="qee-ZN-dHr" secondAttribute="trailing" constant="8" id="7as-h3-iBM"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="qee-ZN-dHr" secondAttribute="bottom" constant="16" id="X4U-2f-bEK"/>
+                                                <constraint firstItem="qee-ZN-dHr" firstAttribute="leading" secondItem="nzt-6Y-onT" secondAttribute="leadingMargin" constant="8" id="a3t-2L-mdy"/>
+                                                <constraint firstItem="qee-ZN-dHr" firstAttribute="top" secondItem="nzt-6Y-onT" secondAttribute="topMargin" constant="16" id="pbQ-cI-4wu"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <edgeInsets key="layoutMargins" top="8" left="0.0" bottom="8" right="8"/>
@@ -482,7 +482,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ImageCell" rowHeight="215" id="PVs-yJ-ww8" customClass="ImageTableViewCell" customModule="Recover" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="157" width="320" height="215"/>
+                                        <rect key="frame" x="0.0" y="189" width="320" height="215"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PVs-yJ-ww8" id="Oit-W3-D5o">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="214.5"/>
@@ -521,7 +521,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="InstructionsCell" rowHeight="127" id="pvU-Dg-GMI" customClass="InstructionTableViewCell" customModule="Recover" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="372" width="320" height="127"/>
+                                        <rect key="frame" x="0.0" y="404" width="320" height="127"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pvU-Dg-GMI" id="bE8-GI-bS3">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="126.5"/>
@@ -557,7 +557,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="RepsAndTimeCell" rowHeight="49" id="Etg-WZ-l1H" customClass="RepAndTimeTableViewCell" customModule="Recover" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="499" width="320" height="49"/>
+                                        <rect key="frame" x="0.0" y="531" width="320" height="49"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Etg-WZ-l1H" id="VTU-jw-fJq">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="48.5"/>
@@ -1183,6 +1183,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="AGS-mf-Sn1"/>
-        <segue reference="Dyh-Ox-IZk"/>
+        <segue reference="Ong-vP-K06"/>
     </inferredMetricsTieBreakers>
 </document>
