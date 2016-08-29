@@ -125,6 +125,7 @@ class ExerciseDetailTableViewController: AdjustableTableViewController, EditExer
         let savedExerciseLists = fetchSavedExerciseLists()
         let saveExerciseList = savedExerciseLists?.first
         saveExerciseList?.exercises.insert(exercise)
+        saveCoreDataState()
     }
     
     // MARK: - Segues -

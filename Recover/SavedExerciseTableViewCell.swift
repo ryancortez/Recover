@@ -11,21 +11,15 @@ import UIKit
 class SavedExerciseTableViewCell: UITableViewCell {
 
     @IBOutlet weak var exerciseName: UILabel!
-    @IBOutlet weak var arrowImageView: UIImageView!
+    @IBOutlet weak var repTitle: UILabel!
     @IBOutlet weak var reps: UILabel!
+    @IBOutlet weak var timeTitle: UILabel!
     @IBOutlet weak var time: UILabel!
     @IBOutlet weak var repsView: UIStackView!
     @IBOutlet weak var timeView: UIStackView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        removeAllViewsExceptName()
-    }
-    
-    func removeAllViewsExceptName() {
-        arrowImageView.removeFromSuperview()
-        repsView.removeFromSuperview()
-        timeView.removeFromSuperview()
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

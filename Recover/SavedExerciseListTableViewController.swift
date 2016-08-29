@@ -144,14 +144,13 @@ class SavedExerciseListTableViewController: AdjustableTableViewController, Saved
             let exercise = exercises[indexPath.row]
             managedObjectContext.deleteObject(exercise)
             
-            dispatch_async(dispatch_get_main_queue(),{
-                do {
-                    try self.managedObjectContext.save()
-                } catch {
-                    print("Unable to save Core Data state")
-                    return
-                }
-            })
+            do {
+                try self.managedObjectContext.save()
+            } catch {
+                print("Unable to save Core Data state")
+                return
+            }
+
             
             exercises.removeAtIndex(indexPath.row)
              tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
