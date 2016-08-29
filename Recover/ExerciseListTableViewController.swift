@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ExerciseListTableViewController: BasicTableViewController, EditExerciseTableViewControllerDelegate {
+class ExerciseListTableViewController: AdjustableTableViewController, EditExerciseTableViewControllerDelegate {
     
     var bodyPart: BodyPart!
     
@@ -64,7 +64,8 @@ class ExerciseListTableViewController: BasicTableViewController, EditExerciseTab
             return
         }
         let bodyPart = object as! BodyPart
-        exercises = Array(bodyPart.exercises)
+        let unsortedExercises = Array(bodyPart.exercises)
+        exercises = unsortedExercises.sort { $0.name < $1.name }
         tableView.reloadData()
     }
     

@@ -36,6 +36,7 @@ class EditExerciseTableViewController: BasicTableViewController, UITextViewDeleg
     
     // MARK: - Inital Setup
     override func viewDidLoad() {
+        super.viewDidLoad()
         setupUI()
         setupImagePicker()
     }

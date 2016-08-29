@@ -18,16 +18,6 @@ class BasicTableViewController: UITableViewController,  NSFetchedResultsControll
     var fetchResultsController: NSFetchedResultsController!
     var exercises = [Exercise]()
     
-    // MARK: - Intial Setup -
-    
-    override func viewDidLoad() {
-        setupTableView()
-    }
-    func setupTableView() {
-        self.tableView.estimatedRowHeight = 88.0
-        self.tableView.rowHeight = UITableViewAutomaticDimension
-    }
-    
     // MARK: - Core Data - 
     
     // MARK: Save to CoreData
@@ -107,12 +97,15 @@ class BasicTableViewController: UITableViewController,  NSFetchedResultsControll
         tableView.reloadData()
     }
     func saveCoreDataState() {
-        do {
-            try self.managedObjectContext.save()
-        } catch {
-            print("Unable to edit exercise entry")
-            return
-        }
+        
+        dispatch_async(dispatch_get_main_queue(),{
+            do {
+                try self.managedObjectContext.save()
+            } catch {
+                print("Unable to save Core Data state")
+                return
+            }
+        })
     }
     
     // MARK: Fetch from Core Data
@@ -120,7 +113,7 @@ class BasicTableViewController: UITableViewController,  NSFetchedResultsControll
         
         var fetchedObjects = []
         let fetchRequest = NSFetchRequest(entityName: "Exercise")
-        fetchRequest.predicate = NSPredicate(format: "ANY name contains %@", argumentArray: [exerciseName])
+        fetchRequest.predicate = NSPredicate(format: "name CONTAINS[cd] %@", exerciseName)
         do {
             try fetchedObjects = managedObjectContext.executeFetchRequest(fetchRequest)
         } catch {
@@ -141,7 +134,7 @@ class BasicTableViewController: UITableViewController,  NSFetchedResultsControll
         
         var fetchedObjects = []
         let fetchRequest = NSFetchRequest(entityName: "BodyPart")
-        fetchRequest.predicate = NSPredicate(format: "ANY name contains %@", argumentArray: [bodyPartName])
+        fetchRequest.predicate = NSPredicate(format: "name contains %@", argumentArray: [bodyPartName])
         do {
             try fetchedObjects = managedObjectContext.executeFetchRequest(fetchRequest)
         } catch {
@@ -159,6 +152,7 @@ class BasicTableViewController: UITableViewController,  NSFetchedResultsControll
         }
     }
     func getFetchRequest(withEntityName entityName: String, withSortDescriptors sortDescriptiors: Array<NSSortDescriptor>?, andPredicate predicate: NSPredicate?) -> NSFetchRequest {
+        
         let fetchRequest = NSFetchRequest(entityName: entityName)
         fetchRequest.sortDescriptors = sortDescriptiors
         fetchRequest.predicate = predicate
@@ -234,9 +228,6 @@ class BasicTableViewController: UITableViewController,  NSFetchedResultsControll
     // MARK: - TableView -
     
     // MARK: TableView Delegate
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
-    }
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
@@ -246,4 +237,5 @@ class BasicTableViewController: UITableViewController,  NSFetchedResultsControll
     override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
+    
 }

@@ -39,6 +39,7 @@
 		94C323E61D5E177500227ACE /* SavedExerciseListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C323E51D5E177500227ACE /* SavedExerciseListTableViewController.swift */; };
 		94C323E81D5E18BD00227ACE /* SavedExerciseDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C323E71D5E18BD00227ACE /* SavedExerciseDetailTableViewController.swift */; };
 		94C4BEF91D660F51004F4E5B /* BodyPart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C4BEF81D660F51004F4E5B /* BodyPart.swift */; };
+		94D868091D748DFE003594BF /* AdjustableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D868081D748DFE003594BF /* AdjustableTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,7 @@
 		94C323E51D5E177500227ACE /* SavedExerciseListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedExerciseListTableViewController.swift; sourceTree = "<group>"; };
 		94C323E71D5E18BD00227ACE /* SavedExerciseDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedExerciseDetailTableViewController.swift; sourceTree = "<group>"; };
 		94C4BEF81D660F51004F4E5B /* BodyPart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodyPart.swift; sourceTree = "<group>"; };
+		94D868081D748DFE003594BF /* AdjustableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdjustableTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,6 +243,7 @@
 				941BB6E81D63A8F800A8380D /* TableViewCells */,
 				94C323E31D5E155C00227ACE /* Catalog */,
 				94C323E41D5E156100227ACE /* Saved Exercises */,
+				94D868081D748DFE003594BF /* AdjustableTableViewController.swift */,
 			);
 			name = TableViewControllers;
 			sourceTree = "<group>";
@@ -403,6 +406,7 @@
 				9467378F1D6E31BF009803E0 /* ExerciseCatalogDetailTableViewController.swift in Sources */,
 				941BB6E21D622BBF00A8380D /* CoreDataManager.swift in Sources */,
 				941BB6EE1D63A9A800A8380D /* RepAndTimeTableViewCell.swift in Sources */,
+				94D868091D748DFE003594BF /* AdjustableTableViewController.swift in Sources */,
 				9467378B1D6B6E17009803E0 /* SavedExerciseTableViewCell.swift in Sources */,
 				94C323DE1D5E146600227ACE /* BodyPartCategoryTableViewController.swift in Sources */,
 				94475E451D5ED07200D919C4 /* ExerciseTableViewController.swift in Sources */,

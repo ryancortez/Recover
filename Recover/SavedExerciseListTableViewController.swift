@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class SavedExerciseListTableViewController: BasicTableViewController, SavedExerciseDetailTableViewControllerDelegate {
+class SavedExerciseListTableViewController: AdjustableTableViewController, SavedExerciseDetailTableViewControllerDelegate {
     
     // MARK: - Global Variables
     var sessionIsActive: Bool = false
@@ -99,7 +99,7 @@ class SavedExerciseListTableViewController: BasicTableViewController, SavedExerc
         let entityName = "SavedExerciseList"
         let sortingKey = "name"
         let sortDescriptors = [NSSortDescriptor(key: sortingKey, ascending: true)]
-        let predicate = NSPredicate(format: "ANY name contains %@", argumentArray: [name])
+        let predicate = NSPredicate(format: "name contains %@", argumentArray: [name])
         let fetchRequest = getFetchRequest(withEntityName: entityName, withSortDescriptors: sortDescriptors, andPredicate: predicate)
         guard let objects = getObjects(withFetchRequest: fetchRequest) else {
             print("Did not recieve any objects from fetchRequest")
@@ -138,11 +138,32 @@ class SavedExerciseListTableViewController: BasicTableViewController, SavedExerc
         cell.textLabel?.numberOfLines = 0
         return cell
     }
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if (editingStyle == .Delete) {
+            
+            let exercise = exercises[indexPath.row]
+            managedObjectContext.deleteObject(exercise)
+            
+            dispatch_async(dispatch_get_main_queue(),{
+                do {
+                    try self.managedObjectContext.save()
+                } catch {
+                    print("Unable to save Core Data state")
+                    return
+                }
+            })
+            
+            exercises.removeAtIndex(indexPath.row)
+             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+            tableView.reloadData()
+        }
+    }
     
     // MARK: TableView Delegate
     override func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
         
     }
+    
     
     // MARK: SavedExerciseDetail Delegate
     func stopButtonWasPressed() {
