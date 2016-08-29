@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ExerciseDetailTableViewController: BasicTableViewController, EditExerciseTableViewControllerDelegate, AddToSavedExerciseListTableViewCellDelegate {
+class ExerciseDetailTableViewController: AdjustableTableViewController, EditExerciseTableViewControllerDelegate, AddToSavedExerciseListTableViewCellDelegate {
     
     var bodyPart: BodyPart!
     var exercise: Exercise!
@@ -98,8 +98,9 @@ class ExerciseDetailTableViewController: BasicTableViewController, EditExerciseT
     func fetchSavedExerciseLists() -> [SavedExerciseList]? {
         let entityName = "SavedExerciseList"
         let sortingKey = "name"
+        let predicate = NSPredicate(format: "name CONTAINS[c] %@", "My Exercise List")
         let sortDescriptors = [NSSortDescriptor(key: sortingKey, ascending: false)]
-        let fetchRequest = getFetchRequest(withEntityName: entityName, withSortDescriptors: sortDescriptors, andPredicate: nil)
+        let fetchRequest = getFetchRequest(withEntityName: entityName, withSortDescriptors: sortDescriptors, andPredicate: predicate)
         guard let objects = getObjects(withFetchRequest: fetchRequest) else {
             print("Did not recieve any objects from fetchRequest")
             return nil
@@ -124,7 +125,6 @@ class ExerciseDetailTableViewController: BasicTableViewController, EditExerciseT
         let savedExerciseLists = fetchSavedExerciseLists()
         let saveExerciseList = savedExerciseLists?.first
         saveExerciseList?.exercises.insert(exercise)
-        saveCoreDataState()
     }
     
     // MARK: - Segues -

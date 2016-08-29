@@ -16,4 +16,5 @@ class Exercise: NSManagedObject {
     @NSManaged var reps: Int16 // Number of times exercise is performed
     @NSManaged var time: Int16 // Time it takes to do the exercise in seconds
     @NSManaged var instructions: String
+    @NSManaged var savedExerciseList: SavedExerciseList
 }

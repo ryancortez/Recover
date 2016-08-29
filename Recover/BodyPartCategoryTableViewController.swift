@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class BodyPartCategoryTableViewController: BasicTableViewController, EditExerciseTableViewControllerDelegate {
+class BodyPartCategoryTableViewController: AdjustableTableViewController, EditExerciseTableViewControllerDelegate {
     
     var bodyParts: Array<BodyPart> = []
     
