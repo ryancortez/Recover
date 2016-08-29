@@ -46,8 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIBarButtonItem.appearanceWhenContainedInInstancesOfClasses([UIToolbar.self]).tintColor = UIColor.customGreen()
         UIButton.appearanceWhenContainedInInstancesOfClasses([UIToolbar.self]).tintColor = UIColor.customGreen()
         UIToolbar.appearance().tintColor = UIColor.customGreen()
-        
-        
+        UIStepper.appearance().tintColor = UIColor.customGreen()
     }
     
     func passContextToExerciseCatalog(fromCoreDataManager coreDataManager: CoreDataManager) {
