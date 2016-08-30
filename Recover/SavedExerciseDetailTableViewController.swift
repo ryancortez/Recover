@@ -194,10 +194,10 @@ class SavedExerciseDetailTableViewController: ExerciseDetailTableViewController,
         speak(thisText: "\(exercise.instructions)", withPreUtteranceDelay: 0.0, andPostUtterenceDelay: 0.0)
         announceReps()
         announceExerciseTime()
-        var timeInterval: NSTimeInterval = 2.0
-        if (exercise.time != 0) {
-            timeInterval = Double(exercise.time)
-        }
+        var timeInterval: NSTimeInterval = 1.0
+//        if (exercise.time != 0) {
+//            timeInterval = Double(exercise.time)
+//        }
         readyAnnouncement(withExerciseTimeInterval: timeInterval)
         countdownAnnouncement()
         if (exerciseIndex + 1 == exercises.count) {

@@ -239,11 +239,11 @@
 			isa = PBXGroup;
 			children = (
 				94C323D91D5E116F00227ACE /* BasicTableViewController.swift */,
+				94D868081D748DFE003594BF /* AdjustableTableViewController.swift */,
 				94C323E11D5E151F00227ACE /* ExerciseDetailTableViewController.swift */,
 				941BB6E81D63A8F800A8380D /* TableViewCells */,
 				94C323E31D5E155C00227ACE /* Catalog */,
 				94C323E41D5E156100227ACE /* Saved Exercises */,
-				94D868081D748DFE003594BF /* AdjustableTableViewController.swift */,
 			);
 			name = TableViewControllers;
 			sourceTree = "<group>";

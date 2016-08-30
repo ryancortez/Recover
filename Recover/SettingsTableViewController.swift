@@ -12,7 +12,7 @@ import MessageUI
 class SettingsTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
     
     var userHasTipped = true
-//    var cloudKitManager = CloudKitManager()
+    //    var cloudKitManager = CloudKitManager()
     
     override func viewDidLoad() {
         self.tableView.rowHeight = UITableViewAutomaticDimension
@@ -31,16 +31,16 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if userHasTipped {
             switch section {
-                case 0: return 1
-                case 1: return 2
-                case 2: return 2
-                default: return 0
+            case 0: return 1
+            case 1: return 2
+            case 2: return 2
+            default: return 0
             }
         } else {
             switch section {
-                case 0: return 1
-                case 1: return 2
-                default: return 0
+            case 0: return 1
+            case 1: return 2
+            default: return 0
             }
         }
     }
@@ -48,29 +48,28 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if userHasTipped {
             switch indexPath.section {
-                case 0: return tableView.dequeueReusableCellWithIdentifier("feedbackCell") ?? UITableViewCell(style: .Default, reuseIdentifier: "feedbackCell")
-                case 1: if (indexPath.row == 0) {
-                            return tableView.dequeueReusableCellWithIdentifier("backupCell") ?? UITableViewCell(style: .Default, reuseIdentifier: "backupCell")
-                        } else {
-                            return tableView.dequeueReusableCellWithIdentifier("replaceListsCell") ?? UITableViewCell(style: .Default, reuseIdentifier: "replaceListsCell")
-                        }
-                    
-                case 2: if (indexPath.row == 0) {
-                            return tableView.dequeueReusableCellWithIdentifier("tipCell") ?? UITableViewCell(style: .Default, reuseIdentifier: "tipCell")
-                        } else {
-                            return tableView.dequeueReusableCellWithIdentifier("restorePurchasesCell") ?? UITableViewCell(style: .Default, reuseIdentifier: "restorePurchasesCell")
-                        }
-                default: return UITableViewCell()
+            case 0: return tableView.dequeueReusableCellWithIdentifier("feedbackCell") ?? UITableViewCell(style: .Default, reuseIdentifier: "feedbackCell")
+            case 1: if (indexPath.row == 0) {
+                return tableView.dequeueReusableCellWithIdentifier("tipCell") ?? UITableViewCell(style: .Default, reuseIdentifier: "tipCell")
+            } else {
+                return tableView.dequeueReusableCellWithIdentifier("restorePurchasesCell") ?? UITableViewCell(style: .Default, reuseIdentifier: "restorePurchasesCell")
+                }
+            case 2: if (indexPath.row == 0) {
+                return tableView.dequeueReusableCellWithIdentifier("backupCell") ?? UITableViewCell(style: .Default, reuseIdentifier: "backupCell")
+            } else {
+                return tableView.dequeueReusableCellWithIdentifier("replaceListsCell") ?? UITableViewCell(style: .Default, reuseIdentifier: "replaceListsCell")
+                }
+            default: return UITableViewCell()
             }
         } else {
             switch indexPath.section {
-                case 0: return tableView.dequeueReusableCellWithIdentifier("feedbackCell") ?? UITableViewCell(style: .Default, reuseIdentifier: "feedbackCell")
-                case 1: if (indexPath.row == 0) {
-                            return tableView.dequeueReusableCellWithIdentifier("tipCell") ?? UITableViewCell(style: .Default, reuseIdentifier: "tipCell")
-                        } else {
-                            return tableView.dequeueReusableCellWithIdentifier("restorePurchasesCell") ?? UITableViewCell(style: .Default, reuseIdentifier: "restorePurchasesCell")
-                        }
-                default: return UITableViewCell()
+            case 0: return tableView.dequeueReusableCellWithIdentifier("feedbackCell") ?? UITableViewCell(style: .Default, reuseIdentifier: "feedbackCell")
+            case 1: if (indexPath.row == 0) {
+                return tableView.dequeueReusableCellWithIdentifier("tipCell") ?? UITableViewCell(style: .Default, reuseIdentifier: "tipCell")
+            } else {
+                return tableView.dequeueReusableCellWithIdentifier("restorePurchasesCell") ?? UITableViewCell(style: .Default, reuseIdentifier: "restorePurchasesCell")
+                }
+            default: return UITableViewCell()
             }
         }
     }
@@ -120,13 +119,13 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         }
     }
     @IBAction func backupToiCloudButtonPressed(sender: AnyObject) {
-//        let lists = UserDefaultsManager.fetchListsFromNSUserDefaults()
+        //        let lists = UserDefaultsManager.fetchListsFromNSUserDefaults()
         
     }
     @IBAction func replaceListsButtonPressed(sender: AnyObject) {
-//        cloudKitManager.fetchAllLists()
-//        let lists = cloudKitManager.lists
-//        print(lists)
+        //        cloudKitManager.fetchAllLists()
+        //        let lists = cloudKitManager.lists
+        //        print(lists)
     }
     @IBAction func smallTipButtonPressed(sender: AnyObject) {
     }

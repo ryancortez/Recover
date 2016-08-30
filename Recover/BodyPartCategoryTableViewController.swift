@@ -38,7 +38,7 @@ class BodyPartCategoryTableViewController: AdjustableTableViewController, EditEx
     }
     func setupNavBar() {
         if let font = UIFont(name: "Avenir-Medium", size: 17) {
-            settingsButton.setTitleTextAttributes([NSFontAttributeName: font], forState: UIControlState.Normal)
+        settingsButton.setTitleTextAttributes([NSFontAttributeName: font], forState: UIControlState.Normal)            
         }
     }
     func checkIfAppHasLaunchedBefore() {

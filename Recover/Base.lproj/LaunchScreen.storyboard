@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,12 +17,28 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JBA-Mn-AeY">
+                                <rect key="frame" x="20" y="108" width="560" height="274"/>
+                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="35"/>
+                                <state key="normal" title="Recover">
+                                    <color key="titleColor" red="0.0" green="0.75686274509999996" blue="0.4039215686" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="JBA-Mn-AeY" secondAttribute="bottom" constant="218" id="1JW-KO-jwQ"/>
+                            <constraint firstItem="JBA-Mn-AeY" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailingMargin" id="1ai-4w-IQT"/>
+                            <constraint firstItem="JBA-Mn-AeY" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" id="FXy-7L-6U6"/>
+                            <constraint firstItem="JBA-Mn-AeY" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="44" id="FvV-Au-MVL"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="Xwx-Bk-YPx"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="865" y="375"/>
         </scene>
     </scenes>
 </document>

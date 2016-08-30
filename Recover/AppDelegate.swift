@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         UIBarButtonItem.appearance().tintColor = UIColor.whiteColor()
         UITabBar.appearance().tintColor = UIColor.customGreen()
-        if let font = UIFont(name: "Avenir-Medium", size: 18) {
+        if let font = UIFont(name: "Avenir-Heavy", size: 18) {
             UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.whiteColor()]
         }
         
