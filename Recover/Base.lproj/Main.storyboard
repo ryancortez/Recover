@@ -54,7 +54,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Catalog" id="opW-KV-9LL">
                         <barButtonItem key="backBarButtonItem" title="Catalog" id="T4b-MD-TPV"/>
-                        <barButtonItem key="leftBarButtonItem" enabled="NO" title="Item" id="5am-Kl-5ef">
+                        <barButtonItem key="leftBarButtonItem" image="Settings_50" id="5am-Kl-5ef">
                             <inset key="imageInsets" minX="-7" minY="14" maxX="33" maxY="14"/>
                             <connections>
                                 <segue destination="cfg-E7-7Ey" kind="presentation" id="bqQ-0t-K9a"/>
@@ -1303,6 +1303,7 @@ If you ever feel discomfort performing an exercise please stop using Recover and
         <image name="Catalog_Highlighted" width="50" height="50"/>
         <image name="Physical Therapy Filled_50" width="50" height="50"/>
         <image name="Physical Therapy_50" width="50" height="50"/>
+        <image name="Settings_50" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="AGS-mf-Sn1"/>
