@@ -54,7 +54,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Catalog" id="opW-KV-9LL">
                         <barButtonItem key="backBarButtonItem" title="Catalog" id="T4b-MD-TPV"/>
-                        <barButtonItem key="leftBarButtonItem" image="Settings_50" id="5am-Kl-5ef">
+                        <barButtonItem key="leftBarButtonItem" enabled="NO" title="Item" id="5am-Kl-5ef">
                             <inset key="imageInsets" minX="-7" minY="14" maxX="33" maxY="14"/>
                             <connections>
                                 <segue destination="cfg-E7-7Ey" kind="presentation" id="bqQ-0t-K9a"/>
@@ -68,6 +68,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="settingsButton" destination="5am-Kl-5ef" id="3E4-fY-0ph"/>
+                        <segue destination="drV-BE-dSY" kind="presentation" identifier="disclaimer" id="zbg-Vc-zJR"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ghj-3N-Dlj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -932,6 +933,65 @@
             </objects>
             <point key="canvasLocation" x="1532" y="60"/>
         </scene>
+        <!--Disclamier View Controller-->
+        <scene sceneID="P02-B2-Sb4">
+            <objects>
+                <viewController id="XUm-A1-s9n" customClass="DisclamierViewController" customModule="Recover" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="f1h-Nw-y4Z"/>
+                        <viewControllerLayoutGuide type="bottom" id="9fo-ZA-JNR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hG4-4I-PbM">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NR7-oJ-qO4">
+                                <rect key="frame" x="20" y="64" width="560" height="427.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">This app, Recover, helps you perform your physical therapy sessions more easily. It offers no expert medical advice or opinions. 
+
+If you ever feel discomfort performing an exercise please stop using Recover and seek attention from a medical professional.</string>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gbi-hf-eFx">
+                                <rect key="frame" x="20" y="499.5" width="560" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="80" id="Bfx-BZ-dBY"/>
+                                </constraints>
+                                <color key="tintColor" red="0.0" green="0.75686274509999996" blue="0.4039215686" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="I acknowledge that I've read what is written above">
+                                            <attributes>
+                                                <font key="NSFont" size="17" name="Avenir-Medium"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <action selector="agreeButton:" destination="XUm-A1-s9n" eventType="touchUpInside" id="34h-f6-0p0"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="NR7-oJ-qO4" firstAttribute="leading" secondItem="Gbi-hf-eFx" secondAttribute="leading" id="1lX-T5-7SO"/>
+                            <constraint firstItem="Gbi-hf-eFx" firstAttribute="top" secondItem="NR7-oJ-qO4" secondAttribute="bottom" constant="8" symbolic="YES" id="6t4-G1-2Pc"/>
+                            <constraint firstItem="NR7-oJ-qO4" firstAttribute="top" secondItem="f1h-Nw-y4Z" secondAttribute="bottom" id="9dr-F7-87m"/>
+                            <constraint firstAttribute="bottom" secondItem="Gbi-hf-eFx" secondAttribute="bottom" constant="20" symbolic="YES" id="MGj-07-qW8"/>
+                            <constraint firstItem="NR7-oJ-qO4" firstAttribute="trailing" secondItem="Gbi-hf-eFx" secondAttribute="trailing" id="NVF-IP-hbU"/>
+                            <constraint firstItem="NR7-oJ-qO4" firstAttribute="leading" secondItem="hG4-4I-PbM" secondAttribute="leadingMargin" id="No5-Er-v1t"/>
+                            <constraint firstItem="NR7-oJ-qO4" firstAttribute="trailing" secondItem="hG4-4I-PbM" secondAttribute="trailingMargin" id="wXa-h5-c0p"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="cGT-iV-aun"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u2M-sZ-u9c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="827" y="-1544"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="JC9-aV-ya5">
             <objects>
@@ -1219,13 +1279,30 @@
             </objects>
             <point key="canvasLocation" x="1350" y="768"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ga1-Dg-ncO">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="drV-BE-dSY" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hDc-gw-gCS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="XUm-A1-s9n" kind="relationship" relationship="rootViewController" id="5u3-Zh-CLb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jns-js-0fc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-6" y="-1544"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Catalog" width="50" height="50"/>
         <image name="Catalog_Highlighted" width="50" height="50"/>
         <image name="Physical Therapy Filled_50" width="50" height="50"/>
         <image name="Physical Therapy_50" width="50" height="50"/>
-        <image name="Settings_50" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="AGS-mf-Sn1"/>

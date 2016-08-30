@@ -32,6 +32,7 @@
 		949AC22B1D5D69DD0029328B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 949AC2291D5D69DD0029328B /* LaunchScreen.storyboard */; };
 		949AC2361D5D69DD0029328B /* RecoverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949AC2351D5D69DD0029328B /* RecoverTests.swift */; };
 		949AC2411D5D69DE0029328B /* RecoverUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949AC2401D5D69DE0029328B /* RecoverUITests.swift */; };
+		949B43DF1D7612D600992D50 /* DisclamierViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949B43DE1D7612D600992D50 /* DisclamierViewController.swift */; };
 		94C323DA1D5E116F00227ACE /* BasicTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C323D91D5E116F00227ACE /* BasicTableViewController.swift */; };
 		94C323DE1D5E146600227ACE /* BodyPartCategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C323DD1D5E146600227ACE /* BodyPartCategoryTableViewController.swift */; };
 		94C323E01D5E149F00227ACE /* ExerciseListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C323DF1D5E149F00227ACE /* ExerciseListTableViewController.swift */; };
@@ -91,6 +92,7 @@
 		949AC23C1D5D69DE0029328B /* RecoverUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecoverUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		949AC2401D5D69DE0029328B /* RecoverUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoverUITests.swift; sourceTree = "<group>"; };
 		949AC2421D5D69DE0029328B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		949B43DE1D7612D600992D50 /* DisclamierViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisclamierViewController.swift; sourceTree = "<group>"; };
 		94C323D91D5E116F00227ACE /* BasicTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicTableViewController.swift; sourceTree = "<group>"; };
 		94C323DD1D5E146600227ACE /* BodyPartCategoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodyPartCategoryTableViewController.swift; sourceTree = "<group>"; };
 		94C323DF1D5E149F00227ACE /* ExerciseListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseListTableViewController.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 				946737881D67952E009803E0 /* ExerciseTabViewController.swift */,
 				943270BA1D5E582B00BE2D1A /* ModalViews */,
 				94C323D81D5E10C900227ACE /* TableViewControllers */,
+				949B43DE1D7612D600992D50 /* DisclamierViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 				9467378D1D6E1471009803E0 /* UIColor+Extensions.swift in Sources */,
 				94C323E21D5E151F00227ACE /* ExerciseDetailTableViewController.swift in Sources */,
 				9467378F1D6E31BF009803E0 /* ExerciseCatalogDetailTableViewController.swift in Sources */,
+				949B43DF1D7612D600992D50 /* DisclamierViewController.swift in Sources */,
 				941BB6E21D622BBF00A8380D /* CoreDataManager.swift in Sources */,
 				941BB6EE1D63A9A800A8380D /* RepAndTimeTableViewCell.swift in Sources */,
 				94D868091D748DFE003594BF /* AdjustableTableViewController.swift in Sources */,

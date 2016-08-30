@@ -38,13 +38,15 @@ class BodyPartCategoryTableViewController: AdjustableTableViewController, EditEx
     }
     func setupNavBar() {
         if let font = UIFont(name: "Avenir-Medium", size: 17) {
-        settingsButton.setTitleTextAttributes([NSFontAttributeName: font], forState: UIControlState.Normal)            
+        settingsButton.setTitleTextAttributes([NSFontAttributeName: font], forState: UIControlState.Normal)
         }
+        settingsButton.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.clearColor()], forState: .Disabled)
     }
     func checkIfAppHasLaunchedBefore() {
         if (!NSUserDefaults.standardUserDefaults().boolForKey("hasLaunchedBefore")) {
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: "hasLaunchedBefore")
             NSUserDefaults.standardUserDefaults().synchronize()
+            displayDisclamier()
             fetchAllExercisesFromRemoteDataBase()
         }
     }
@@ -55,6 +57,10 @@ class BodyPartCategoryTableViewController: AdjustableTableViewController, EditEx
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return newImage
+    }
+    
+    func displayDisclamier() {
+        performSegueWithIdentifier("disclaimer", sender: self)
     }
     
     // MARK: - Fetch from Remote Database -

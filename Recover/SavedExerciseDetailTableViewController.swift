@@ -195,9 +195,9 @@ class SavedExerciseDetailTableViewController: ExerciseDetailTableViewController,
         announceReps()
         announceExerciseTime()
         var timeInterval: NSTimeInterval = 1.0
-//        if (exercise.time != 0) {
-//            timeInterval = Double(exercise.time)
-//        }
+        if (exercise.time != 0) {
+            timeInterval = Double(exercise.time)
+        }
         readyAnnouncement(withExerciseTimeInterval: timeInterval)
         countdownAnnouncement()
         if (exerciseIndex + 1 == exercises.count) {
