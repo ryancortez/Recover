@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		941BB6E01D6224AE00A8380D /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941BB6DF1D6224AE00A8380D /* Exercise.swift */; };
-		941BB6E21D622BBF00A8380D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941BB6E11D622BBF00A8380D /* CoreDataManager.swift */; };
 		941BB6E51D62333D00A8380D /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 941BB6E31D62333D00A8380D /* Model.xcdatamodeld */; };
 		941BB6E71D63859D00A8380D /* ExerciseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941BB6E61D63859D00A8380D /* ExerciseViewModel.swift */; };
 		941BB6EA1D63A91E00A8380D /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941BB6E91D63A91E00A8380D /* TitleTableViewCell.swift */; };
@@ -40,6 +39,7 @@
 		94C323E61D5E177500227ACE /* SavedExerciseListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C323E51D5E177500227ACE /* SavedExerciseListTableViewController.swift */; };
 		94C323E81D5E18BD00227ACE /* SavedExerciseDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C323E71D5E18BD00227ACE /* SavedExerciseDetailTableViewController.swift */; };
 		94C4BEF91D660F51004F4E5B /* BodyPart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C4BEF81D660F51004F4E5B /* BodyPart.swift */; };
+		94D7B4771D767CDF0087534C /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D7B4761D767CDF0087534C /* CoreDataManager.swift */; };
 		94D868091D748DFE003594BF /* AdjustableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D868081D748DFE003594BF /* AdjustableTableViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -62,7 +62,6 @@
 
 /* Begin PBXFileReference section */
 		941BB6DF1D6224AE00A8380D /* Exercise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
-		941BB6E11D622BBF00A8380D /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataManager.swift; path = ../../GroceryList/GroceryList/CoreDataManager.swift; sourceTree = "<group>"; };
 		941BB6E41D62333D00A8380D /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		941BB6E61D63859D00A8380D /* ExerciseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseViewModel.swift; sourceTree = "<group>"; };
 		941BB6E91D63A91E00A8380D /* TitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
@@ -100,6 +99,7 @@
 		94C323E51D5E177500227ACE /* SavedExerciseListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedExerciseListTableViewController.swift; sourceTree = "<group>"; };
 		94C323E71D5E18BD00227ACE /* SavedExerciseDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedExerciseDetailTableViewController.swift; sourceTree = "<group>"; };
 		94C4BEF81D660F51004F4E5B /* BodyPart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodyPart.swift; sourceTree = "<group>"; };
+		94D7B4761D767CDF0087534C /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		94D868081D748DFE003594BF /* AdjustableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdjustableTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -208,7 +208,7 @@
 				94C4BEF81D660F51004F4E5B /* BodyPart.swift */,
 				946737851D6758CE009803E0 /* SavedExerciseList.swift */,
 				941BB6E61D63859D00A8380D /* ExerciseViewModel.swift */,
-				941BB6E11D622BBF00A8380D /* CoreDataManager.swift */,
+				94D7B4761D767CDF0087534C /* CoreDataManager.swift */,
 				943270BF1D5E5AC900BE2D1A /* CloudKitManager.swift */,
 				943270C01D5E5AC900BE2D1A /* UserDefaultsManager.swift */,
 				9467378C1D6E1471009803E0 /* UIColor+Extensions.swift */,
@@ -408,7 +408,6 @@
 				94C323E21D5E151F00227ACE /* ExerciseDetailTableViewController.swift in Sources */,
 				9467378F1D6E31BF009803E0 /* ExerciseCatalogDetailTableViewController.swift in Sources */,
 				949B43DF1D7612D600992D50 /* DisclamierViewController.swift in Sources */,
-				941BB6E21D622BBF00A8380D /* CoreDataManager.swift in Sources */,
 				941BB6EE1D63A9A800A8380D /* RepAndTimeTableViewCell.swift in Sources */,
 				94D868091D748DFE003594BF /* AdjustableTableViewController.swift in Sources */,
 				9467378B1D6B6E17009803E0 /* SavedExerciseTableViewCell.swift in Sources */,
@@ -427,6 +426,7 @@
 				94C323E01D5E149F00227ACE /* ExerciseListTableViewController.swift in Sources */,
 				941BB6E71D63859D00A8380D /* ExerciseViewModel.swift in Sources */,
 				94475E3D1D5EB7BB00D919C4 /* SettingsTableViewController.swift in Sources */,
+				94D7B4771D767CDF0087534C /* CoreDataManager.swift in Sources */,
 				94C323E61D5E177500227ACE /* SavedExerciseListTableViewController.swift in Sources */,
 				941BB6EA1D63A91E00A8380D /* TitleTableViewCell.swift in Sources */,
 				941BB6F01D63A9B700A8380D /* DescriptionTableViewCell.swift in Sources */,
@@ -573,6 +573,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Recover/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ryancortez.Recover;
@@ -584,6 +585,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Recover/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ryancortez.Recover;
