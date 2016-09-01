@@ -1,0 +1,24 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "3AB667C4D38757EF192569A111EAD2E123355717",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "6F822EC3837B68113DA1A424673BEBA3532F0CA5" : 0,
+    "3AB667C4D38757EF192569A111EAD2E123355717" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "A9956723-5ED1-49C5-9D0F-49A52600E7B9",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "3AB667C4D38757EF192569A111EAD2E123355717" : "Recover\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Recover",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Recover.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/ryancortez\/Recover.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "3AB667C4D38757EF192569A111EAD2E123355717"
+    }
+  ]
+}
