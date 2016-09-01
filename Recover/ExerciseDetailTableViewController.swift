@@ -36,6 +36,7 @@ class ExerciseDetailTableViewController: AdjustableTableViewController, EditExer
     func setupUI() {
         setupNavBar()
         setupTableView()
+        setupImageView()
     }
     func setupNavBar() {
         self.title = ""
@@ -47,6 +48,10 @@ class ExerciseDetailTableViewController: AdjustableTableViewController, EditExer
         tableView.estimatedRowHeight = 44
         setupAddToSavedListCell()
         refreshTableViewData()
+    }
+    func setupImageView() {
+//        imageView.layer.cornerRadius = 20.0
+//        imageView.layer.masksToBounds = true
     }
     func refreshTableViewData() {
         if (exerciseTitle != nil) {
@@ -124,7 +129,16 @@ class ExerciseDetailTableViewController: AdjustableTableViewController, EditExer
     func addToSavedExerciseListButtonPressed() {
         let savedExerciseLists = fetchSavedExerciseLists()
         let saveExerciseList = savedExerciseLists?.first
-        saveExerciseList?.exercises.insert(exercise)
+        guard let exerciseCopy = NSEntityDescription.insertNewObjectForEntityForName("Exercise", inManagedObjectContext: self.managedObjectContext) as? Exercise else {
+            print("Could not insert new exercise into CoreData"); return
+        }
+        exerciseCopy.name = exercise.name
+        exerciseCopy.image = exercise.image
+        exerciseCopy.reps = exercise.reps
+        exerciseCopy.time = exercise.time
+        exerciseCopy.instructions = exercise.instructions
+        
+        saveExerciseList?.exercises.insert(exerciseCopy)
         saveCoreDataState()
     }
     
