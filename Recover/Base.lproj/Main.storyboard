@@ -492,7 +492,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="214.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g4g-0X-8Tg">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g4g-0X-8Tg">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="214.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="lessThanOrEqual" priority="999" constant="200" id="mah-ec-mPC"/>

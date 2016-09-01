@@ -37,6 +37,14 @@ class SavedExerciseListTableViewController: AdjustableTableViewController, Saved
         }
         fetchExercises(fromSavedExercise: savedExerciseList)
     }
+    func savePersistentListOrder() {
+        var count: Int16 = 0
+        for exercise in exercises {
+            exercise.savedExerciseListIndex = count
+            count += 1
+        }
+        saveCoreDataState()
+    }
     func setButtonStates() {
         setPreviousExerciseButtonState()
         setStartButtonState()
@@ -116,7 +124,14 @@ class SavedExerciseListTableViewController: AdjustableTableViewController, Saved
         return savedExerciseList
     }
     func fetchExercises(fromSavedExercise savedExerciseList: SavedExerciseList) {
-        exercises = Array(savedExerciseList.exercises)
+        let unsortedExercises = Array(savedExerciseList.exercises)
+        
+        let sortedArray = unsortedExercises.sort { (element1, element2) -> Bool in
+            return element1.savedExerciseListIndex < element2.savedExerciseListIndex
+        }
+        exercises = sortedArray
+        savePersistentListOrder()
+        saveCoreDataState()
         tableView.reloadData()
     }
     
@@ -140,17 +155,10 @@ class SavedExerciseListTableViewController: AdjustableTableViewController, Saved
     }
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if (editingStyle == .Delete) {
-            
-            let exercise = exercises[indexPath.row]
-            managedObjectContext.deleteObject(exercise)
-            
-            do {
-                try self.managedObjectContext.save()
-            } catch {
-                print("Unable to save Core Data state")
-                return
-            }
+            managedObjectContext.deleteObject(exercises[indexPath.row])
             exercises.removeAtIndex(indexPath.row)
+            savePersistentListOrder()
+            saveCoreDataState()
              tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
             tableView.reloadData()
         }
@@ -165,6 +173,8 @@ class SavedExerciseListTableViewController: AdjustableTableViewController, Saved
         let exercise = exercises[sourceIndexPath.row]
         exercises.removeAtIndex(sourceIndexPath.row)
         exercises.insert(exercise, atIndex: destinationIndexPath.row)
+        savePersistentListOrder()
+        saveCoreDataState()
     }
     
     // MARK: SavedExerciseDetail Delegate
