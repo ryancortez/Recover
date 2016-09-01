@@ -9,6 +9,7 @@
         <attribute name="instructions" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="reps" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="savedExerciseListIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="time" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="bodyPart" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BodyPart" inverseName="exercises" inverseEntity="BodyPart" syncable="YES"/>
         <relationship name="savedExerciseList" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SavedExerciseList" inverseName="exercises" inverseEntity="SavedExerciseList" syncable="YES"/>
@@ -19,7 +20,7 @@
     </entity>
     <elements>
         <element name="BodyPart" positionX="-110" positionY="258" width="128" height="75"/>
-        <element name="Exercise" positionX="-63" positionY="-18" width="128" height="150"/>
+        <element name="Exercise" positionX="-63" positionY="-18" width="128" height="165"/>
         <element name="SavedExerciseList" positionX="-90" positionY="135" width="128" height="75"/>
     </elements>
 </model>

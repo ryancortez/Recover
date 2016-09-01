@@ -150,19 +150,22 @@ class SavedExerciseListTableViewController: AdjustableTableViewController, Saved
                 print("Unable to save Core Data state")
                 return
             }
-
-            
             exercises.removeAtIndex(indexPath.row)
              tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
             tableView.reloadData()
+        }
+        if (editingStyle == .Insert) {
+            
         }
     }
     
     // MARK: TableView Delegate
     override func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
         
+        let exercise = exercises[sourceIndexPath.row]
+        exercises.removeAtIndex(sourceIndexPath.row)
+        exercises.insert(exercise, atIndex: destinationIndexPath.row)
     }
-    
     
     // MARK: SavedExerciseDetail Delegate
     func stopButtonWasPressed() {

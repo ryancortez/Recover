@@ -36,6 +36,7 @@ class ExerciseDetailTableViewController: AdjustableTableViewController, EditExer
     func setupUI() {
         setupNavBar()
         setupTableView()
+        setupImageView()
     }
     func setupNavBar() {
         self.title = ""
@@ -47,6 +48,10 @@ class ExerciseDetailTableViewController: AdjustableTableViewController, EditExer
         tableView.estimatedRowHeight = 44
         setupAddToSavedListCell()
         refreshTableViewData()
+    }
+    func setupImageView() {
+//        imageView.layer.cornerRadius = 20.0
+//        imageView.layer.masksToBounds = true
     }
     func refreshTableViewData() {
         if (exerciseTitle != nil) {

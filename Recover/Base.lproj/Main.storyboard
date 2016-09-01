@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -55,7 +55,7 @@
                     <navigationItem key="navigationItem" title="Catalog" id="opW-KV-9LL">
                         <barButtonItem key="backBarButtonItem" title="Catalog" id="T4b-MD-TPV"/>
                         <barButtonItem key="leftBarButtonItem" image="Settings_50" id="5am-Kl-5ef">
-                            <inset key="imageInsets" minX="-7" minY="14" maxX="33" maxY="14"/>
+                            <inset key="imageInsets" minX="2" minY="14" maxX="25" maxY="14"/>
                             <connections>
                                 <segue destination="cfg-E7-7Ey" kind="presentation" id="bqQ-0t-K9a"/>
                             </connections>
@@ -84,18 +84,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="SavedExerciseCell" rowHeight="87" id="tQh-Xg-L0t" customClass="SavedExerciseTableViewCell" customModule="Recover" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SavedExerciseCell" rowHeight="87" id="tQh-Xg-L0t" customClass="SavedExerciseTableViewCell" customModule="Recover" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="320" height="87"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tQh-Xg-L0t" id="NSV-BS-OtL">
-                                    <rect key="frame" x="0.0" y="0.0" width="287" height="86.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="86.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1SB-lo-48s">
-                                            <rect key="frame" x="16" y="24" width="263" height="38.5"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1SB-lo-48s">
+                                            <rect key="frame" x="16" y="24" width="296" height="39"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Exercise Name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XuF-Hu-E2M">
-                                                    <rect key="frame" x="0.0" y="0.0" width="263" height="38.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Exercise Name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XuF-Hu-E2M">
+                                                    <rect key="frame" x="0.0" y="0.0" width="296" height="39"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -492,7 +492,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="214.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g4g-0X-8Tg">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g4g-0X-8Tg">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="214.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="lessThanOrEqual" priority="999" constant="200" id="mah-ec-mPC"/>
@@ -1059,16 +1059,16 @@ If you ever feel discomfort performing an exercise please stop using Recover and
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Add Exercise Title" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="nbl-lz-PjP">
-                                                    <rect key="frame" x="16" y="8" width="584" height="27.5"/>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Add Exercise Title" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="nbl-lz-PjP">
+                                                    <rect key="frame" x="16" y="8" width="296" height="27.5"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="18"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="nbl-lz-PjP" firstAttribute="top" secondItem="Adc-V0-Hjn" secondAttribute="topMargin" id="HAK-Wk-0RA"/>
                                                 <constraint firstItem="nbl-lz-PjP" firstAttribute="leading" secondItem="Adc-V0-Hjn" secondAttribute="leadingMargin" constant="8" id="Iij-54-vk6"/>
-                                                <constraint firstItem="nbl-lz-PjP" firstAttribute="trailing" secondItem="Adc-V0-Hjn" secondAttribute="trailingMargin" constant="8" id="Q6k-mS-iS3"/>
+                                                <constraint firstItem="nbl-lz-PjP" firstAttribute="trailing" secondItem="Adc-V0-Hjn" secondAttribute="trailingMargin" id="Q6k-mS-iS3"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="nbl-lz-PjP" secondAttribute="bottom" id="srC-sF-kGn"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1083,7 +1083,7 @@ If you ever feel discomfort performing an exercise please stop using Recover and
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Add Exercise Category" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BS7-Wh-zYR">
                                                     <rect key="frame" x="16" y="8" width="296" height="33.5"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="18"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -1101,8 +1101,8 @@ If you ever feel discomfort performing an exercise please stop using Recover and
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="201.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" text="Add Exercise Instructions" translatesAutoresizingMaskIntoConstraints="NO" id="8GK-dO-zyM">
-                                                    <rect key="frame" x="14" y="8" width="293" height="185.5"/>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Add Exercise Instructions" translatesAutoresizingMaskIntoConstraints="NO" id="8GK-dO-zyM">
+                                                    <rect key="frame" x="11" y="8" width="301" height="185.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="textColor" red="0.73333333329999995" green="0.72941176470000002" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="18"/>
@@ -1113,7 +1113,7 @@ If you ever feel discomfort performing an exercise please stop using Recover and
                                                 <constraint firstItem="8GK-dO-zyM" firstAttribute="leading" secondItem="6ju-jr-TrN" secondAttribute="leadingMargin" constant="3" id="4LN-1V-UNd"/>
                                                 <constraint firstItem="8GK-dO-zyM" firstAttribute="top" secondItem="6ju-jr-TrN" secondAttribute="topMargin" id="O34-a9-vRG"/>
                                                 <constraint firstItem="8GK-dO-zyM" firstAttribute="bottom" secondItem="6ju-jr-TrN" secondAttribute="bottomMargin" id="nED-Cm-YFr"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="8GK-dO-zyM" secondAttribute="trailing" constant="8" id="zMM-4E-lMl"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="8GK-dO-zyM" secondAttribute="trailing" id="zMM-4E-lMl"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1307,6 +1307,6 @@ If you ever feel discomfort performing an exercise please stop using Recover and
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="AGS-mf-Sn1"/>
-        <segue reference="Ong-vP-K06"/>
+        <segue reference="p8e-h6-qWC"/>
     </inferredMetricsTieBreakers>
 </document>

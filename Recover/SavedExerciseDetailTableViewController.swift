@@ -160,18 +160,11 @@ class SavedExerciseDetailTableViewController: ExerciseDetailTableViewController,
         speechSynthesizer.delegate = self
     }
     func speak(thisText text: String, withPreUtteranceDelay preUtteranceDelay: NSTimeInterval?, andPostUtterenceDelay postUtterenceDelay: NSTimeInterval?) {
-        let speakUtterence = AVSpeechUtterance(string: text)
-        if (preUtteranceDelay != nil) {
-            speakUtterence.preUtteranceDelay = preUtteranceDelay!
-        }
-        if (postUtterenceDelay != nil) {
-            speakUtterence.postUtteranceDelay = postUtterenceDelay!
-        }
-        speakUtterence.rate = 0.43
-        speechSynthesizer.speakUtterance(speakUtterence)
+        speak(thisText: text, withPreUtteranceDelay: preUtteranceDelay, andPostUtterenceDelay: postUtterenceDelay, withSpeakingRate: 0.43)
     }
     func speak(thisText text: String, withPreUtteranceDelay preUtteranceDelay: NSTimeInterval?, andPostUtterenceDelay postUtterenceDelay: NSTimeInterval?, withSpeakingRate rate: Float) {
         let speakUtterence = AVSpeechUtterance(string: text)
+
         if (preUtteranceDelay != nil) {
             speakUtterence.preUtteranceDelay = preUtteranceDelay!
         }
