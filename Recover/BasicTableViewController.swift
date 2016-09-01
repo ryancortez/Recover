@@ -97,7 +97,6 @@ class BasicTableViewController: UITableViewController, NSFetchedResultsControlle
         }
         let bodyPart = newExerciseData.bodyPart
         bodyPart.exercises.insert(currentExercise)
-        ç
         saveCoreDataState()
         tableView.reloadData()
     }
