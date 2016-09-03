@@ -30,6 +30,12 @@ class BodyPartCategoryTableViewController: AdjustableTableViewController, EditEx
     override func viewWillAppear(animated: Bool) {
         tableView.reloadData()
     }
+    override func prefersStatusBarHidden() -> Bool {
+        return false
+    }
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
+    }
     func setupTabBar() {
         guard let image = UIImage(contentsOfFile: "Catalog") else {
             return

@@ -14,7 +14,7 @@ protocol EditExerciseTableViewControllerDelegate {
     func edit(currentExercise currentExercise: Exercise, withNewExerciseData newExerciseData: ExerciseViewModel)
 }
 
-class EditExerciseTableViewController: BasicTableViewController, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+class EditExerciseTableViewController: BasicTableViewController, UITextViewDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     // MARK: - Global Variables
     var bodyPart: BodyPart!
@@ -38,7 +38,6 @@ class EditExerciseTableViewController: BasicTableViewController, UITextViewDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        setupImagePicker()
     }
     func setupUI() {
         setupNavBar()
@@ -46,6 +45,7 @@ class EditExerciseTableViewController: BasicTableViewController, UITextViewDeleg
         setupInstructions()
         setupSteppers()
         setupBodyPartTextField()
+        setupImagePicker()
     }
     func setupNavBar() {
         if (exercise != nil) {
@@ -55,6 +55,7 @@ class EditExerciseTableViewController: BasicTableViewController, UITextViewDeleg
         }
     }
     func setupTitle() {
+        exerciseTitle.delegate = self
         if (exercise != nil) {
             exerciseTitle.text = exercise.name
         }
@@ -67,6 +68,7 @@ class EditExerciseTableViewController: BasicTableViewController, UITextViewDeleg
         }
     }
     func setupBodyPartTextField() {
+        bodyPartTextField.delegate = self
         if (bodyPart != nil) {
             bodyPartTextField.text = bodyPart.name
             bodyPartTextField.enabled = false
@@ -146,6 +148,17 @@ class EditExerciseTableViewController: BasicTableViewController, UITextViewDeleg
             textView.text = ""
             textView.textColor = UIColor.blackColor()
         }
+    }
+    
+    // MARK: - Textfield Delegate - 
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if (textField == exerciseTitle) {
+            bodyPartTextField.becomeFirstResponder()
+        }
+        if (textField == bodyPartTextField) {
+            exerciseInstructions.becomeFirstResponder()
+        }
+        return false
     }
     
     // MARK: - Image Picker Delegate -
