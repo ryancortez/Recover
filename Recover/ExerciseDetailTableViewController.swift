@@ -73,6 +73,11 @@ class ExerciseDetailTableViewController: AdjustableTableViewController, EditExer
                 timeLabel.text = "\(exercise.time) sec"
             }
         }
+        if (exercise.sets == 0) {
+            print("exercise.sets = \(exercise.sets)")
+        } else {
+            print("exercise.sets = \(exercise.sets)")
+        }
         
         instructionsLabel.text = "\(exercise.instructions)"
         guard let image = UIImage(data: exercise.image) else {
