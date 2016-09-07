@@ -61,6 +61,9 @@ class BasicTableViewController: UITableViewController, NSFetchedResultsControlle
         if (exercise.reps != nil) {
             newExercise.setValue(NSInteger(exercise.reps!), forKey: "reps")
         }
+        if (exercise.sets != nil) {
+            newExercise.setValue(NSInteger(exercise.sets!), forKey: "sets")
+        }
         
         guard let image = exercise.image else {
             let bodyPart = exercise.bodyPart
