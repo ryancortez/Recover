@@ -125,6 +125,11 @@ class BodyPartCategoryTableViewController: AdjustableTableViewController, EditEx
                                     exerciseViewModel.reps = value
                                 }
                             }
+                            if (key == "sets") {
+                                if let value = Int16(exercisePropertyValue) {
+                                     exerciseViewModel.sets = value
+                                }
+                            }
                             if (key == "time") {
                                 if let value = Int16(exercisePropertyValue) {
                                     exerciseViewModel.time = value
