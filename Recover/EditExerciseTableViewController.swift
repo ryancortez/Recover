@@ -31,6 +31,7 @@ class EditExerciseTableViewController: BasicTableViewController, UITextViewDeleg
     @IBOutlet weak var numberOfReps: UILabel!
     @IBOutlet weak var exerciseTime: UILabel!
     @IBOutlet weak var repStepper: UIStepper!
+    @IBOutlet weak var setsStepper: UIStepper!
     @IBOutlet weak var timeStepper: UIStepper!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var numberOfSets: UILabel!
@@ -102,9 +103,19 @@ class EditExerciseTableViewController: BasicTableViewController, UITextViewDeleg
         if (exercise != nil) {
             if (exercise.reps == 0) {
                 repStepper.value = 0
-                numberOfReps.text = "0"
+                numberOfReps.text = "--"
             } else {
                 repStepper.value = Double(exercise.reps)
+            }
+        }
+    }
+    func setupSetsStepper() {
+        setsStepper.maximumValue = 99
+        
+        if (exercise != nil) {
+            if (exercise.sets == 0) {
+               setsStepper.value = 0
+                numberOfReps.text = "--"
             }
         }
     }
@@ -228,8 +239,8 @@ class EditExerciseTableViewController: BasicTableViewController, UITextViewDeleg
     @IBAction func repStepperPressed(sender: AnyObject) {
         numberOfReps.text = "\(Int(repStepper.value))"
     }
-    @IBAction func setsStepper(sender: AnyObject) {
-        
+    @IBAction func setsStepperPressed(sender: AnyObject) {
+        numberOfSets.text = "\(Int(setsStepper.value))"
     }
     @IBAction func timeStepperPressed(sender: AnyObject) {
         

@@ -1188,10 +1188,10 @@ If you ever feel discomfort performing an exercise please stop using Recover and
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="SbC-pe-nRi">
+                                                        <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="SbC-pe-nRi">
                                                             <rect key="frame" x="482" y="7" width="94" height="29"/>
                                                             <connections>
-                                                                <action selector="setsStepper:" destination="lmd-zu-Eof" eventType="valueChanged" id="TUg-Fp-oTr"/>
+                                                                <action selector="setsStepperPressed:" destination="lmd-zu-Eof" eventType="valueChanged" id="FT8-qY-EIh"/>
                                                             </connections>
                                                         </stepper>
                                                     </subviews>
@@ -1279,6 +1279,7 @@ If you ever feel discomfort performing an exercise please stop using Recover and
                         <outlet property="numberOfReps" destination="Onl-ak-RuF" id="FLD-x3-Cxt"/>
                         <outlet property="numberOfSets" destination="pzp-In-5E0" id="ttk-r2-mYP"/>
                         <outlet property="repStepper" destination="MRH-I7-ByD" id="gAr-ih-pce"/>
+                        <outlet property="setsStepper" destination="SbC-pe-nRi" id="CdP-cn-0oG"/>
                         <outlet property="timeStepper" destination="o99-4l-raW" id="M52-ZK-dYV"/>
                     </connections>
                 </tableViewController>
