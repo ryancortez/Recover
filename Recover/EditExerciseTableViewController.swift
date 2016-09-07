@@ -33,6 +33,7 @@ class EditExerciseTableViewController: BasicTableViewController, UITextViewDeleg
     @IBOutlet weak var repStepper: UIStepper!
     @IBOutlet weak var timeStepper: UIStepper!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var numberOfSets: UILabel!
     
     // MARK: - Inital Setup
     override func viewDidLoad() {
@@ -226,6 +227,9 @@ class EditExerciseTableViewController: BasicTableViewController, UITextViewDeleg
     }
     @IBAction func repStepperPressed(sender: AnyObject) {
         numberOfReps.text = "\(Int(repStepper.value))"
+    }
+    @IBAction func setsStepper(sender: AnyObject) {
+        
     }
     @IBAction func timeStepperPressed(sender: AnyObject) {
         
