@@ -13,6 +13,7 @@ class ExerciseViewModel: NSObject {
     var image: UIImage? 
     var reps: Int16? = 0 // Number of times exercise is performed
     var time: Int16? = 0 // Time it takes to do the exercise in seconds
+    var sets: Int16? = 0 // Number of reps that should be done
     var instructions: String?
     var bodyPart: BodyPart!
     
