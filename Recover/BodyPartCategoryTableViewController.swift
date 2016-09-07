@@ -105,7 +105,7 @@ class BodyPartCategoryTableViewController: AdjustableTableViewController, EditEx
                         return
                     }
                     let exerciseName = key
-                    let exerciseViewModel = ExerciseViewModel(name: exerciseName, image: nil, instructions: nil, bodyPart: bodyPart, reps: nil, time: nil)
+                    let exerciseViewModel = ExerciseViewModel(name: exerciseName, image: nil, instructions: nil, bodyPart: bodyPart, reps: nil, sets: nil, time: nil)
                     
                     for key in exerciseDictionary.keys {
                         if let exercisePropertyValue = exerciseDictionary[key] as? String {

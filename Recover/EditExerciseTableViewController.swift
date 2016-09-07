@@ -193,6 +193,7 @@ class EditExerciseTableViewController: BasicTableViewController, UITextViewDeleg
         var name: String
         var instructions: String?
         var reps: Int16?
+        var sets: Int16?
         var time: Int16?
         var image: UIImage?
         
@@ -200,14 +201,15 @@ class EditExerciseTableViewController: BasicTableViewController, UITextViewDeleg
         
         name = nameString
         instructions = exerciseInstructions.text
-        reps = Int16(numberOfReps.text!)
+        reps = Int16(repStepper.value)
+        sets = Int16(setsStepper.value)
         time = Int16(timeStepper.value)
         image = imageView.image
         
         guard let bodyPartName = bodyPartTextField.text else {
             print("Did not recieve any associated body part, fetching/creating misc BodyPart")
             let miscBodyPart = fetchMiscBodyPart()
-            let exerciseViewModel = ExerciseViewModel(name: name, image: image, instructions: instructions, bodyPart: miscBodyPart, reps: reps, time: time)
+            let exerciseViewModel = ExerciseViewModel(name: name, image: image, instructions: instructions, bodyPart: miscBodyPart, reps: reps, sets: sets, time: time)
             pass(exerciseViewModelToCoreData: exerciseViewModel)
             dismissViewControllerAnimated(true, completion: nil)
             return
@@ -215,7 +217,7 @@ class EditExerciseTableViewController: BasicTableViewController, UITextViewDeleg
         
         if (bodyPartName == "") {
             let miscBodyPart = fetchMiscBodyPart()
-            let exerciseViewModel = ExerciseViewModel(name: name, image: image, instructions: instructions, bodyPart: miscBodyPart, reps: reps, time: time)
+            let exerciseViewModel = ExerciseViewModel(name: name, image: image, instructions: instructions, bodyPart: miscBodyPart, reps: reps, sets: sets, time: time)
             pass(exerciseViewModelToCoreData: exerciseViewModel)
             dismissViewControllerAnimated(true, completion: nil)
             return
@@ -226,13 +228,13 @@ class EditExerciseTableViewController: BasicTableViewController, UITextViewDeleg
                 print("Creating newBodyPart (\(bodyPartName)) did not succeed")
                 return
             }
-            let exerciseViewModel = ExerciseViewModel(name: name, image: image, instructions: instructions, bodyPart: newBodyPart, reps: reps, time: time)
+            let exerciseViewModel = ExerciseViewModel(name: name, image: image, instructions: instructions, bodyPart: newBodyPart, reps: reps, sets: sets, time: time)
             pass(exerciseViewModelToCoreData: exerciseViewModel)
             dismissViewControllerAnimated(true, completion: nil)
             return
         }
         
-        let exerciseViewModel = ExerciseViewModel(name: name, image: image, instructions: instructions, bodyPart: fetchedBodyPart, reps: reps, time: time)
+        let exerciseViewModel = ExerciseViewModel(name: name, image: image, instructions: instructions, bodyPart: fetchedBodyPart, reps: reps, sets: sets, time: time)
         pass(exerciseViewModelToCoreData: exerciseViewModel)
         dismissViewControllerAnimated(true, completion: nil)
     }

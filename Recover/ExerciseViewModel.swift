@@ -17,10 +17,11 @@ class ExerciseViewModel: NSObject {
     var instructions: String?
     var bodyPart: BodyPart!
     
-    init(name: String, image: UIImage?, instructions: String?, bodyPart: BodyPart, reps: Int16?, time: Int16?) {
+    init(name: String, image: UIImage?, instructions: String?, bodyPart: BodyPart, reps: Int16?, sets: Int16?, time: Int16?) {
         super.init()
         self.name = name
         self.reps = reps
+        self.sets = sets
         self.time = time
         self.instructions = instructions
         self.bodyPart = bodyPart
