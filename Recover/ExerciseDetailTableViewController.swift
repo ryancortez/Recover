@@ -74,7 +74,7 @@ class ExerciseDetailTableViewController: AdjustableTableViewController, EditExer
             }
         }
         if (exercise.sets == 0) {
-            print("exercise.sets = \(exercise.sets)")
+            print("exercise.sets = \(exercise.sets)")   
         } else {
             print("exercise.sets = \(exercise.sets)")
         }
