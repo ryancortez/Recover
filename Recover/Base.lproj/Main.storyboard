@@ -450,10 +450,10 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="tH0-K3-r42" secondAttribute="trailing" constant="8" id="ZP3-8v-ZrE"/>
-                                                <constraint firstItem="Ps6-h1-EA5" firstAttribute="leading" secondItem="Uvz-4z-0bf" secondAttribute="leadingMargin" constant="16" id="ZbG-B7-ps2"/>
-                                                <constraint firstItem="Ps6-h1-EA5" firstAttribute="trailing" secondItem="Uvz-4z-0bf" secondAttribute="trailingMargin" constant="-16" id="eZZ-Kl-gFi"/>
-                                                <constraint firstItem="Ps6-h1-EA5" firstAttribute="bottom" secondItem="Uvz-4z-0bf" secondAttribute="bottomMargin" constant="-16" id="gjU-NL-IlV"/>
-                                                <constraint firstItem="Ps6-h1-EA5" firstAttribute="top" secondItem="tH0-K3-r42" secondAttribute="bottom" constant="16" id="kUB-na-Opz"/>
+                                                <constraint firstItem="Ps6-h1-EA5" firstAttribute="leading" secondItem="Uvz-4z-0bf" secondAttribute="leadingMargin" priority="750" constant="16" id="ZbG-B7-ps2"/>
+                                                <constraint firstItem="Ps6-h1-EA5" firstAttribute="trailing" secondItem="Uvz-4z-0bf" secondAttribute="trailingMargin" priority="750" constant="-16" id="eZZ-Kl-gFi"/>
+                                                <constraint firstItem="Ps6-h1-EA5" firstAttribute="bottom" secondItem="Uvz-4z-0bf" secondAttribute="bottomMargin" priority="750" constant="-16" id="gjU-NL-IlV"/>
+                                                <constraint firstItem="Ps6-h1-EA5" firstAttribute="top" secondItem="tH0-K3-r42" secondAttribute="bottom" priority="750" constant="16" id="kUB-na-Opz"/>
                                                 <constraint firstItem="tH0-K3-r42" firstAttribute="leading" secondItem="Uvz-4z-0bf" secondAttribute="leadingMargin" constant="8" id="nut-ra-qV4"/>
                                                 <constraint firstItem="tH0-K3-r42" firstAttribute="top" secondItem="Uvz-4z-0bf" secondAttribute="topMargin" constant="8" id="x4l-OK-0kl"/>
                                             </constraints>
@@ -605,13 +605,13 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Fds-3x-V9U">
                                                             <rect key="frame" x="195" y="0.0" width="195" height="33"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Sets" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Edl-Ew-61q">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Sets" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Edl-Ew-61q">
                                                                     <rect key="frame" x="0.0" y="0.0" width="195" height="11"/>
                                                                     <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="16"/>
                                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DM0-2r-OhF">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DM0-2r-OhF">
                                                                     <rect key="frame" x="0.0" y="11" width="195" height="22"/>
                                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
                                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>

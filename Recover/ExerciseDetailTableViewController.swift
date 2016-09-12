@@ -13,6 +13,12 @@ class ExerciseDetailTableViewController: AdjustableTableViewController, EditExer
     
     var bodyPart: BodyPart!
     var exercise: Exercise!
+    var hideImageCell = false
+    var hideRepsandTimeCell = false
+    var hideInstructionCell = false
+    var hideReps = false
+    var hideTime = false
+    var hideSets = false
     
     // MARK: - Outlets -
     
@@ -45,7 +51,6 @@ class ExerciseDetailTableViewController: AdjustableTableViewController, EditExer
     override func setupTableView() {
         super.setupTableView()
         self.tableView.contentInset = UIEdgeInsetsMake(-36, 0, 0, 0)
-        tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
         setupAddToSavedListCell()
         refreshTableViewData()
@@ -59,6 +64,9 @@ class ExerciseDetailTableViewController: AdjustableTableViewController, EditExer
         setReps()
         setTime()
         setSets()
+        if (hideReps && hideSets && hideTime) {
+            hideRepsandTimeCell = true
+        }
         setInstuctions()
         setImage()
     }
@@ -71,6 +79,7 @@ class ExerciseDetailTableViewController: AdjustableTableViewController, EditExer
     }
     func setReps() {
         if (exercise.reps == 0) {
+            hideReps = true
             repLabel.text = "--"
         } else {
             repLabel.text = "\(exercise.reps)"
@@ -81,6 +90,7 @@ class ExerciseDetailTableViewController: AdjustableTableViewController, EditExer
             timeLabel.text = "\(exercise.time / 60) min"
         } else {
             if (exercise.time == 0) {
+                hideTime = true
                 timeLabel.text = "--"
             } else {
                 timeLabel.text = "\(exercise.time) sec"
@@ -89,16 +99,22 @@ class ExerciseDetailTableViewController: AdjustableTableViewController, EditExer
     }
     func setSets() {
         if (exercise.sets == 0) {
+            hideSets = true
             setsLabel.text = "--"
         } else {
             setsLabel.text = "\(exercise.sets)"
         }
     }
     func setInstuctions() {
-        instructionsLabel.text = "\(exercise.instructions)"
+        if (exercise.instructions != "") {
+            instructionsLabel.text = "\(exercise.instructions)"
+        } else {
+            hideInstructionCell = true
+        }
     }
     func setImage() {
         guard let image = UIImage(data: exercise.image) else {
+            hideImageCell = true
             return
         }
         imageView.image = image
@@ -144,6 +160,17 @@ class ExerciseDetailTableViewController: AdjustableTableViewController, EditExer
     // MARK: - TableView -
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        
+        if (indexPath.row == 0 && hideImageCell) {
+            return 0
+        }
+        if (indexPath.row == 2 && hideRepsandTimeCell) {
+            return 0
+        }
+        if (indexPath.row == 4 && hideInstructionCell) {
+            return 0
+        }
+        
         return UITableViewAutomaticDimension
     }
     
