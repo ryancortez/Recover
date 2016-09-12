@@ -21,6 +21,7 @@ class ExerciseDetailTableViewController: AdjustableTableViewController, EditExer
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var repLabel: UILabel!
     @IBOutlet weak var instructionsLabel: UILabel!
+    @IBOutlet weak var setsLabel: UILabel!
     
     @IBOutlet weak var titleCell: TitleTableViewCell!
     @IBOutlet weak var imageCell: ImageTableViewCell!
@@ -54,16 +55,28 @@ class ExerciseDetailTableViewController: AdjustableTableViewController, EditExer
 //        imageView.layer.masksToBounds = true
     }
     func refreshTableViewData() {
+        setTitle()
+        setReps()
+        setTime()
+        setSets()
+        setInstuctions()
+        setImage()
+    }
+    
+    // MARK: Refreshing Table View Data
+    func setTitle() {
         if (exerciseTitle != nil) {
             exerciseTitle.text = exercise.name
         }
-
+    }
+    func setReps() {
         if (exercise.reps == 0) {
             repLabel.text = "--"
         } else {
             repLabel.text = "\(exercise.reps)"
         }
-        
+    }
+    func setTime() {
         if (exercise.time >= 60) {
             timeLabel.text = "\(exercise.time / 60) min"
         } else {
@@ -73,18 +86,24 @@ class ExerciseDetailTableViewController: AdjustableTableViewController, EditExer
                 timeLabel.text = "\(exercise.time) sec"
             }
         }
+    }
+    func setSets() {
         if (exercise.sets == 0) {
-            print("exercise.sets = \(exercise.sets)")   
+            setsLabel.text = "--"
         } else {
-            print("exercise.sets = \(exercise.sets)")
+            setsLabel.text = "\(exercise.sets)"
         }
-        
+    }
+    func setInstuctions() {
         instructionsLabel.text = "\(exercise.instructions)"
+    }
+    func setImage() {
         guard let image = UIImage(data: exercise.image) else {
             return
         }
         imageView.image = image
     }
+    
     func setupAddToSavedListCell() {
         if (addToSavedExerciseListCell != nil) {
             addToSavedExerciseListCell.delegate = self
