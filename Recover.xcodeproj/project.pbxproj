@@ -39,8 +39,8 @@
 		94C323E81D5E18BD00227ACE /* SavedExerciseDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C323E71D5E18BD00227ACE /* SavedExerciseDetailTableViewController.swift */; };
 		94C4BEF91D660F51004F4E5B /* BodyPart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C4BEF81D660F51004F4E5B /* BodyPart.swift */; };
 		94D868091D748DFE003594BF /* AdjustableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D868081D748DFE003594BF /* AdjustableTableViewController.swift */; };
-		94E4AEE01D84C09600890FDE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E4AEDF1D84C09600890FDE /* AppDelegate.swift */; };
 		94E4AEE21D84C0FB00890FDE /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E4AEE11D84C0FB00890FDE /* CoreDataManager.swift */; };
+		94E4AEE41D871EDE00890FDE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E4AEE31D871EDE00890FDE /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,8 +99,8 @@
 		94C323E71D5E18BD00227ACE /* SavedExerciseDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedExerciseDetailTableViewController.swift; sourceTree = "<group>"; };
 		94C4BEF81D660F51004F4E5B /* BodyPart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodyPart.swift; sourceTree = "<group>"; };
 		94D868081D748DFE003594BF /* AdjustableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdjustableTableViewController.swift; sourceTree = "<group>"; };
-		94E4AEDF1D84C09600890FDE /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94E4AEE11D84C0FB00890FDE /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		94E4AEE31D871EDE00890FDE /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,7 +219,7 @@
 		94C323D61D5E10C700227ACE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				94E4AEDF1D84C09600890FDE /* AppDelegate.swift */,
+				94E4AEE31D871EDE00890FDE /* AppDelegate.swift */,
 				946737881D67952E009803E0 /* ExerciseTabViewController.swift */,
 				943270BA1D5E582B00BE2D1A /* ModalViews */,
 				94C323D81D5E10C900227ACE /* TableViewControllers */,
@@ -405,7 +405,7 @@
 				94C323E81D5E18BD00227ACE /* SavedExerciseDetailTableViewController.swift in Sources */,
 				9467378D1D6E1471009803E0 /* UIColor+Extensions.swift in Sources */,
 				94C323E21D5E151F00227ACE /* ExerciseDetailTableViewController.swift in Sources */,
-				94E4AEE01D84C09600890FDE /* AppDelegate.swift in Sources */,
+				94E4AEE41D871EDE00890FDE /* AppDelegate.swift in Sources */,
 				9467378F1D6E31BF009803E0 /* ExerciseCatalogDetailTableViewController.swift in Sources */,
 				949B43DF1D7612D600992D50 /* DisclamierViewController.swift in Sources */,
 				941BB6EE1D63A9A800A8380D /* RepAndTimeTableViewCell.swift in Sources */,
