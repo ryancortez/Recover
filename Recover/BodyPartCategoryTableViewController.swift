@@ -24,6 +24,7 @@ class BodyPartCategoryTableViewController: AdjustableTableViewController, EditEx
     override func viewDidLoad() {
         setupTabBar()
         setupNavBar()
+        passContextToSavedExercises(fromCoreDataManager: coreDataManager)
         checkIfAppHasLaunchedBefore()
         refreshTableView()
     }

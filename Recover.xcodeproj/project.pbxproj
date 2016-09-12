@@ -26,7 +26,6 @@
 		9467378B1D6B6E17009803E0 /* SavedExerciseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467378A1D6B6E17009803E0 /* SavedExerciseTableViewCell.swift */; };
 		9467378D1D6E1471009803E0 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467378C1D6E1471009803E0 /* UIColor+Extensions.swift */; };
 		9467378F1D6E31BF009803E0 /* ExerciseCatalogDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467378E1D6E31BF009803E0 /* ExerciseCatalogDetailTableViewController.swift */; };
-		949AC21F1D5D69DD0029328B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949AC21E1D5D69DD0029328B /* AppDelegate.swift */; };
 		949AC2281D5D69DD0029328B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 949AC2271D5D69DD0029328B /* Assets.xcassets */; };
 		949AC22B1D5D69DD0029328B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 949AC2291D5D69DD0029328B /* LaunchScreen.storyboard */; };
 		949AC2361D5D69DD0029328B /* RecoverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949AC2351D5D69DD0029328B /* RecoverTests.swift */; };
@@ -40,7 +39,8 @@
 		94C323E81D5E18BD00227ACE /* SavedExerciseDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C323E71D5E18BD00227ACE /* SavedExerciseDetailTableViewController.swift */; };
 		94C4BEF91D660F51004F4E5B /* BodyPart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C4BEF81D660F51004F4E5B /* BodyPart.swift */; };
 		94D868091D748DFE003594BF /* AdjustableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D868081D748DFE003594BF /* AdjustableTableViewController.swift */; };
-		94E4AEDE1D84C06400890FDE /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E4AEDD1D84C06400890FDE /* CoreDataManager.swift */; };
+		94E4AEE01D84C09600890FDE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E4AEDF1D84C09600890FDE /* AppDelegate.swift */; };
+		94E4AEE21D84C0FB00890FDE /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E4AEE11D84C0FB00890FDE /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,7 +81,6 @@
 		9467378C1D6E1471009803E0 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		9467378E1D6E31BF009803E0 /* ExerciseCatalogDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseCatalogDetailTableViewController.swift; sourceTree = "<group>"; };
 		949AC21B1D5D69DD0029328B /* Recover.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recover.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		949AC21E1D5D69DD0029328B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		949AC2271D5D69DD0029328B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		949AC22A1D5D69DD0029328B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		949AC22C1D5D69DD0029328B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -100,7 +99,8 @@
 		94C323E71D5E18BD00227ACE /* SavedExerciseDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedExerciseDetailTableViewController.swift; sourceTree = "<group>"; };
 		94C4BEF81D660F51004F4E5B /* BodyPart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodyPart.swift; sourceTree = "<group>"; };
 		94D868081D748DFE003594BF /* AdjustableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdjustableTableViewController.swift; sourceTree = "<group>"; };
-		94E4AEDD1D84C06400890FDE /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		94E4AEDF1D84C09600890FDE /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		94E4AEE11D84C0FB00890FDE /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,7 +208,7 @@
 				94C4BEF81D660F51004F4E5B /* BodyPart.swift */,
 				946737851D6758CE009803E0 /* SavedExerciseList.swift */,
 				941BB6E61D63859D00A8380D /* ExerciseViewModel.swift */,
-				94E4AEDD1D84C06400890FDE /* CoreDataManager.swift */,
+				94E4AEE11D84C0FB00890FDE /* CoreDataManager.swift */,
 				943270BF1D5E5AC900BE2D1A /* CloudKitManager.swift */,
 				943270C01D5E5AC900BE2D1A /* UserDefaultsManager.swift */,
 				9467378C1D6E1471009803E0 /* UIColor+Extensions.swift */,
@@ -219,7 +219,7 @@
 		94C323D61D5E10C700227ACE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				949AC21E1D5D69DD0029328B /* AppDelegate.swift */,
+				94E4AEDF1D84C09600890FDE /* AppDelegate.swift */,
 				946737881D67952E009803E0 /* ExerciseTabViewController.swift */,
 				943270BA1D5E582B00BE2D1A /* ModalViews */,
 				94C323D81D5E10C900227ACE /* TableViewControllers */,
@@ -403,9 +403,9 @@
 			files = (
 				946737891D67952F009803E0 /* ExerciseTabViewController.swift in Sources */,
 				94C323E81D5E18BD00227ACE /* SavedExerciseDetailTableViewController.swift in Sources */,
-				949AC21F1D5D69DD0029328B /* AppDelegate.swift in Sources */,
 				9467378D1D6E1471009803E0 /* UIColor+Extensions.swift in Sources */,
 				94C323E21D5E151F00227ACE /* ExerciseDetailTableViewController.swift in Sources */,
+				94E4AEE01D84C09600890FDE /* AppDelegate.swift in Sources */,
 				9467378F1D6E31BF009803E0 /* ExerciseCatalogDetailTableViewController.swift in Sources */,
 				949B43DF1D7612D600992D50 /* DisclamierViewController.swift in Sources */,
 				941BB6EE1D63A9A800A8380D /* RepAndTimeTableViewCell.swift in Sources */,
@@ -426,7 +426,7 @@
 				94C323E01D5E149F00227ACE /* ExerciseListTableViewController.swift in Sources */,
 				941BB6E71D63859D00A8380D /* ExerciseViewModel.swift in Sources */,
 				94475E3D1D5EB7BB00D919C4 /* SettingsTableViewController.swift in Sources */,
-				94E4AEDE1D84C06400890FDE /* CoreDataManager.swift in Sources */,
+				94E4AEE21D84C0FB00890FDE /* CoreDataManager.swift in Sources */,
 				94C323E61D5E177500227ACE /* SavedExerciseListTableViewController.swift in Sources */,
 				941BB6EA1D63A91E00A8380D /* TitleTableViewCell.swift in Sources */,
 				941BB6F01D63A9B700A8380D /* DescriptionTableViewCell.swift in Sources */,

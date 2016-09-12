@@ -116,6 +116,16 @@ class BasicTableViewController: UITableViewController, NSFetchedResultsControlle
     }
     
     // MARK: Fetch from Core Data
+    func passContextToSavedExercises(fromCoreDataManager coreDataManager: CoreDataManager) {
+        guard let tabBarController = self.tabBarController else {
+            print("Did not find a tabBarController attached to this ViewController \(self.description)")
+            return
+        }
+        let navigationViewController = tabBarController.viewControllers![1] as! UINavigationController
+        let savedExerciseTableViewController = navigationViewController.viewControllers.first as! SavedExerciseListTableViewController
+        savedExerciseTableViewController.coreDataManager = coreDataManager
+        savedExerciseTableViewController.managedObjectContext = coreDataManager.managedObjectContext
+    }
     func fetch(exerciseName exerciseName: String) -> Exercise? {
         
         var fetchedObjects = []
