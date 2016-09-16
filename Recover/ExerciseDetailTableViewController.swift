@@ -60,6 +60,8 @@ class ExerciseDetailTableViewController: AdjustableTableViewController, EditExer
 //        imageView.layer.masksToBounds = true
     }
     func refreshTableViewData() {
+        tableView.beginUpdates()
+        unhideCells()
         setTitle()
         setReps()
         setTime()
@@ -69,6 +71,17 @@ class ExerciseDetailTableViewController: AdjustableTableViewController, EditExer
         }
         setInstuctions()
         setImage()
+        tableView.endUpdates()
+        tableView.updateConstraints()
+    }
+    
+    func unhideCells() {
+        hideRepsandTimeCell = false
+        hideTime = false
+        hideSets = false
+        hideReps = false
+        hideInstructionCell = false
+        hideImageCell = false
     }
     
     // MARK: Refreshing Table View Data
@@ -113,6 +126,7 @@ class ExerciseDetailTableViewController: AdjustableTableViewController, EditExer
         }
     }
     func setImage() {
+        imageView.image = nil
         guard let image = UIImage(data: exercise.image) else {
             hideImageCell = true
             return
