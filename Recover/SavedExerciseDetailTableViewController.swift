@@ -31,7 +31,7 @@ class SavedExerciseDetailTableViewController: ExerciseDetailTableViewController,
     @IBOutlet weak var startButton: UIBarButtonItem!
     @IBOutlet weak var nextButton: UIBarButtonItem!
     
-    // MARK: - Inital Setup -
+    // MARK: - Inital UI Setup -
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavBar()
@@ -163,6 +163,17 @@ class SavedExerciseDetailTableViewController: ExerciseDetailTableViewController,
         } else {
             delegate.stopButtonWasPressed()
             self.dismissViewControllerAnimated(true, completion: nil)
+        }
+    }
+    func getTotalExerciseTime() -> Int16 {
+        if (exercise.time != 0) {
+            if (exercise.reps != 0) {
+                return exercise.time * exercise.reps
+            } else {
+                return exercise.time
+            }
+        } else {
+            return 0
         }
     }
     
