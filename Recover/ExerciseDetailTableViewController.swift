@@ -127,7 +127,7 @@ class ExerciseDetailTableViewController: AdjustableTableViewController, EditExer
     }
     func setImage() {
         imageView.image = nil
-        guard let image = UIImage(data: exercise.image) else {
+        guard let image = UIImage(data: exercise.image as Data) else {
             hideImageCell = true
             return
         }
@@ -147,7 +147,7 @@ class ExerciseDetailTableViewController: AdjustableTableViewController, EditExer
         super.saveNew(exercise)
         tableView.reloadData()
     }
-    override func edit(currentExercise currentExercise: Exercise, withNewExerciseData newExerciseData: ExerciseViewModel) {
+    override func edit(currentExercise: Exercise, withNewExerciseData newExerciseData: ExerciseViewModel) {
        super.edit(currentExercise: currentExercise, withNewExerciseData: newExerciseData)
         tableView.reloadData()
     }
@@ -194,7 +194,7 @@ class ExerciseDetailTableViewController: AdjustableTableViewController, EditExer
     func addToSavedExerciseListButtonPressed() {
         let savedExerciseLists = fetchSavedExerciseLists()
         let saveExerciseList = savedExerciseLists?.first
-        guard let exerciseCopy = NSEntityDescription.insertNewObjectForEntityForName("Exercise", inManagedObjectContext: self.managedObjectContext) as? Exercise else {
+        guard let exerciseCopy = NSEntityDescription.insertNewObject(forEntityName: "Exercise", into: self.managedObjectContext) as? Exercise else {
             print("Could not insert new exercise into CoreData"); return
         }
         exerciseCopy.name = exercise.name

@@ -33,19 +33,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func setupAppearance() {
         
-        UIApplication.sharedApplication().statusBarStyle = .LightContent
+        UIApplication.shared.statusBarStyle = .lightContent
         UINavigationBar.appearance().barTintColor = UIColor.customGreen()
-        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
-        UIBarButtonItem.appearance().tintColor = UIColor.whiteColor()
+        UINavigationBar.appearance().tintColor = UIColor.white
+        UIBarButtonItem.appearance().tintColor = UIColor.white
         UITabBar.appearance().tintColor = UIColor.customGreen()
         if let font = UIFont(name: "Avenir-Heavy", size: 18) {
-            UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.whiteColor()]
+            UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.white]
         }
         
-        UIButton.appearanceWhenContainedInInstancesOfClasses([BasicTableViewController.self]).tintColor = UIColor.customGreen()
-        UIButton.appearanceWhenContainedInInstancesOfClasses([SettingsTableViewController.self]).tintColor = UIColor.customGreen()
-        UIBarButtonItem.appearanceWhenContainedInInstancesOfClasses([UIToolbar.self]).tintColor = UIColor.customGreen()
-        UIButton.appearanceWhenContainedInInstancesOfClasses([UIToolbar.self]).tintColor = UIColor.customGreen()
+//        UIButton.appearanceWhenContainedInInstancesOfClasses([BasicTableViewController.self]).tintColor = UIColor.customGreen()
+//        UIButton.appearanceWhenContainedInInstancesOfClasses([SettingsTableViewController.self]).tintColor = UIColor.customGreen()
+//        UIBarButtonItem.appearanceWhenContainedInInstancesOfClasses([UIToolbar.self]).tintColor = UIColor.customGreen()
+//        UIButton.appearanceWhenContainedInInstancesOfClasses([UIToolbar.self]).tintColor = UIColor.customGreen()
+        UIButton.appearance(whenContainedInInstancesOf: [UIAppearanceContainer])
+        
         UIToolbar.appearance().tintColor = UIColor.customGreen()
         UIStepper.appearance().tintColor = UIColor.customGreen()
     }
@@ -91,7 +93,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func createNewSavedExerciseList(withName name: String) {
-        guard let savedExerciseList = NSEntityDescription.insertNewObjectForEntityForName("SavedExerciseList", inManagedObjectContext: self.managedObjectContext) as? SavedExerciseList else {
+        guard let savedExerciseList = NSEntityDescription.insertNewObject(forEntityName: "SavedExerciseList", into: self.managedObjectContext) as? SavedExerciseList else {
             print("Could not cast NSManagedObject as SavedExerciseList")
             return
         }
@@ -108,25 +110,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK - Application Lifecycle -
 
-    func applicationWillResignActive(application: UIApplication) {
+    func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
     }
 
-    func applicationDidEnterBackground(application: UIApplication) {
+    func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }
 
-    func applicationWillEnterForeground(application: UIApplication) {
+    func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     }
 
-    func applicationDidBecomeActive(application: UIApplication) {
+    func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
 
-    func applicationWillTerminate(application: UIApplication) {
+    func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
