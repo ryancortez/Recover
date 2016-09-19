@@ -217,7 +217,11 @@ class SavedExerciseDetailTableViewController: ExerciseDetailTableViewController,
         if (exercise.time != 0) {
             var timeString: String = ""
             if (exercise.time >= 60) {
-                timeString = "\(exercise.time / 60) minutes"
+                if (exercise.time == 60) {
+                    timeString = "\(exercise.time / 60) minute"
+                } else {
+                    timeString = "\(exercise.time / 60) minutes"
+                }
             } else {
                 timeString = "\(exercise.time) seconds"
             }
