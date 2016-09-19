@@ -38,11 +38,19 @@ class SavedExerciseDetailTableViewController: ExerciseDetailTableViewController,
         setupSpeechSynthesizer()
         checkIfSessionIsActive()
         setButtonStates()
+        setNavBarTitle()
     }
     override func setupTableView() {
         super.setupTableView()
     }
-    
+
+    func setNavBarTitle() {
+        if sessionIsActive {
+            self.title = "0:00"
+        } else {
+            self.title = ""
+        }
+    }
     func setButtonStates() {
         setPreviousExerciseButtonState()
         setStartButtonState()
@@ -114,6 +122,7 @@ class SavedExerciseDetailTableViewController: ExerciseDetailTableViewController,
             continueSession()
         }
         setButtonStates()
+        setNavBarTitle()
     }
     func pauseExerciseSession() {
         sessionIsPaused = true
@@ -123,6 +132,7 @@ class SavedExerciseDetailTableViewController: ExerciseDetailTableViewController,
     func startExerciseSession() {
         sessionIsActive = true
         setButtonStates()
+        setNavBarTitle()
         beginSession()
     }
     func goToPreviousExercise() {
@@ -145,6 +155,7 @@ class SavedExerciseDetailTableViewController: ExerciseDetailTableViewController,
         if (exerciseIndex + 1 < exercises.count) {
             isFirstExercise = false
             setButtonStates()
+            setNavBarTitle()
             exercise = exercises[exerciseIndex + 1]
             exerciseIndex = exerciseIndex + 1
             refreshTableViewData()
